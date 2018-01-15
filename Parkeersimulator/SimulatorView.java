@@ -1,5 +1,3 @@
-
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -17,7 +15,7 @@ public class SimulatorView extends JFrame {
         this.numberOfPlaces = numberOfPlaces;
         this.numberOfOpenSpots =numberOfFloors*numberOfRows*numberOfPlaces;
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
-        
+
         carParkView = new CarParkView();
 
         Container contentPane = getContentPane();
@@ -31,7 +29,7 @@ public class SimulatorView extends JFrame {
     public void updateView() {
         carParkView.updateView();
     }
-    
+
 	public int getNumberOfFloors() {
         return numberOfFloors;
     }
@@ -47,7 +45,7 @@ public class SimulatorView extends JFrame {
     public int getNumberOfOpenSpots(){
     	return numberOfOpenSpots;
     }
-    
+
     public Car getCarAt(Location location) {
         if (!locationIsValid(location)) {
             return null;
@@ -135,26 +133,26 @@ public class SimulatorView extends JFrame {
         }
         return true;
     }
-    
+
     private class CarParkView extends JPanel {
-        
+
         private Dimension size;
-        private Image carParkImage;    
-    
+        private Image carParkImage;
+
         /**
          * Constructor for objects of class CarPark
          */
         public CarParkView() {
             size = new Dimension(0, 0);
         }
-    
+
         /**
          * Overridden. Tell the GUI manager how big we would like to be.
          */
         public Dimension getPreferredSize() {
             return new Dimension(800, 500);
         }
-    
+
         /**
          * Overriden. The car park view component needs to be redisplayed. Copy the
          * internal image to screen.
@@ -163,7 +161,7 @@ public class SimulatorView extends JFrame {
             if (carParkImage == null) {
                 return;
             }
-    
+
             Dimension currentSize = getSize();
             if (size.equals(currentSize)) {
                 g.drawImage(carParkImage, 0, 0, null);
@@ -173,7 +171,7 @@ public class SimulatorView extends JFrame {
                 g.drawImage(carParkImage, 0, 0, currentSize.width, currentSize.height, null);
             }
         }
-    
+
         public void updateView() {
             // Create a new car park image if the size has changed.
             if (!size.equals(getSize())) {
@@ -193,7 +191,7 @@ public class SimulatorView extends JFrame {
             }
             repaint();
         }
-    
+
         /**
          * Paint a place on this car park view in a given color.
          */
