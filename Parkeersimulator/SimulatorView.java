@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 
+@SuppressWarnings("serial")
+
 public class SimulatorView extends JFrame {
     private CarParkView carParkView;
     private int numberOfFloors;
