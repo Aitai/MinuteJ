@@ -12,7 +12,7 @@ public class CarQueue {
         return queue.poll();
     }
 
-    public int test(int i) {
-    		return i;
+    public int carsInQueue(){
+    	return queue.size();
     }
 }
