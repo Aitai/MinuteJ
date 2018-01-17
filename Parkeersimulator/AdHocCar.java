@@ -15,8 +15,4 @@ public class AdHocCar extends Car {
     	return COLOR;
     }
     
-    public void testingTest() {
-    	String color = "green";
-    	System.out.println("mijn kleur is " + color);
-    }
 }
