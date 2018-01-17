@@ -5,7 +5,10 @@ public class Simulator {
 	private static final String AD_HOC = "1";
 	private static final String PASS = "2";
 
-
+	/*
+	 * test
+	 * 
+	 */
 	private CarQueue entranceCarQueue;
     private CarQueue entrancePassQueue;
     private CarQueue paymentCarQueue;

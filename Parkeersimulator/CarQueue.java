@@ -12,7 +12,7 @@ public class CarQueue {
         return queue.poll();
     }
 
-    public void controlCar() {
-    	System.out.println("Test");
+    public int test(int i) {
+    		return i;
     }
 }
