@@ -1,6 +1,6 @@
 
 public class HelloWorld {
 	/*
-	 * Kevin was here!
+	 * Chris was here!
 	 */
 }
