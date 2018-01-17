@@ -5,10 +5,6 @@ public class Simulator {
 	private static final String AD_HOC = "1";
 	private static final String PASS = "2";
 
-	/*
-	 * test
-	 * 
-	 */
 	private CarQueue entranceCarQueue;
     private CarQueue entrancePassQueue;
     private CarQueue paymentCarQueue;
@@ -30,12 +26,13 @@ public class Simulator {
     int paymentSpeed = 7; // number of cars that can pay per minute
     int exitSpeed = 5; // number of cars that can leave per minute
 
+
     public Simulator() {
         entranceCarQueue = new CarQueue();
         entrancePassQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
-        simulatorView = new SimulatorView(3, 6, 30);
+        simulatorView = new SimulatorView(3, 6, 28);
     }
     public static void main (String [] args)
     {
@@ -105,9 +102,7 @@ public class Simulator {
     private void carsEntering(CarQueue queue){
         int i=0;
         // Remove car from the front of the queue and assign to a parking space.
-    	while (queue.carsInQueue()>0 &&
-    			simulatorView.getNumberOfOpenSpots()>0 &&
-    			i<enterSpeed) {
+    	while (queue.carsInQueue()>0 && simulatorView.getNumberOfOpenSpots()>0 && i<enterSpeed) {
             Car car = queue.removeCar();
             Location freeLocation = simulatorView.getFirstFreeLocation();
             simulatorView.setCarAt(freeLocation, car);
