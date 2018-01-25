@@ -53,7 +53,7 @@ public class MainWindow {
 
 		reset=new JButton("Reset");
 		reset.addActionListener(controller);
-		
+
 		test=new JButton("Test");
 		test.addActionListener(controller);
 
