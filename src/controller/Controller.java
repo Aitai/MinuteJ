@@ -51,9 +51,13 @@ public class Controller extends AbstractController {
 		
 		if (e.getActionCommand().equals("Reset")) {
 			model.reset();
+			model.stop();
 		}
 		if (e.getActionCommand().equals("Test")) {
-			Simulator.run2();
+			model.stop();
+			System.exit(0);
+			new 
+			new Simulator().run();
 		}
 		
 	}
