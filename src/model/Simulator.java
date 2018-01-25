@@ -29,6 +29,9 @@ public class Simulator implements Runnable {
     int paymentSpeed = 7; // number of cars that can pay per minute
     int exitSpeed = 5; // number of cars that can leave per minute
 
+    Model model = new Model();
+    boolean runGarage = model.getRunGarage();
+
     public Simulator() {
         entranceCarQueue = new CarQueue();
         entrancePassQueue = new CarQueue();
@@ -37,24 +40,37 @@ public class Simulator implements Runnable {
         simulatorView = new SimulatorView(3, 6, 30);
     }
 
+    @Override
     public void run() {
-        for (int i = 0; i < 10000; i++) {
-            tick();
+        runGarage=true;
+        while(runGarage) {
+        	System.out.println(runGarage);
+            // tick();
+            //code uit tick
+            advanceTime();
+            handleExit();
+            updateViews();
+            try {
+                Thread.sleep(tickPause);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            handleEntrance();
         }
     }
 
-    public void tick() {
-    	advanceTime();
-    	handleExit();
-    	updateViews();
-    	// Pause.
-        try {
-            Thread.sleep(tickPause);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    	handleEntrance();
-    }
+    // public void tick() {
+    // 	advanceTime();
+    // 	handleExit();
+    // 	updateViews();
+    // 	// Pause.
+    //     try {
+    //         Thread.sleep(tickPause);
+    //     } catch (InterruptedException e) {
+    //         e.printStackTrace();
+    //     }
+    // 	handleEntrance();
+    // }
 
     private void advanceTime(){
         // Advance the time by one minute.
@@ -101,7 +117,7 @@ public class Simulator implements Runnable {
     private void carsEntering(CarQueue queue){
         int i=0;
         // Remove car from the front of the queue and assign to a parking space.
-    	while (queue.carsInQueue()>0 &&
+    	if (queue.carsInQueue()>0 &&
     			simulatorView.getNumberOfOpenSpots()>0 &&
     			i<enterSpeed) {
             Car car = queue.removeCar();

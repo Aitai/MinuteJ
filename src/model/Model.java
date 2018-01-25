@@ -14,6 +14,11 @@ public class Model extends AbstractModel implements Runnable {
 
 	private int amount;
 	private boolean run;
+	private boolean runGarage;
+
+	public boolean getRunGarage() {
+		return this.runGarage;
+	}
 
 	/**
 	 * Retrieves the current amount in this model
@@ -55,6 +60,10 @@ public class Model extends AbstractModel implements Runnable {
 	 */
 	public void stop() {
 		run=false;
+	}
+
+	public void stopGarage() {
+		this.runGarage=false;
 	}
 
 	/**

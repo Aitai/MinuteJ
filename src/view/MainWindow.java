@@ -21,7 +21,7 @@ public class MainWindow {
 
 		mainwindow=new JFrame("Model View Controller/Dynamic Model with thread");
 		mainwindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainwindow.setSize(450, 285);
+		mainwindow.setSize(450, 300);
 		mainwindow.setResizable(false);
 		mainwindow.setLayout(null);
 		mainwindow.getContentPane().add(leftpane);
@@ -31,8 +31,8 @@ public class MainWindow {
 		rightpane.setBounds(230, 10, 200, 200);
 
 		buttonpane = new JPanel();
-		buttonpane.setBounds(0, 210, 450, 50);
-		buttonpane.setSize(450, 50);
+		buttonpane.setBounds(0, 210, 450, 65);
+		buttonpane.setSize(450, 65);
 		mainwindow.getContentPane().add(buttonpane);
 
 		JButton decreaseStep;
@@ -41,6 +41,7 @@ public class MainWindow {
 		JButton stop;
 		JButton reset;
 		JButton test;
+		JButton pauseGarage;
 
 		decreaseStep=new JButton("-1");
 		decreaseStep.addActionListener(controller);
@@ -56,6 +57,8 @@ public class MainWindow {
 
 		test=new JButton("Test");
 		test.addActionListener(controller);
+		pauseGarage=new JButton("Pause Garage");
+		pauseGarage.addActionListener(controller);
 
 		buttonpane.setLayout(new FlowLayout());
 		buttonpane.add(decreaseStep);
@@ -64,6 +67,7 @@ public class MainWindow {
 		buttonpane.add(stop);
 		buttonpane.add(reset);
 		buttonpane.add(test);
+		buttonpane.add(pauseGarage);
 
 
 		mainwindow.setVisible(true);

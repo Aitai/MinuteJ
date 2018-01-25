@@ -2,9 +2,10 @@ package model;
 import javax.swing.*;
 import java.awt.*;
 
-public class SimulatorView extends JFrame {
+public class SimulatorView {
+	
+	private JFrame garageWindow;
 
-	private static final long serialVersionUID = 1913218772926048220L;
 	private CarParkView carParkView;
     private int numberOfFloors;
     private int numberOfRows;
@@ -20,11 +21,14 @@ public class SimulatorView extends JFrame {
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
 
         carParkView = new CarParkView();
+        garageWindow = new JFrame("Garage");
 
-        Container contentPane = getContentPane();
+        garageWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        Container contentPane = garageWindow.getContentPane();
         contentPane.add(carParkView, BorderLayout.CENTER);
-        pack();
-        setVisible(true);
+        garageWindow.pack();
+        garageWindow.setVisible(true);
 
         updateView();
     }
