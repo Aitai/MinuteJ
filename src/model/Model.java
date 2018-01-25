@@ -44,6 +44,10 @@ public class Model extends AbstractModel implements Runnable {
 	public void start() {
 		new Thread(this).start();
 	}
+	
+	public void startGarage() {
+		(new Thread(new Simulator())).start();
+	}
 
 	/**
 	 * Stops the iteration in the run method. Note that

@@ -54,10 +54,11 @@ public class Controller extends AbstractController {
 			model.stop();
 		}
 		if (e.getActionCommand().equals("Test")) {
-			model.stop();
-			System.exit(0);
-			new 
-			new Simulator().run();
+//			model.stop();
+//			System.exit(0);
+//			new 
+//			new Simulator().run();
+			model.startGarage();
 		}
 		
 	}

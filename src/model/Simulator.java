@@ -2,7 +2,7 @@ package model;
 
 import java.util.Random;
 
-public class Simulator {
+public class Simulator implements Runnable {
 
 	private static final String AD_HOC = "1";
 	private static final String PASS = "2";
