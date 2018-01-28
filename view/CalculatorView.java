@@ -41,6 +41,10 @@ public class CalculatorView{
         status.setText(string);
     }
 
+	public void enableCalcButton(Boolean b) {
+		calculateButton.setEnabled(b);
+		
+	}
 	public int getFirstNumber(){
 
 		return Integer.parseInt(firstNumber.getText());

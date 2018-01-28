@@ -23,7 +23,7 @@ public class CalculatorController {
 
 			String command = e.getActionCommand();
 			if (command.equals("=")) {
-
+				theView.enableCalcButton(false);
 				theView.setStatus("Bezig...");
 
 				Thread worker = new Thread() {
@@ -35,6 +35,7 @@ public class CalculatorController {
 
 							theModel.addTwoNumbers(firstNumber, secondNumber);
 							theView.setCalcSolution(theModel.getCalculationValue());
+							theView.enableCalcButton(true);
 							theView.setStatus("Klaar");
 							
 						} catch (NumberFormatException ex) {
@@ -49,6 +50,7 @@ public class CalculatorController {
 				theView.scherm.dispose();
 			}
 		}
+
 	}
 
 }
