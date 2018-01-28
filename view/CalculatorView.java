@@ -1,5 +1,6 @@
 package view;
 import java.awt.event.ActionListener;
+import java.awt.BorderLayout;
 import javax.swing.*;
 
 public class CalculatorView{
@@ -18,19 +19,23 @@ public class CalculatorView{
 
 		JPanel calcPanel = new JPanel();
 
-		scherm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		scherm.setSize(600, 200);
-
 		calcPanel.add(firstNumber);
 		calcPanel.add(additionLabel);
 		calcPanel.add(secondNumber);
 		calcPanel.add(calculateButton);
 		calcPanel.add(calcSolution);
 		calcPanel.add(status);
+		
+		JPanel extra = new JPanel();
+		extra.add(sluitknop);
+		
+		JPanel groot = new JPanel(new BorderLayout());
+		groot.add(calcPanel, BorderLayout.NORTH);
+		groot.add(extra, BorderLayout.SOUTH);
 
-		calcPanel.add(sluitknop);
-
-		scherm.add(calcPanel);
+		scherm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		scherm.setSize(600, 200);
+		scherm.add(groot);
 	}
 	public void setStatus(String string) {
         status.setText(string);
