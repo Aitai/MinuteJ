@@ -16,9 +16,10 @@ public class CalculatorView{
 	private JButton sluitknop = new JButton("Sluiten");
 
 	public CalculatorView(){
+		JPanel vierkantPanel = new VierkantView();
+		
 
 		JPanel calcPanel = new JPanel();
-
 		calcPanel.add(firstNumber);
 		calcPanel.add(additionLabel);
 		calcPanel.add(secondNumber);
@@ -26,15 +27,16 @@ public class CalculatorView{
 		calcPanel.add(calcSolution);
 		calcPanel.add(status);
 		
-		JPanel extra = new JPanel();
-		extra.add(sluitknop);
+		JPanel sluitPanel = new JPanel();
+		sluitPanel.add(sluitknop);
 		
 		JPanel groot = new JPanel(new BorderLayout());
 		groot.add(calcPanel, BorderLayout.NORTH);
-		groot.add(extra, BorderLayout.SOUTH);
+		groot.add(sluitPanel, BorderLayout.SOUTH);
+//		groot.add(vierkantPanel,BorderLayout.CENTER);
 
 		scherm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		scherm.setSize(600, 200);
+		scherm.setSize(600, 300);
 		scherm.add(groot);
 	}
 	public void setStatus(String string) {

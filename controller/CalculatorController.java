@@ -23,9 +23,6 @@ public class CalculatorController {
 
 			String command = e.getActionCommand();
 			if (command.equals("=")) {
-				theView.enableCalcButton(false);
-				theView.setStatus("Bezig...");
-
 				Thread worker = new Thread() {
 					public void run() {
 						int firstNumber, secondNumber = 0;
@@ -34,6 +31,8 @@ public class CalculatorController {
 							secondNumber = theView.getSecondNumber();
 
 							theModel.addTwoNumbers(firstNumber, secondNumber);
+							theView.enableCalcButton(false);
+							theView.setStatus("Bezig...");
 							theView.setCalcSolution(theModel.getCalculationValue());
 							theView.enableCalcButton(true);
 							theView.setStatus("Klaar");
