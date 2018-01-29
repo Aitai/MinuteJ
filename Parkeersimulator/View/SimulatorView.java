@@ -1,3 +1,5 @@
+package View;
+import Model.*;
 import javax.swing.*;
 import java.awt.*;
 
@@ -15,7 +17,7 @@ public class SimulatorView extends JFrame {
         this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
-        this.numberOfOpenSpots =numberOfFloors*numberOfRows*numberOfPlaces;
+        this.numberOfOpenSpots = numberOfFloors*numberOfRows*numberOfPlaces-4;
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
 
         carParkView = new CarParkView();

@@ -1,3 +1,4 @@
+package Model;
 public class Location {
 
     private int floor;

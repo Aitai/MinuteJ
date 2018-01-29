@@ -1,3 +1,4 @@
+package Model;
 import java.util.Random;
 import java.awt.*;
 
@@ -13,5 +14,6 @@ public class AdHocCar extends Car {
 
     public Color getColor(){
     	return COLOR;
-    }
+    } 
+    
 }
