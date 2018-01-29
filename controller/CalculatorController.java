@@ -30,13 +30,13 @@ public class CalculatorController {
 							firstNumber = theView.getFirstNumber();
 							secondNumber = theView.getSecondNumber();
 
-							theModel.addTwoNumbers(firstNumber, secondNumber);
 							theView.enableCalcButton(false);
 							theView.setStatus("Bezig...");
+							theModel.addTwoNumbers(firstNumber, secondNumber);
 							theView.setCalcSolution(theModel.getCalculationValue());
 							theView.enableCalcButton(true);
 							theView.setStatus("Klaar");
-							
+
 						} catch (NumberFormatException ex) {
 							System.out.println(ex);
 							theView.displayErrorMessage("Voer twee integers in.");

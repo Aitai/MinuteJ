@@ -8,11 +8,12 @@ import javax.swing.JPanel;
 public class VierkantView extends JPanel {
 
 	private static final long serialVersionUID = -430455720642004448L;
-	
+
 	private CalculatorView calc;
 
 	public void paintComponent(Graphics g) {
-		int amount=calc.getCalcSolution();
+//		int amount=calc.getCalcSolution();
+		int amount=100;
 		boolean ready=false;
 		int counter=1;
 
