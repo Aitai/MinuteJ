@@ -9,7 +9,7 @@ public class MainView{
 	private JTextField firstNumber  = new JTextField(10);
 	private JLabel additionLabel = new JLabel("+");
 	private JTextField secondNumber = new JTextField(10);
-	private JButton calculateButton = new JButton("=");
+	public static JButton calculateButton = new JButton("=");
 	private JTextField calcSolution = new JTextField(10);
 	private JLabel status = new JLabel("Klaar", JLabel.CENTER);
 	private JButton stop = new JButton("Stop");

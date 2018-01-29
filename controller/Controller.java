@@ -4,17 +4,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import model.Model;
 import view.MainView;
+import view.VierkantView;
 
 public class Controller {
 
 	private MainView theView;
 	private Model theModel;
+	private VierkantView vierkantView;
 
-	public Controller(MainView theView, Model theModel) {
+	public Controller(MainView theView, VierkantView vierkantView, Model theModel) {
 		this.theView = theView;
+		this.vierkantView = vierkantView;
 		this.theModel = theModel;
 
 		this.theView.addCalculateListener(new CalculateListener());
+		this.vierkantView.addCalculateListener(new CalculateListener());
 	}
 	private void startWorker() {
 		Thread worker = new Thread() {
@@ -28,6 +32,10 @@ public class Controller {
 					theView.setStatus("Bezig...");
 					theModel.addTwoNumbers(firstNumber, secondNumber);
 					theView.setCalcSolution(theModel.getCalculationValue());
+					
+					vierkantView.setAmount(200);
+					vierkantView.repaint();
+					
 					theView.enableCalcButton(true);
 					theView.setStatus("Klaar");
 

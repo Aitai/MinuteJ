@@ -2,17 +2,24 @@ package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
 public class VierkantView extends JPanel {
 
 	private static final long serialVersionUID = -430455720642004448L;
+	int amount=50;
+	
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+	public void addCalculateListener(ActionListener knop){
 
-	private MainView calc;
+		MainView.calculateButton.addActionListener(knop);
+	}
 
 	public void paintComponent(Graphics g) {
-		int amount=100;
 		boolean ready=false;
 		int counter=1;
 
