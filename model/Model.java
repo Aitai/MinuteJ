@@ -1,6 +1,6 @@
 package model;
 
-public class CalculatorModel implements Runnable {
+public class Model implements Runnable {
 
 	private int calculationValue;
 

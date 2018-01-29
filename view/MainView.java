@@ -3,8 +3,8 @@ import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
 import javax.swing.*;
 
-public class CalculatorView{
-	public JFrame scherm = new JFrame("Een rekenmachine");
+public class MainView{
+	public JFrame scherm = new JFrame("Een garage");
 
 	private JTextField firstNumber  = new JTextField(10);
 	private JLabel additionLabel = new JLabel("+");
@@ -12,10 +12,11 @@ public class CalculatorView{
 	private JButton calculateButton = new JButton("=");
 	private JTextField calcSolution = new JTextField(10);
 	private JLabel status = new JLabel("Klaar", JLabel.CENTER);
+	private JButton stop = new JButton("Stop");
 
 	private JButton sluitknop = new JButton("Sluiten");
 
-	public CalculatorView(){
+	public MainView(){
 		JPanel vierkantPanel = new VierkantView();
 
 
@@ -26,6 +27,7 @@ public class CalculatorView{
 		calcPanel.add(calculateButton);
 		calcPanel.add(calcSolution);
 		calcPanel.add(status);
+		calcPanel.add(stop);
 
 		JPanel sluitPanel = new JPanel();
 		sluitPanel.add(sluitknop);
@@ -38,6 +40,7 @@ public class CalculatorView{
 		scherm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		scherm.setSize(600, 300);
 		scherm.add(groot);
+		
 	}
 	public void setStatus(String string) {
         status.setText(string);
@@ -73,6 +76,7 @@ public class CalculatorView{
 
 		calculateButton.addActionListener(knop);
 		sluitknop.addActionListener(knop);
+		stop.addActionListener(knop);
 	}
 
 	// Opent een popup die de error weergeeft
