@@ -24,10 +24,10 @@ public class Simulator extends ViewModel implements Runnable {
 
 	private int tickPause = 100;
 
-	int weekDayArrivals = 100; // average number of arriving cars per hour
-	int weekendArrivals = 200; // average number of arriving cars per hour
-	int weekDayPassArrivals = 50; // average number of arriving cars per hour
-	int weekendPassArrivals = 5; // average number of arriving cars per hour
+	private int weekDayArrivals = 100; // average number of arriving cars per hour
+	private int weekendArrivals = 200; // average number of arriving cars per hour
+	private int weekDayPassArrivals = 50; // average number of arriving cars per hour
+	private int weekendPassArrivals = 5; // average number of arriving cars per hour
 
 	int enterSpeed = 3; // number of cars that can enter per minute
 	int paymentSpeed = 7; // number of cars that can pay per minute
@@ -51,16 +51,30 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	public void tick() {
+		eveningArrivals();
 		advanceTime();
 		handleExit();
 		updateViews();
 		// Pause.
 		try {
+			System.out.println(day + "   " + hour + ":" + minute + "Arrivals: " + weekDayArrivals);
 			Thread.sleep(tickPause);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		handleEntrance();
+	}
+
+	public void eveningArrivals() {
+		if (hour >= 22 || hour <= 7) {
+			if (day <= 5) {
+				weekDayArrivals = 40;
+				weekDayPassArrivals = 20;
+			} 
+		} else {
+			weekDayArrivals = 100;
+			weekDayPassArrivals = 50;
+		}
 	}
 
 	private void advanceTime() {
@@ -119,48 +133,49 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	public void start() {
-		if(running == false) {
-		t = new Thread(this);
-		t.start();
-		running = true;
+		if (running == false) {
+			t = new Thread(this);
+			t.start();
+			running = true;
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public void pauze() {
-		if(running == true) {
-		t.stop();
-		running = false;
+		if (running == true) {
+			t.stop();
+			running = false;
 		}
 	}
 
 	public void step() {
-		if(running == false) {
+		if (running == false) {
 			tick();
 		}
 	}
-	
+
 	public void steps() {
-		if(running == false) {
-			for(int i = 0; i <= 100; i++) {
+		if (running == false) {
+			for (int i = 0; i <= 100; i++) {
 				tick();
 			}
 		}
 	}
-	
-	public void faster() { 
-		if(running == true && tickPause > 20) {
+
+	public void faster() {
+		if (running == true && tickPause > 20) {
 			tickPause = tickPause - 20;
 			System.out.println(tickPause);
 		}
 	}
-	
+
 	public void slower() {
-		if(running == true && tickPause < 300) {
+		if (running == true && tickPause < 300) {
 			tickPause = tickPause + 60;
 			System.out.println(tickPause);
 		}
 	}
-	
+
 	private void carsReadyToLeave() {
 		// Add leaving cars to the payment queue.
 		Car car = garageModel.getFirstLeavingCar();
