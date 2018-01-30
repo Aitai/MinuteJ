@@ -17,6 +17,7 @@ public class Simulator extends ViewModel implements Runnable {
 	private GarageModel garageModel;
 	private boolean running;
 	private Thread t;
+	private String dayString;
 
 	private int day = 0;
 	private int hour = 0;
@@ -51,13 +52,14 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	public void tick() {
+		daysOfTheWeek();
 		eveningArrivals();
 		advanceTime();
 		handleExit();
 		updateViews();
 		// Pause.
 		try {
-			System.out.println(day + "   " + hour + ":" + minute + "Arrivals: " + weekDayArrivals);
+			System.out.println(daysOfTheWeek() + "   " + hour + ":" + minute + "Arrivals: " + weekDayArrivals);
 			Thread.sleep(tickPause);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -92,6 +94,29 @@ public class Simulator extends ViewModel implements Runnable {
 			day -= 7;
 		}
 
+	}
+	
+	public String daysOfTheWeek() {
+		switch (day) {
+			case 0: 	dayString = "Monday";
+						break;
+			case 1: 	dayString = "Tuesday";
+						break;
+			case 2: 	dayString = "Wednesday";
+						break;
+			case 3: 	dayString = "Thursday";
+						break;
+			case 4: 	dayString = "Friday";
+						break;
+			case 5: 	dayString = "Saturday";
+						break;
+			case 6: 	dayString = "Sunday";
+						break;
+			default: 	dayString = "ERRROR!!!!";
+						break;
+			
+		}
+		return dayString;
 	}
 
 	private void handleEntrance() {
