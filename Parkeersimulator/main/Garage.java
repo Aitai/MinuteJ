@@ -26,8 +26,10 @@ public class Garage {
 		Container contentPane = window.getContentPane();
 		contentPane.add(garageController, BorderLayout.SOUTH);
 		contentPane.add(garageView, BorderLayout.CENTER);
+		
 		window.pack();
 		simulator.tick();
+		
 		window.setVisible(true);
 	}
 }

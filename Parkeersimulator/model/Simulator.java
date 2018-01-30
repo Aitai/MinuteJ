@@ -18,16 +18,18 @@ public class Simulator extends ViewModel implements Runnable {
 	private boolean running;
 	private Thread t;
 	private String dayString;
+	private String fullMinute;
+	private String fullHour;
 
 	private int day = 0;
-	private int hour = 0;
+	private int hour = 10;
 	private int minute = 0;
 
 	private int tickPause = 100;
 
-	private int weekDayArrivals = 100; // average number of arriving cars per hour
+	private int weekDayArrivals; // average number of arriving cars per hour
 	private int weekendArrivals = 200; // average number of arriving cars per hour
-	private int weekDayPassArrivals = 50; // average number of arriving cars per hour
+	private int weekDayPassArrivals; // average number of arriving cars per hour
 	private int weekendPassArrivals = 5; // average number of arriving cars per hour
 
 	int enterSpeed = 3; // number of cars that can enter per minute
@@ -45,7 +47,7 @@ public class Simulator extends ViewModel implements Runnable {
 
 	public void run() {
 		running = true;
-		for (int i = 0; i < 10000; i++) {
+		for (int i = 0; i < 100000; i++) {
 			tick();
 		}
 		running = false;
@@ -59,7 +61,7 @@ public class Simulator extends ViewModel implements Runnable {
 		updateViews();
 		// Pause.
 		try {
-			System.out.println(daysOfTheWeek() + "   " + hour + ":" + minute + "Arrivals: " + weekDayArrivals);
+			System.out.println(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute() + " Arrivals: " + weekDayArrivals);
 			Thread.sleep(tickPause);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -93,7 +95,24 @@ public class Simulator extends ViewModel implements Runnable {
 		while (day > 6) {
 			day -= 7;
 		}
-
+	}
+	
+	public String fullHour() {
+		if(hour < 10) {
+			fullHour = "0" + hour;
+		} else {
+			fullHour =  "" + hour;
+		}
+		return fullHour;
+	}
+	
+	public String fullMinute() {
+		if(minute < 10) {
+			fullMinute = "0" + minute;
+		} else { 
+			fullMinute = "" + minute;
+		}
+		return fullMinute;
 	}
 	
 	public String daysOfTheWeek() {
