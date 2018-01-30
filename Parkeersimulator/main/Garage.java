@@ -17,7 +17,7 @@ public class Garage {
 		
 		simulator = new Simulator();
 		garageView = new GarageView(simulator);
-		window = new JFrame("Parkeer simulatie");
+		window = new JFrame("Parkeergarage simulatie");
 		
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Container contentPane = window.getContentPane();

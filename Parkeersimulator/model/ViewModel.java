@@ -12,7 +12,7 @@ public abstract class ViewModel {
 		views = new ArrayList<>();
 	}
 	
-	public void addView(AbstractView views) {
-		views.add(views);
+	public void addView(AbstractView view) {
+		views.add(view);
 	}
 }
