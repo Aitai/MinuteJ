@@ -22,7 +22,7 @@ public class Simulator extends ViewModel implements Runnable {
 	private int hour = 0;
 	private int minute = 0;
 
-	public int tickPause = 100;
+	private int tickPause = 100;
 
 	int weekDayArrivals = 100; // average number of arriving cars per hour
 	int weekendArrivals = 200; // average number of arriving cars per hour
@@ -149,14 +149,14 @@ public class Simulator extends ViewModel implements Runnable {
 	
 	public void faster() { 
 		if(running == true && tickPause > 20) {
-			tickPause = tickPause - 40;
+			tickPause = tickPause - 20;
 			System.out.println(tickPause);
 		}
 	}
 	
 	public void slower() {
 		if(running == true && tickPause < 300) {
-			tickPause = tickPause + 100;
+			tickPause = tickPause + 60;
 			System.out.println(tickPause);
 		}
 	}
