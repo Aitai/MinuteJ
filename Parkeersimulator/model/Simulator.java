@@ -15,6 +15,7 @@ public class Simulator extends ViewModel implements Runnable{
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
     private GarageModel garageModel;
+    private boolean running;
 
     private int day = 0;
     private int hour = 0;
@@ -37,15 +38,18 @@ public class Simulator extends ViewModel implements Runnable{
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
         garageModel = new GarageModel(3, 6, 28);
+        
     }
     
     public void run() {
+    	running = true;
         for (int i = 0; i < 10000; i++) {
             tick();
         }
+        running = false;
     }
-
-    private void tick() {
+    
+    public void tick() {
     	advanceTime();
     	handleExit();
     	updateViews();
@@ -112,6 +116,14 @@ public class Simulator extends ViewModel implements Runnable{
             i++;
         }
     }
+    
+    public void start() {
+    	new Thread(this).start();
+    }
+    
+    public void pauze() {
+    	running=false;
+    }    
 
     private void carsReadyToLeave(){
         // Add leaving cars to the payment queue.
