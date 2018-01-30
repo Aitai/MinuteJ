@@ -1,8 +1,11 @@
-package Model;
-import java.util.Random; 
-import View.SimulatorView;
+package model;
 
-public class Simulator {
+import model.ViewModel;
+import view.AbstractView;
+
+import java.util.Random;
+
+public class Simulator extends ViewModel implements Runnable{
 
 	private static final String AD_HOC = "1";
 	private static final String PASS = "2";
@@ -11,7 +14,7 @@ public class Simulator {
     private CarQueue entrancePassQueue;
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
-    private SimulatorView simulatorView;
+    private GarageModel garageModel;
 
     private int day = 0;
     private int hour = 0;
@@ -28,13 +31,12 @@ public class Simulator {
     int paymentSpeed = 7; // number of cars that can pay per minute
     int exitSpeed = 5; // number of cars that can leave per minute
 
-
     public Simulator() {
         entranceCarQueue = new CarQueue();
         entrancePassQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
-        simulatorView = new SimulatorView(3, 6, 28);
+        garageModel = new GarageModel(3, 6, 28);
     }
     
     public void run() {
@@ -86,9 +88,11 @@ public class Simulator {
     }
 
     private void updateViews(){
-    	simulatorView.tick();
+    	garageModel.tick();
         // Update the car park view.
-        simulatorView.updateView();
+        for(AbstractView av: views) {
+        	av.updateView();
+        }
     }
 
     private void carsArriving(){
@@ -101,17 +105,17 @@ public class Simulator {
     private void carsEntering(CarQueue queue){
         int i=0;
         // Remove car from the front of the queue and assign to a parking space.
-    	while (queue.carsInQueue()>0 && simulatorView.getNumberOfOpenSpots()>0 && i<enterSpeed) {
+    	while (queue.carsInQueue()>0 && garageModel.getNumberOfOpenSpots()>0 && i<enterSpeed) {
             Car car = queue.removeCar();
-            Location freeLocation = simulatorView.getFirstFreeLocation();
-            simulatorView.setCarAt(freeLocation, car);
+            Location freeLocation = garageModel.getFirstFreeLocation();
+            garageModel.setCarAt(freeLocation, car);
             i++;
         }
     }
 
     private void carsReadyToLeave(){
         // Add leaving cars to the payment queue.
-        Car car = simulatorView.getFirstLeavingCar();
+        Car car = garageModel.getFirstLeavingCar();
         while (car!=null) {
         	if (car.getHasToPay()){
 	            car.setIsPaying(true);
@@ -120,7 +124,7 @@ public class Simulator {
         	else {
         		carLeavesSpot(car);
         	}
-            car = simulatorView.getFirstLeavingCar();
+            car = garageModel.getFirstLeavingCar();
         }
     }
 
@@ -175,8 +179,11 @@ public class Simulator {
     }
 
     private void carLeavesSpot(Car car){
-    	simulatorView.removeCarAt(car.getLocation());
+    	garageModel.removeCarAt(car.getLocation());
         exitCarQueue.addCar(car);
     }
-
+    
+    public GarageModel getGarageModel() {
+    	return garageModel;
+    }
 }
