@@ -17,7 +17,7 @@ public class GarageView extends AbstractView {
 	private Dimension size;
 	private Image carParkImage;
 	private Simulator simulator;
-	JTextArea date;
+//	JTextArea date;
 
 	/**
 	 * Constructor for objects of class CarPark
