@@ -59,8 +59,8 @@ public class GarageView extends AbstractView {
 			size = getSize();
 			carParkImage = createImage(size.width, size.height);
 		}
-		date = new JTextArea(simulator.daysOfTheWeek());
-		date.setVisible(true);
+//		date = new JTextArea(simulator.daysOfTheWeek());
+//		date.setVisible(true);
 		Graphics graphics = carParkImage.getGraphics();
 		for (int floor = 0; floor < simulator.getGarageModel().getNumberOfFloors(); floor++) {
 			for (int row = 0; row < simulator.getGarageModel().getNumberOfRows(); row++) {

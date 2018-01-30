@@ -203,17 +203,17 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	public void step() {
-		if (running == false) {
+//		if (running == false) {
 			tick();
-		}
+//		}
 	}
 
 	public void steps() {
-		if (running == false) {
+//		if (running == false) {
 			for (int i = 0; i <= 100; i++) {
 				tickFast();
 			}
-		}
+//		}
 	}
 
 	public void faster() {
