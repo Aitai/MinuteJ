@@ -69,12 +69,22 @@ public class Simulator extends ViewModel implements Runnable {
 		handleEntrance();
 	}
 
+	public void tickFast() {
+		daysOfTheWeek();
+		eveningArrivals();
+		advanceTime();
+		handleExit();
+		updateViews();
+		System.out.println(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute() + " Arrivals: " + weekDayArrivals);
+		handleEntrance();
+	}
+
 	public void eveningArrivals() {
 		if (hour >= 22 || hour <= 7) {
 			if (day <= 5) {
 				weekDayArrivals = 40;
 				weekDayPassArrivals = 20;
-			} 
+			}
 		} else {
 			weekDayArrivals = 100;
 			weekDayPassArrivals = 50;
@@ -96,7 +106,7 @@ public class Simulator extends ViewModel implements Runnable {
 			day -= 7;
 		}
 	}
-	
+
 	public String fullHour() {
 		if(hour < 10) {
 			fullHour = "0" + hour;
@@ -105,16 +115,16 @@ public class Simulator extends ViewModel implements Runnable {
 		}
 		return fullHour;
 	}
-	
+
 	public String fullMinute() {
 		if(minute < 10) {
 			fullMinute = "0" + minute;
-		} else { 
+		} else {
 			fullMinute = "" + minute;
 		}
 		return fullMinute;
 	}
-	
+
 	public String daysOfTheWeek() {
 		switch (day) {
 			case 0: 	dayString = "Monday";
@@ -133,7 +143,7 @@ public class Simulator extends ViewModel implements Runnable {
 						break;
 			default: 	dayString = "ERRROR!!!!";
 						break;
-			
+
 		}
 		return dayString;
 	}
@@ -201,7 +211,7 @@ public class Simulator extends ViewModel implements Runnable {
 	public void steps() {
 		if (running == false) {
 			for (int i = 0; i <= 100; i++) {
-				tick();
+				tickFast();
 			}
 		}
 	}

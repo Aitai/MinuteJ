@@ -40,27 +40,27 @@ public class GarageController extends AbstractController {
 				simulator.step();
 			}
 		});
-		
+
 		steps = new JButton("100 Stappen");
 		steps.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				simulator.steps();
 			}
 		});
-		
+
 		faster = new JButton("Sneller");
 		faster.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				simulator.faster();
 			}
 		});
-		
+
 		slower = new JButton("Langzamer");
 		slower.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				simulator.slower();
 			}
-		});		
+		});
 
 		add(start);
 		add(pauze);
