@@ -16,12 +16,13 @@ public class Simulator extends ViewModel implements Runnable {
 	private CarQueue exitCarQueue;
 	private GarageModel garageModel;
 	private boolean running;
+	private Thread t;
 
 	private int day = 0;
 	private int hour = 0;
 	private int minute = 0;
 
-	private int tickPause = 100;
+	public int tickPause = 100;
 
 	int weekDayArrivals = 100; // average number of arriving cars per hour
 	int weekendArrivals = 200; // average number of arriving cars per hour
@@ -118,13 +119,48 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	public void start() {
-		new Thread(this).start();
+		if(running == false) {
+		t = new Thread(this);
+		t.start();
+		running = true;
+		}
 	}
 
 	public void pauze() {
+		if(running == true) {
+		t.stop();
 		running = false;
+		}
 	}
 
+	public void step() {
+		if(running == false) {
+			tick();
+		}
+	}
+	
+	public void steps() {
+		if(running == false) {
+			for(int i = 0; i <= 100; i++) {
+				tick();
+			}
+		}
+	}
+	
+	public void faster() { 
+		if(running == true && tickPause > 20) {
+			tickPause = tickPause - 40;
+			System.out.println(tickPause);
+		}
+	}
+	
+	public void slower() {
+		if(running == true && tickPause < 300) {
+			tickPause = tickPause + 100;
+			System.out.println(tickPause);
+		}
+	}
+	
 	private void carsReadyToLeave() {
 		// Add leaving cars to the payment queue.
 		Car car = garageModel.getFirstLeavingCar();

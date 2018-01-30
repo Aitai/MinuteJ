@@ -11,7 +11,10 @@ public class GarageController extends AbstractController {
 	private static final long serialVersionUID = 3253955925290497248L;
 	private JButton start;
 	private JButton pauze;
-	private JButton stap;
+	private JButton step;
+	private JButton steps;
+	private JButton faster;
+	private JButton slower;
 
 	public GarageController(Simulator simulator) {
 		super(simulator);
@@ -30,16 +33,40 @@ public class GarageController extends AbstractController {
 			}
 		});
 
-		stap = new JButton("Stap");
-		stap.addActionListener(new ActionListener() {
+		step = new JButton("Stap");
+		step.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				simulator.tick();
+				simulator.step();
+			}
+		});
+		
+		steps = new JButton("100 Stappen");
+		steps.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				simulator.steps();
+			}
+		});
+		
+		faster = new JButton("Sneller");
+		faster.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				simulator.faster();
+			}
+		});
+		
+		slower = new JButton("Langzamer");
+		slower.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				simulator.slower();
 			}
 		});
 
 		add(start);
 		add(pauze);
-		add(stap);
+		add(step);
+		add(steps);
+		add(faster);
+		add(slower);
 
 		setVisible(true);
 	}

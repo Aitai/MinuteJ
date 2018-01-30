@@ -16,7 +16,6 @@ public class Garage {
 	private GarageController garageController;
 
 	public Garage() {
-
 		simulator = new Simulator();
 		garageView = new GarageView(simulator);
 		garageController = new GarageController(simulator);
@@ -27,6 +26,7 @@ public class Garage {
 		contentPane.add(garageController, BorderLayout.SOUTH);
 		contentPane.add(garageView, BorderLayout.CENTER);
 		window.pack();
+		simulator.tick();
 		window.setVisible(true);
 	}
 }
