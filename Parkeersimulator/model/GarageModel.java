@@ -1,13 +1,5 @@
 package model;
 
-import javax.swing.*;
-
-import model.*;
-
-import java.awt.*;
-
-@SuppressWarnings("serial")
-
 public class GarageModel {
 
 	private int numberOfFloors;
