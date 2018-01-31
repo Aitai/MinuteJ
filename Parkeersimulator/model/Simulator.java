@@ -1,7 +1,7 @@
 package model;
 
 import view.AbstractView;
-import controller.*;
+import view.InfoView;
 
 import java.util.Random;
 
@@ -23,7 +23,7 @@ public class Simulator extends ViewModel implements Runnable {
 
 	private int day = 0;
 	private int hour = 10;
-	private int minute = 0;
+	private int minute = -1;
 
 	private int tickPause = 100;
 
@@ -52,6 +52,10 @@ public class Simulator extends ViewModel implements Runnable {
 		}
 	}
 
+	public String getLabel() {
+		return daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute();
+	}
+
 	public void tick() {
 		daysOfTheWeek();
 		eveningArrivals();
@@ -66,10 +70,10 @@ public class Simulator extends ViewModel implements Runnable {
 			e.printStackTrace();
 		}
 		handleEntrance();
-//		controller.setLabel("a");
+		InfoView.setLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
 	}
-	
-	
+
+
 
 	public void tickFast() {
 		daysOfTheWeek();

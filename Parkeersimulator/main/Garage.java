@@ -6,6 +6,7 @@ import java.awt.*;
 
 import model.Simulator;
 import view.GarageView;
+import view.InfoView;
 import controller.GarageController;
 
 public class Garage {
@@ -14,18 +15,22 @@ public class Garage {
 	private Simulator simulator;
 	private GarageView garageView;
 	private GarageController garageController;
+	private InfoView info;
 
 	public Garage() {
 
 		simulator = new Simulator();
 		garageView = new GarageView(simulator);
 		garageController = new GarageController(simulator);
+		info = new InfoView(simulator);
 		window = new JFrame("Parkeergarage simulatie");
 
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Container contentPane = window.getContentPane();
-		contentPane.add(garageController, BorderLayout.SOUTH);
-		contentPane.add(garageView, BorderLayout.CENTER);
+		Container garageAndButtons = window.getContentPane();
+		Container infoPane = window.getContentPane();
+		garageAndButtons.add(garageController, BorderLayout.SOUTH);
+		garageAndButtons.add(garageView, BorderLayout.CENTER);
+		infoPane.add(info, BorderLayout.EAST);
 
 		window.pack();
 		simulator.tick();

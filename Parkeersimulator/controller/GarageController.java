@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,11 +17,7 @@ public class GarageController extends AbstractController {
 	private JButton steps;
 	private JButton faster;
 	private JButton slower;
-	public JLabel dateTime = new JLabel("a");
 
-	public void setLabel(String label) {
-		dateTime.setText(label);
-	}
 	public GarageController(Simulator simulator) {
 		super(simulator);
 
@@ -64,7 +61,7 @@ public class GarageController extends AbstractController {
 			public void actionPerformed(ActionEvent e) {
 				simulator.slower();
 			}
-		});		
+		});
 
 		add(start);
 		add(pauze);
@@ -72,7 +69,8 @@ public class GarageController extends AbstractController {
 		add(steps);
 		add(faster);
 		add(slower);
-		add(dateTime);
+
+		setBackground(Color.BLACK);
 
 		setVisible(true);
 	}

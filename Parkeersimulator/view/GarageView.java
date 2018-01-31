@@ -52,7 +52,7 @@ public class GarageView extends AbstractView {
 			g.drawImage(carParkImage, 0, 0, currentSize.width, currentSize.height, null);
 		}
 	}
-
+	@Override
 	public void updateView() {
 		// Create a new car park image if the size has changed.
 		if (!size.equals(getSize())) {
