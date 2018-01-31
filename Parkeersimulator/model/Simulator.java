@@ -29,7 +29,7 @@ public class Simulator extends ViewModel implements Runnable {
 	private int hour = 10;
 	private int minute = -1;
 
-	private int tickPause = 128;
+	private int tickPause = 100;
 
 	private boolean realTime = false;
 
@@ -40,7 +40,7 @@ public class Simulator extends ViewModel implements Runnable {
 	private int weekDayResArrivals;
 	private int weekendResArrivals = 50;
 
-	int enterSpeed = 2; // number of cars that can enter per minute
+	int enterSpeed = 3; // number of cars that can enter per minute
 	int paymentSpeed = 7; // number of cars that can pay per minute
 	int exitSpeed = 5; // number of cars that can leave per minute
 
@@ -84,7 +84,6 @@ public class Simulator extends ViewModel implements Runnable {
 		}
 		handleEntrance();
 		InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
-		InfoView.setQueueLabel(entranceCarQueue.carsInQueue());
 	}
 
 
@@ -240,15 +239,15 @@ public class Simulator extends ViewModel implements Runnable {
 }
 
 	public void faster() {
-		if (running == true) {
-			tickPause /=2 + ((tickPause%2==0)?0:1);
+		if (running == true && tickPause >= 0) {
+			tickPause = tickPause - 20;
 			System.out.println(tickPause);
 		}
 	}
 
 	public void slower() {
-		if (running == true) {
-			tickPause *=2;
+		if (running == true && tickPause < 300) {
+			tickPause = tickPause + 60;
 			System.out.println(tickPause);
 		}
 	}

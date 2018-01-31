@@ -29,7 +29,7 @@ public class GarageController extends AbstractController {
 			}
 		});
 
-		step = new JButton("Stap");
+		step = new JButton("1 minuut");
 		step.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				simulator.step();
