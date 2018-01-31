@@ -37,4 +37,7 @@ public class Garage {
 
 		window.setVisible(true);
 	}
+	public static void main(String[] args) {
+		new Garage();
+	}
 }
