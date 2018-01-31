@@ -1,7 +1,7 @@
 package model;
 
-import model.ViewModel;
 import view.AbstractView;
+import controller.*;
 
 import java.util.Random;
 
@@ -47,10 +47,9 @@ public class Simulator extends ViewModel implements Runnable {
 
 	public void run() {
 		running = true;
-		for (int i = 0; i < 100000; i++) {
+		while(running) {
 			tick();
 		}
-		running = false;
 	}
 
 	public void tick() {
@@ -67,7 +66,10 @@ public class Simulator extends ViewModel implements Runnable {
 			e.printStackTrace();
 		}
 		handleEntrance();
+//		controller.setLabel("a");
 	}
+	
+	
 
 	public void tickFast() {
 		daysOfTheWeek();
@@ -194,12 +196,8 @@ public class Simulator extends ViewModel implements Runnable {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	public void pauze() {
-		if (running == true) {
-			t.stop();
 			running = false;
-		}
 	}
 
 	public void step() {
