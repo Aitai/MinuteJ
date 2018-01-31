@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 
 import model.Simulator;
 
@@ -32,7 +31,7 @@ public class GarageController extends AbstractController {
 		step = new JButton("1 minuut");
 		step.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				simulator.step();
+				simulator.ffMinute();
 			}
 		});
 

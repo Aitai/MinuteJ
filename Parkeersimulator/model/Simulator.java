@@ -2,10 +2,7 @@ package model;
 
 import view.AbstractView;
 import view.InfoView;
-
 import java.util.Random;
-
-import javax.swing.SwingUtilities;
 
 public class Simulator extends ViewModel implements Runnable {
 
@@ -29,9 +26,7 @@ public class Simulator extends ViewModel implements Runnable {
 	private int hour = 10;
 	private int minute = -1;
 
-	private int tickPause = 100;
-
-	private boolean realTime = false;
+	private int tickPause = 128;
 
 	private int weekDayArrivals; // average number of arriving cars per hour
 	private int weekendArrivals = 200; // average number of arriving cars per hour
@@ -66,7 +61,6 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	public void realTime() {
-		realTime=true;
 		tickPause=60000;
 	}
 
@@ -219,12 +213,12 @@ public class Simulator extends ViewModel implements Runnable {
 		}
 	}
 
-	public void step() {
+	public void ffMinute() {
 //		if (running == false) {
-			tick();
+			tickFast();
+			InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
 //		}
 	}
-
 	public void ffHour() {
 			for (int i = 0; i < 60; i++) {
 				tickFast();
@@ -239,15 +233,15 @@ public class Simulator extends ViewModel implements Runnable {
 }
 
 	public void faster() {
-		if (running == true && tickPause >= 0) {
-			tickPause = tickPause - 20;
+		if (tickPause!=1) {
+			tickPause /=2;
 			System.out.println(tickPause);
 		}
 	}
 
 	public void slower() {
-		if (running == true && tickPause < 300) {
-			tickPause = tickPause + 60;
+		if (tickPause<=256) {
+			tickPause*=2;
 			System.out.println(tickPause);
 		}
 	}

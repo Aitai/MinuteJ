@@ -30,4 +30,3 @@ public class InfoView extends AbstractView {
 	public void updateView() {
 	}
 }
->>>>>>> 380a32f710a1b357c4017c3e30effe2205db7dc8
