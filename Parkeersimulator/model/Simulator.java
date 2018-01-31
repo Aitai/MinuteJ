@@ -83,7 +83,7 @@ public class Simulator extends ViewModel implements Runnable {
 			e.printStackTrace();
 		}
 		handleEntrance();
-		InfoView.setLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
+		InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
 	}
 
 
@@ -228,18 +228,18 @@ public class Simulator extends ViewModel implements Runnable {
 	public void ffHour() {
 			for (int i = 0; i < 60; i++) {
 				tickFast();
-				InfoView.setLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
+				InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
 			}
 	}
 	public void ffDay() {
 		for (int i = 0; i < 60*24; i++) {
 			tickFast();
-			InfoView.setLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
+			InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
 		}
 }
 
 	public void faster() {
-		if (running == true && tickPause > 20) {
+		if (running == true && tickPause >= 0) {
 			tickPause = tickPause - 20;
 			System.out.println(tickPause);
 		}
