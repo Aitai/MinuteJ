@@ -9,9 +9,11 @@ public class Simulator extends ViewModel implements Runnable {
 
 	private static final String AD_HOC = "1";
 	private static final String PASS = "2";
+	private static final String RES = "3";
 
 	private CarQueue entranceCarQueue;
 	private CarQueue entrancePassQueue;
+	private CarQueue entranceResQueue;
 	private CarQueue paymentCarQueue;
 	private CarQueue exitCarQueue;
 	private GarageModel garageModel;
@@ -31,7 +33,9 @@ public class Simulator extends ViewModel implements Runnable {
 	private int weekendArrivals = 200; // average number of arriving cars per hour
 	private int weekDayPassArrivals; // average number of arriving cars per hour
 	private int weekendPassArrivals = 5; // average number of arriving cars per hour
-
+	private int weekDayResArrivals = 30;
+	private int weekendResArrivals = 50;
+	
 	int enterSpeed = 3; // number of cars that can enter per minute
 	int paymentSpeed = 7; // number of cars that can pay per minute
 	int exitSpeed = 5; // number of cars that can leave per minute
@@ -39,6 +43,7 @@ public class Simulator extends ViewModel implements Runnable {
 	public Simulator() {
 		entranceCarQueue = new CarQueue();
 		entrancePassQueue = new CarQueue();
+		entranceResQueue = new CarQueue();
 		paymentCarQueue = new CarQueue();
 		exitCarQueue = new CarQueue();
 		garageModel = new GarageModel(3, 6, 28);
@@ -158,6 +163,7 @@ public class Simulator extends ViewModel implements Runnable {
 		carsArriving();
 		carsEntering(entrancePassQueue);
 		carsEntering(entranceCarQueue);
+		carsEntering(entranceResQueue);
 	}
 
 	private void handleExit() {
@@ -179,6 +185,8 @@ public class Simulator extends ViewModel implements Runnable {
 		addArrivingCars(numberOfCars, AD_HOC);
 		numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
 		addArrivingCars(numberOfCars, PASS);
+		numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArrivals);
+		addArrivingCars(numberOfCars, RES);
 	}
 
 	private void carsEntering(CarQueue queue) {
@@ -287,6 +295,11 @@ public class Simulator extends ViewModel implements Runnable {
 		case PASS:
 			for (int i = 0; i < numberOfCars; i++) {
 				entrancePassQueue.addCar(new ParkingPassCar());
+			}
+			break;
+		case RES:
+			for (int i = 0; i < numberOfCars; i++) {
+				entrancePassQueue.addCar(new ReservedCar());
 			}
 			break;
 		}
