@@ -16,6 +16,7 @@ public class GarageController extends AbstractController {
 	private JButton steps;
 	private JButton faster;
 	private JButton slower;
+	private JButton realTime;
 
 	public GarageController(Simulator simulator) {
 		super(simulator);
@@ -54,12 +55,20 @@ public class GarageController extends AbstractController {
 				simulator.slower();
 			}
 		});
+		
+		realTime = new JButton("Realtime");
+		realTime.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				simulator.realTime();
+			}
+		});
 
 		add(startPauze);
 		add(step);
 		add(steps);
 		add(faster);
 		add(slower);
+		add(realTime);
 
 		setBackground(Color.BLACK);
 
