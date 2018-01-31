@@ -2,16 +2,17 @@ package model;
 
 import view.AbstractView;
 import view.InfoView;
-
 import java.util.Random;
 
 public class Simulator extends ViewModel implements Runnable {
 
 	private static final String AD_HOC = "1";
 	private static final String PASS = "2";
+	private static final String RES = "3";
 
 	private CarQueue entranceCarQueue;
 	private CarQueue entrancePassQueue;
+	private CarQueue entranceResQueue;
 	private CarQueue paymentCarQueue;
 	private CarQueue exitCarQueue;
 	private GarageModel garageModel;
@@ -25,12 +26,14 @@ public class Simulator extends ViewModel implements Runnable {
 	private int hour = 10;
 	private int minute = -1;
 
-	private int tickPause = 100;
+	private int tickPause = 128;
 
 	private int weekDayArrivals; // average number of arriving cars per hour
 	private int weekendArrivals = 200; // average number of arriving cars per hour
 	private int weekDayPassArrivals; // average number of arriving cars per hour
 	private int weekendPassArrivals = 5; // average number of arriving cars per hour
+	private int weekDayResArrivals; // average number of arriving cars per hour
+	private int weekendResArrivals = 50; // average number of arriving cars per hour
 
 	int enterSpeed = 3; // number of cars that can enter per minute
 	int paymentSpeed = 7; // number of cars that can pay per minute
@@ -39,6 +42,7 @@ public class Simulator extends ViewModel implements Runnable {
 	public Simulator() {
 		entranceCarQueue = new CarQueue();
 		entrancePassQueue = new CarQueue();
+		entranceResQueue = new CarQueue();
 		paymentCarQueue = new CarQueue();
 		exitCarQueue = new CarQueue();
 		garageModel = new GarageModel(3, 6, 28);
@@ -56,6 +60,10 @@ public class Simulator extends ViewModel implements Runnable {
 		return daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute();
 	}
 
+	public void realTime() {
+		tickPause=60000;
+	}
+
 	public void tick() {
 		daysOfTheWeek();
 		eveningArrivals();
@@ -64,13 +72,13 @@ public class Simulator extends ViewModel implements Runnable {
 		updateViews();
 		// Pause.
 		try {
-			System.out.println(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute() + " Arrivals: " + weekDayArrivals);
 			Thread.sleep(tickPause);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		handleEntrance();
-		InfoView.setLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
+		InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
+		InfoView.setQueueLabel("Aantal auto's in de rij: " + entranceCarQueue.carsInQueue());
 	}
 
 
@@ -81,7 +89,6 @@ public class Simulator extends ViewModel implements Runnable {
 		advanceTime();
 		handleExit();
 		updateViews();
-		System.out.println(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute() + " Arrivals: " + weekDayArrivals);
 		handleEntrance();
 	}
 
@@ -90,10 +97,12 @@ public class Simulator extends ViewModel implements Runnable {
 			if (day <= 5) {
 				weekDayArrivals = 40;
 				weekDayPassArrivals = 20;
+				weekDayResArrivals = 5;
 			}
 		} else {
 			weekDayArrivals = 100;
 			weekDayPassArrivals = 50;
+			weekDayResArrivals = 20;
 		}
 	}
 
@@ -158,6 +167,7 @@ public class Simulator extends ViewModel implements Runnable {
 		carsArriving();
 		carsEntering(entrancePassQueue);
 		carsEntering(entranceCarQueue);
+		carsEntering(entranceResQueue);
 	}
 
 	private void handleExit() {
@@ -179,6 +189,8 @@ public class Simulator extends ViewModel implements Runnable {
 		addArrivingCars(numberOfCars, AD_HOC);
 		numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
 		addArrivingCars(numberOfCars, PASS);
+		numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArrivals);
+		addArrivingCars(numberOfCars, RES);
 	}
 
 	private void carsEntering(CarQueue queue) {
@@ -192,42 +204,45 @@ public class Simulator extends ViewModel implements Runnable {
 		}
 	}
 
-	public void start() {
+	public void startPauze() {
 		if (running == false) {
 			t = new Thread(this);
 			t.start();
 			running = true;
+		} else {
+			running = false;
 		}
 	}
 
-	public void pauze() {
-			running = false;
-	}
-
-	public void step() {
+	public void ffMinute() {
 //		if (running == false) {
-			tick();
+			tickFast();
+			InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
 //		}
 	}
-
-	public void steps() {
-//		if (running == false) {
-			for (int i = 0; i <= 100; i++) {
+	public void ffHour() {
+			for (int i = 0; i < 60; i++) {
 				tickFast();
+				InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
 			}
-//		}
 	}
+	public void ffDay() {
+		for (int i = 0; i < 60*24; i++) {
+			tickFast();
+			InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
+		}
+}
 
 	public void faster() {
-		if (running == true && tickPause > 20) {
-			tickPause = tickPause - 20;
+		if (tickPause!=1) {
+			tickPause /=2;
 			System.out.println(tickPause);
 		}
 	}
 
 	public void slower() {
-		if (running == true && tickPause < 300) {
-			tickPause = tickPause + 60;
+		if (tickPause<=256) {
+			tickPause*=2;
 			System.out.println(tickPause);
 		}
 	}
@@ -289,6 +304,11 @@ public class Simulator extends ViewModel implements Runnable {
 		case PASS:
 			for (int i = 0; i < numberOfCars; i++) {
 				entrancePassQueue.addCar(new ParkingPassCar());
+			}
+			break;
+		case RES:
+			for (int i = 0; i < numberOfCars; i++) {
+				entrancePassQueue.addCar(new ReservedCar());
 			}
 			break;
 		}
