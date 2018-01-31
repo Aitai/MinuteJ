@@ -24,5 +24,4 @@ public class InfoView extends AbstractView {
 	@Override
 	public void updateView() {
 	}
-
 }

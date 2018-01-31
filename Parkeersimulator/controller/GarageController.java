@@ -13,7 +13,8 @@ public class GarageController extends AbstractController {
 	private static final long serialVersionUID = 3253955925290497248L;
 	private JButton startPauze;
 	private JButton step;
-	private JButton steps;
+	private JButton ffHour;
+	private JButton ffDay;
 	private JButton faster;
 	private JButton slower;
 	private JButton realTime;
@@ -35,10 +36,17 @@ public class GarageController extends AbstractController {
 			}
 		});
 
-		steps = new JButton("100 Stappen");
-		steps.addActionListener(new ActionListener() {
+		ffHour = new JButton("1 uur");
+		ffHour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				simulator.steps();
+				simulator.ffHour();
+			}
+		});
+		
+		ffDay = new JButton("1 dag");
+		ffDay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				simulator.ffDay();
 			}
 		});
 
@@ -65,7 +73,8 @@ public class GarageController extends AbstractController {
 
 		add(startPauze);
 		add(step);
-		add(steps);
+		add(ffHour);
+		add(ffDay);
 		add(faster);
 		add(slower);
 		add(realTime);

@@ -5,6 +5,8 @@ import view.InfoView;
 
 import java.util.Random;
 
+import javax.swing.SwingUtilities;
+
 public class Simulator extends ViewModel implements Runnable {
 
 	private static final String AD_HOC = "1";
@@ -37,7 +39,7 @@ public class Simulator extends ViewModel implements Runnable {
 	private int weekendPassArrivals = 5; // average number of arriving cars per hour
 	private int weekDayResArrivals;
 	private int weekendResArrivals = 50;
-	
+
 	int enterSpeed = 3; // number of cars that can enter per minute
 	int paymentSpeed = 7; // number of cars that can pay per minute
 	int exitSpeed = 5; // number of cars that can leave per minute
@@ -76,7 +78,6 @@ public class Simulator extends ViewModel implements Runnable {
 		updateViews();
 		// Pause.
 		try {
-			System.out.println(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute() + " Arrivals: " + weekDayArrivals);
 			Thread.sleep(tickPause);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -93,7 +94,6 @@ public class Simulator extends ViewModel implements Runnable {
 		advanceTime();
 		handleExit();
 		updateViews();
-		System.out.println(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute() + " Arrivals: " + weekDayArrivals);
 		handleEntrance();
 	}
 
@@ -225,13 +225,18 @@ public class Simulator extends ViewModel implements Runnable {
 //		}
 	}
 
-	public void steps() {
-//		if (running == false) {
-			for (int i = 0; i <= 100; i++) {
+	public void ffHour() {
+			for (int i = 0; i < 60; i++) {
 				tickFast();
+				InfoView.setLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
 			}
-//		}
 	}
+	public void ffDay() {
+		for (int i = 0; i < 60*24; i++) {
+			tickFast();
+			InfoView.setLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
+		}
+}
 
 	public void faster() {
 		if (running == true && tickPause > 20) {
