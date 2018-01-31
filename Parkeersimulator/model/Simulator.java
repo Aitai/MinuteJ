@@ -32,8 +32,8 @@ public class Simulator extends ViewModel implements Runnable {
 	private int weekendArrivals = 200; // average number of arriving cars per hour
 	private int weekDayPassArrivals; // average number of arriving cars per hour
 	private int weekendPassArrivals = 5; // average number of arriving cars per hour
-	private int weekDayResArrivals;
-	private int weekendResArrivals = 50;
+	private int weekDayResArrivals; // average number of arriving cars per hour
+	private int weekendResArrivals = 50; // average number of arriving cars per hour
 
 	int enterSpeed = 3; // number of cars that can enter per minute
 	int paymentSpeed = 7; // number of cars that can pay per minute
@@ -78,6 +78,7 @@ public class Simulator extends ViewModel implements Runnable {
 		}
 		handleEntrance();
 		InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
+		InfoView.setQueueLabel("Aantal auto's in de rij: " + entranceCarQueue.carsInQueue());
 	}
 
 
