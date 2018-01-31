@@ -35,7 +35,7 @@ public class Simulator extends ViewModel implements Runnable {
 	private int weekendArrivals = 200; // average number of arriving cars per hour
 	private int weekDayPassArrivals; // average number of arriving cars per hour
 	private int weekendPassArrivals = 5; // average number of arriving cars per hour
-	private int weekDayResArrivals = 30;
+	private int weekDayResArrivals;
 	private int weekendResArrivals = 50;
 	
 	int enterSpeed = 3; // number of cars that can enter per minute
@@ -102,10 +102,12 @@ public class Simulator extends ViewModel implements Runnable {
 			if (day <= 5) {
 				weekDayArrivals = 40;
 				weekDayPassArrivals = 20;
+				weekDayResArrivals = 5;
 			}
 		} else {
 			weekDayArrivals = 100;
 			weekDayPassArrivals = 50;
+			weekDayResArrivals = 20;
 		}
 	}
 
