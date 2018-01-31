@@ -10,7 +10,6 @@ public class InfoView extends AbstractView {
 	public static JLabel dateTime = new JLabel();
 	public static JLabel queue = new JLabel();
 
-//	super(simulator);
 	private static final long serialVersionUID = -3260703954764103294L;
 	public InfoView(Simulator simulator) {
 		simulator.addView(this);

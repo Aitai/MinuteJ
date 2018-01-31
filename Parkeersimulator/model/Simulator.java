@@ -236,14 +236,12 @@ public class Simulator extends ViewModel implements Runnable {
 	public void faster() {
 		if (tickPause!=1) {
 			tickPause /=2;
-			System.out.println(tickPause);
 		}
 	}
 
 	public void slower() {
 		if (tickPause<=256) {
 			tickPause*=2;
-			System.out.println(tickPause);
 		}
 	}
 

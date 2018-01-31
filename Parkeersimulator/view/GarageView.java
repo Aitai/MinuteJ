@@ -15,7 +15,6 @@ public class GarageView extends AbstractView {
 	private Dimension size;
 	private Image carParkImage;
 	private Simulator simulator;
-//	JTextArea date;
 
 	/**
 	 * Constructor for objects of class CarPark
@@ -57,8 +56,6 @@ public class GarageView extends AbstractView {
 			size = getSize();
 			carParkImage = createImage(size.width, size.height);
 		}
-//		date = new JTextArea(simulator.daysOfTheWeek());
-//		date.setVisible(true);
 		Graphics graphics = carParkImage.getGraphics();
 		for (int floor = 0; floor < simulator.getGarageModel().getNumberOfFloors(); floor++) {
 			for (int row = 0; row < simulator.getGarageModel().getNumberOfRows(); row++) {
