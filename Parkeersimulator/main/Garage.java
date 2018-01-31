@@ -33,9 +33,9 @@ public class Garage {
 		infoPane.add(info, BorderLayout.EAST);
 
 		window.pack();
+		window.setVisible(true);
 		simulator.tick();
 
-		window.setVisible(true);
 	}
 	public static void main(String[] args) {
 		new Garage();

@@ -27,6 +27,8 @@ public class Simulator extends ViewModel implements Runnable {
 
 	private int tickPause = 100;
 
+	private boolean realTime = false;
+
 	private int weekDayArrivals; // average number of arriving cars per hour
 	private int weekendArrivals = 200; // average number of arriving cars per hour
 	private int weekDayPassArrivals; // average number of arriving cars per hour
@@ -54,6 +56,11 @@ public class Simulator extends ViewModel implements Runnable {
 
 	public String getLabel() {
 		return daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute();
+	}
+
+	public void realTime() {
+		realTime=true;
+		tickPause=60000;
 	}
 
 	public void tick() {
