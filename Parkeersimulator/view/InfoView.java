@@ -23,8 +23,8 @@ public class InfoView extends AbstractView {
 	public static void setDateTimeLabel(String label) {
 		dateTime.setText(label);
 	}
-	public static void setQueueLabel(String label) {
-		queue.setText(label);
+	public static void setQueueLabel(int label) {
+		queue.setText(Integer.toString(label));
 	}
 	@Override
 	public void updateView() {
