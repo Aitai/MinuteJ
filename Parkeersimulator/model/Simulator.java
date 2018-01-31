@@ -192,16 +192,14 @@ public class Simulator extends ViewModel implements Runnable {
 		}
 	}
 
-	public void start() {
+	public void startPauze() {
 		if (running == false) {
 			t = new Thread(this);
 			t.start();
 			running = true;
-		}
-	}
-
-	public void pauze() {
+		} else {
 			running = false;
+		}
 	}
 
 	public void step() {

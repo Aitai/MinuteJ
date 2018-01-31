@@ -11,8 +11,7 @@ import model.Simulator;
 
 public class GarageController extends AbstractController {
 	private static final long serialVersionUID = 3253955925290497248L;
-	private JButton start;
-	private JButton pauze;
+	private JButton startPauze;
 	private JButton step;
 	private JButton steps;
 	private JButton faster;
@@ -21,17 +20,10 @@ public class GarageController extends AbstractController {
 	public GarageController(Simulator simulator) {
 		super(simulator);
 
-		start = new JButton("Start");
-		start.addActionListener(new ActionListener() {
+		startPauze = new JButton("Start/Pauze");
+		startPauze.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				simulator.start();
-			}
-		});
-
-		pauze = new JButton("Pauze");
-		pauze.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				simulator.pauze();
+				simulator.startPauze();
 			}
 		});
 
@@ -63,8 +55,7 @@ public class GarageController extends AbstractController {
 			}
 		});
 
-		add(start);
-		add(pauze);
+		add(startPauze);
 		add(step);
 		add(steps);
 		add(faster);
