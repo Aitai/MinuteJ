@@ -24,7 +24,11 @@ public class GarageModel {
 	private double costPerMinute = 0.05;
 
     private double expectedAdHocRev = 0;
-    private double AdHocRev = 0;
+    private double adHocRev = 0;
+    double input = 0;
+    double output = 0;
+    double totalInput = 0;
+    double totalOutput = 0;
 	
 	public double calcAdHocRev() {
         for (Car[][] cars1 : cars) {
@@ -32,32 +36,34 @@ public class GarageModel {
                 for (Car car : cars2) {
                     try {
                         AdHocCar adHocCar = (AdHocCar) car;
-                        if (adHocCar.getColor() == Color.red && adHocCar.getMinutesLeft() == 0) {
-                        	AdHocRev += adHocCar.getParkingTime() * costPerMinute;
+                        if(adHocCar.getMinutesLeft() == 0 && adHocCar.getColor() == Color.red) {
+                        	output = adHocCar.getParkingTime() * costPerMinute;
+                        	totalOutput = totalOutput + output;
                         }
                     } catch (Exception b) {
                     }
                 }
             }
         }
-        return AdHocRev;
+        return adHocRev += output;
     }
 	public double calcExpectedAdHocRev() {
-        double input = 0;
         for (Car[][] cars1 : cars) {
             for (Car[] cars2 : cars1) {
                 for (Car car : cars2) {
                     try {
                         AdHocCar adHocCar = (AdHocCar) car;
-                        if (adHocCar.getColor() == Color.red) {
+                        if (adHocCar.getColor() == Color.red && adHocCar.getParkingTime() == adHocCar.getMinutesLeft()) {
                             input = adHocCar.getParkingTime() * costPerMinute;
+                            totalInput = totalInput + input;
                         }
+                        expectedAdHocRev = (totalInput - totalOutput);
                     } catch (Exception b) {
                     }
                 }
             }
         }
-        return expectedAdHocRev += input;
+        return expectedAdHocRev;
     }
 	public int getPassSpots() {
 		return passSpots;
