@@ -55,6 +55,10 @@ public class InfoView extends AbstractView {
 	public static void setexitCarQueueLabel(String label) {
 		exitCarQueue.setText(label);
 	}
+	
+	public static void setFreeSpots(String label) {
+		exitCarQueue.setText(label);
+	}
 
 	@Override
 	public void updateView() {
