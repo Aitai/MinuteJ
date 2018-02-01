@@ -40,14 +40,12 @@ public class InfoView extends AbstractView {
 	public static void setCarQueueLabel(String label) {
 		entranceCarQueue.setText(label);
 	}
-
 	public static void setRevenueLabel(String label) {
 		revenue.setText(label);
 	}
 	public static void setExpectedRevenueLabel(String label) {
 		expectedRevenue.setText(label);
 	}
-
 	public static void setPassResQueueLabel(String label) {
 		entrancePassResQueue.setText(label);
 	}
@@ -57,7 +55,6 @@ public class InfoView extends AbstractView {
 	public static void setexitCarQueueLabel(String label) {
 		exitCarQueue.setText(label);
 	}
-	
 	public static void setFreeSpots(String label) {
 		freeSpots.setText(label);
 	}

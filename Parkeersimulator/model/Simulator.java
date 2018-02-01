@@ -105,7 +105,7 @@ public class Simulator extends ViewModel implements Runnable {
 		InfoView.setExpectedRevenueLabel("Verwachte ad hoc omzet: " + round(garageModel.calcExpectedAdHocRev(), 2));
 		InfoView.setFreeSpots("Aantal lege plekken: " + garageModel.getNumberOfOpenSpots());
 		if (exitCarQueue.carsInQueue() > 0) {
-//			System.out.println("test");
+			System.out.println("test");
 			playExitSound();
 		}
 		;
