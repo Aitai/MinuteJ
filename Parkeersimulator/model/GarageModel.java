@@ -9,6 +9,7 @@ public class GarageModel {
 	private int numberOfRows;
 	private int numberOfPlaces;
 	private int numberOfOpenSpots;
+	private int passSpots;
 	private Car[][][] cars;
 
 	public GarageModel(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
@@ -17,6 +18,7 @@ public class GarageModel {
 		this.numberOfPlaces = numberOfPlaces;
 		this.numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces - 4;
 		cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
+		passSpots = 56;
 
 	}
 	private double costPerMinute = 0.05;
@@ -57,6 +59,9 @@ public class GarageModel {
         }
         return expectedAdHocRev += input;
     }
+	public int getPassSpots() {
+		return passSpots;
+	}
 
 	public int getNumberOfFloors() {
 		return numberOfFloors;

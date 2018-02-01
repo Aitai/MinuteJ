@@ -4,9 +4,13 @@ import view.AbstractView;
 import view.CarGraph;
 import view.InfoView;
 
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Random;
+
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 
 public class Simulator extends ViewModel implements Runnable {
 
@@ -53,6 +57,15 @@ public class Simulator extends ViewModel implements Runnable {
 
 	}
 
+	private void playExitSound() {
+		try {
+			InputStream inputStream = getClass().getResourceAsStream("../media/splat.au");
+			AudioStream audioStream = new AudioStream(inputStream);
+			AudioPlayer.player.start(audioStream);
+		} catch (Exception e) {
+		}
+	}
+
 	public void run() {
 		running = true;
 		while (running) {
@@ -82,23 +95,28 @@ public class Simulator extends ViewModel implements Runnable {
 		}
 		handleEntrance();
 		InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
-		InfoView.setCarQueueLabel("Aantal auto's in de rij: " + entranceCarQueue.carsInQueue());
 		InfoView.setCarQueueLabel("Aantal normale auto's in de rij: " + entranceCarQueue.carsInQueue());
-		InfoView.setPassResQueueLabel("Aantal abonnement houders/gereserveerden in de rij: " + entrancePassQueue.carsInQueue());
+		InfoView.setPassResQueueLabel(
+				"Aantal abonnement houders/gereserveerden in de rij: " + entrancePassQueue.carsInQueue());
 		InfoView.setpaymentCarQueueLabel("Aantal betalende in de rij: " + paymentCarQueue.carsInQueue());
 		InfoView.setexitCarQueueLabel("Aantal auto's in de rij voor de uitgang: " + exitCarQueue.carsInQueue());
 		CarGraph.setVal();
-		InfoView.setRevenueLabel("Ad hoc omzet: "+round(garageModel.calcAdHocRev(),2));
-		InfoView.setExpectedRevenueLabel("Verwachte ad hoc omzet: "+round(garageModel.calcExpectedAdHocRev(),2));
+		InfoView.setRevenueLabel("Ad hoc omzet: " + round(garageModel.calcAdHocRev(), 2));
+		InfoView.setExpectedRevenueLabel("Verwachte ad hoc omzet: " + round(garageModel.calcExpectedAdHocRev(), 2));
+		if (exitCarQueue.carsInQueue() > 0) {
+			System.out.println("test");
+			playExitSound();
+		}
+		;
 	}
 
-
 	public static double round(double value, int places) {
-	    if (places < 0) throw new IllegalArgumentException();
+		if (places < 0)
+			throw new IllegalArgumentException();
 
-	    BigDecimal bd = new BigDecimal(value);
-	    bd = bd.setScale(places, RoundingMode.HALF_UP);
-	    return bd.doubleValue();
+		BigDecimal bd = new BigDecimal(value);
+		bd = bd.setScale(places, RoundingMode.HALF_UP);
+		return bd.doubleValue();
 	}
 
 	public void tickFast() {
@@ -245,16 +263,16 @@ public class Simulator extends ViewModel implements Runnable {
 	public void ffMinute() {
 		tickFast();
 		InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
-		InfoView.setRevenueLabel("Ad hoc omzet: "+round(garageModel.calcAdHocRev(),2));
-		InfoView.setExpectedRevenueLabel("Verwachte ad hoc omzet: "+round(garageModel.calcExpectedAdHocRev(),2));
+		InfoView.setRevenueLabel("Ad hoc omzet: " + round(garageModel.calcAdHocRev(), 2));
+		InfoView.setExpectedRevenueLabel("Verwachte ad hoc omzet: " + round(garageModel.calcExpectedAdHocRev(), 2));
 	}
 
 	public void ffHour() {
 		for (int i = 0; i < 60; i++) {
 			tickFast();
 			InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
-			InfoView.setRevenueLabel("Ad hoc omzet: "+round(garageModel.calcAdHocRev(),2));
-			InfoView.setExpectedRevenueLabel("Verwachte ad hoc omzet: "+round(garageModel.calcExpectedAdHocRev(),2));
+			InfoView.setRevenueLabel("Ad hoc omzet: " + round(garageModel.calcAdHocRev(), 2));
+			InfoView.setExpectedRevenueLabel("Verwachte ad hoc omzet: " + round(garageModel.calcExpectedAdHocRev(), 2));
 		}
 	}
 
@@ -262,8 +280,8 @@ public class Simulator extends ViewModel implements Runnable {
 		for (int i = 0; i < 60 * 24; i++) {
 			tickFast();
 			InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
-			InfoView.setRevenueLabel("Ad hoc omzet: "+round(garageModel.calcAdHocRev(),2));
-			InfoView.setExpectedRevenueLabel("Verwachte ad hoc omzet: "+round(garageModel.calcExpectedAdHocRev(),2));
+			InfoView.setRevenueLabel("Ad hoc omzet: " + round(garageModel.calcAdHocRev(), 2));
+			InfoView.setExpectedRevenueLabel("Verwachte ad hoc omzet: " + round(garageModel.calcExpectedAdHocRev(), 2));
 		}
 	}
 

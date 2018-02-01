@@ -51,33 +51,61 @@ public class GarageView extends AbstractView {
 	}
 
 	@Override
+//	public void updateView() {
+//		// Create a new car park image if the size has changed.
+//		if (!size.equals(getSize())) {
+//			size = getSize();
+//			carParkImage = createImage(size.width, size.height);
+//		}
+//		Graphics graphics = carParkImage.getGraphics();
+//		for (int floor = 0; floor < simulator.getGarageModel().getNumberOfFloors(); floor++) {
+//			for (int row = 0; row < simulator.getGarageModel().getNumberOfRows(); row++) {
+//				for (int place = 0; place < simulator.getGarageModel().getNumberOfPlaces(); place++) {
+//					Location location = new Location(floor, row, place);
+//					Car car = simulator.getGarageModel().getCarAt(location);
+//					Color color; 
+//					if (car == null) {
+//						color = Color.white;
+//					} else {
+//						color = car.getColor();
+//					}
+//					drawPlace(graphics, location, color);
+//				}
+//			}
+//		}
+//	
+//
+//	repaint();
+//
+//	}
 	public void updateView() {
-		// Create a new car park image if the size has changed.
-		if (!size.equals(getSize())) {
-			size = getSize();
-			carParkImage = createImage(size.width, size.height);
-		}
-		Graphics graphics = carParkImage.getGraphics();
-		for (int floor = 0; floor < simulator.getGarageModel().getNumberOfFloors(); floor++) {
-			for (int row = 0; row < simulator.getGarageModel().getNumberOfRows(); row++) {
-				for (int place = 0; place < simulator.getGarageModel().getNumberOfPlaces(); place++) {
-					Location location = new Location(floor, row, place);
-					Car car = simulator.getGarageModel().getCarAt(location);
-					Color color; 
-					if (car == null) {
-						color = Color.white;
-					} else {
-						color = car.getColor();
-					}
-					drawPlace(graphics, location, color);
-				}
-			}
-		}
-	
+        // Create a new car park image if the size has changed.
+        //garage.tick();
+        if (!size.equals(getSize())) {
+            size = getSize();
+            carParkImage = createImage(size.width, size.height);
+        }
+        Graphics graphics = carParkImage.getGraphics();
+        int passCounter = 0;
+        for(int floor = 0; floor < simulator.getGarageModel().getNumberOfFloors(); floor++) {
+            for(int row = 0; row < simulator.getGarageModel().getNumberOfRows(); row++) {
+                for(int place = 0; place < simulator.getGarageModel().getNumberOfPlaces(); place++) {
+                    Location location = new Location(floor, row, place);
+                    Car car = simulator.getGarageModel().getCarAt(location);
+                    passCounter++;
+                    if (passCounter <= simulator.getGarageModel().getPassSpots()) {
+                        Color color = car == null ? Color.lightGray : car.getColor();
+                        drawPlace(graphics, location, color);
+                    } else {
+                        Color color = car == null ? Color.white : car.getColor();
+                        drawPlace(graphics, location, color);
+                    }
+                }
+            }
+        }
+        repaint();
 
-	repaint();
-
-	}
+    }
 
 	/**
 	 * Paint a place on this car park view in a given color.
