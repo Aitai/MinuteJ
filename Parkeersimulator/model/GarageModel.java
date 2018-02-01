@@ -19,26 +19,43 @@ public class GarageModel {
 		cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
 
 	}
-	private double kostenPM = 0.05;
-    private double dagOmzet = 0;
+	private double costPerMinute = 0.05;
+
+    private double expectedAdHocRev = 0;
+    private double AdHocRev = 0;
 	
-	public double calcDagOmzet() {
-//        Car[][][] cars = carController.getAllCars();
+	public double calcAdHocRev() {
         for (Car[][] cars1 : cars) {
             for (Car[] cars2 : cars1) {
                 for (Car car : cars2) {
                     try {
                         AdHocCar adHocCar = (AdHocCar) car;
                         if (adHocCar.getColor() == Color.red && adHocCar.getMinutesLeft() == 0) {
-                            dagOmzet += adHocCar.getParkingTime() * kostenPM;
+                        	AdHocRev += adHocCar.getParkingTime() * costPerMinute;
                         }
                     } catch (Exception b) {
-                        // Do nothing.
                     }
                 }
             }
         }
-        return dagOmzet;
+        return AdHocRev;
+    }
+	public double calcExpectedAdHocRev() {
+        double input = 0;
+        for (Car[][] cars1 : cars) {
+            for (Car[] cars2 : cars1) {
+                for (Car car : cars2) {
+                    try {
+                        AdHocCar adHocCar = (AdHocCar) car;
+                        if (adHocCar.getColor() == Color.red) {
+                            input = adHocCar.getParkingTime() * costPerMinute;
+                        }
+                    } catch (Exception b) {
+                    }
+                }
+            }
+        }
+        return expectedAdHocRev += input;
     }
 
 	public int getNumberOfFloors() {

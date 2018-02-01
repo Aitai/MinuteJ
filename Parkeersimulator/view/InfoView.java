@@ -10,6 +10,7 @@ public class InfoView extends AbstractView {
 	public static JLabel dateTime = new JLabel();
 	public static JLabel queue = new JLabel();
 	public static JLabel revenue = new JLabel();
+	public static JLabel expectedRevenue = new JLabel();
 	public static JLabel entranceCarQueue = new JLabel();
 	public static JLabel entrancePassResQueue = new JLabel();
 	public static JLabel paymentCarQueue = new JLabel();
@@ -21,6 +22,7 @@ public class InfoView extends AbstractView {
 		add(dateTime);
 		add(queue);
 		add(revenue);
+		add(expectedRevenue);
 
 		add(entranceCarQueue);
 		add(entrancePassResQueue);
@@ -39,6 +41,9 @@ public class InfoView extends AbstractView {
 
 	public static void setRevenueLabel(String label) {
 		revenue.setText(label);
+	}
+	public static void setExpectedRevenueLabel(String label) {
+		expectedRevenue.setText(label);
 	}
 
 	public static void setPassResQueueLabel(String label) {

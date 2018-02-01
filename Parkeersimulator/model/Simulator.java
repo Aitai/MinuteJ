@@ -82,13 +82,14 @@ public class Simulator extends ViewModel implements Runnable {
 		}
 		handleEntrance();
 		InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
-		InfoView.setQueueLabel("Aantal auto's in de rij: " + entranceCarQueue.carsInQueue());
+		InfoView.setCarQueueLabel("Aantal auto's in de rij: " + entranceCarQueue.carsInQueue());
 		InfoView.setCarQueueLabel("Aantal normale auto's in de rij: " + entranceCarQueue.carsInQueue());
 		InfoView.setPassResQueueLabel("Aantal abonnement houders/gereserveerden in de rij: " + entrancePassQueue.carsInQueue());
 		InfoView.setpaymentCarQueueLabel("Aantal betalende in de rij: " + paymentCarQueue.carsInQueue());
 		InfoView.setexitCarQueueLabel("Aantal auto's in de rij voor de uitgang: " + exitCarQueue.carsInQueue());
 		CarGraph.setVal();
-		InfoView.setRevenueLabel("Dagomzet: "+round(garageModel.calcDagOmzet(),2));
+		InfoView.setRevenueLabel("Ad hoc omzet: "+round(garageModel.calcAdHocRev(),2));
+		InfoView.setExpectedRevenueLabel("Verwachte ad hoc omzet: "+round(garageModel.calcExpectedAdHocRev(),2));
 	}
 
 
@@ -107,6 +108,8 @@ public class Simulator extends ViewModel implements Runnable {
 		handleExit();
 		updateViews();
 		handleEntrance();
+		garageModel.calcAdHocRev();
+		garageModel.calcExpectedAdHocRev();
 	}
 
 	public void eveningArrivals() {
@@ -240,16 +243,18 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	public void ffMinute() {
-		// if (running == false) {
 		tickFast();
 		InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
-		// }
+		InfoView.setRevenueLabel("Ad hoc omzet: "+round(garageModel.calcAdHocRev(),2));
+		InfoView.setExpectedRevenueLabel("Verwachte ad hoc omzet: "+round(garageModel.calcExpectedAdHocRev(),2));
 	}
 
 	public void ffHour() {
 		for (int i = 0; i < 60; i++) {
 			tickFast();
 			InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
+			InfoView.setRevenueLabel("Ad hoc omzet: "+round(garageModel.calcAdHocRev(),2));
+			InfoView.setExpectedRevenueLabel("Verwachte ad hoc omzet: "+round(garageModel.calcExpectedAdHocRev(),2));
 		}
 	}
 
@@ -257,6 +262,8 @@ public class Simulator extends ViewModel implements Runnable {
 		for (int i = 0; i < 60 * 24; i++) {
 			tickFast();
 			InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
+			InfoView.setRevenueLabel("Ad hoc omzet: "+round(garageModel.calcAdHocRev(),2));
+			InfoView.setExpectedRevenueLabel("Verwachte ad hoc omzet: "+round(garageModel.calcExpectedAdHocRev(),2));
 		}
 	}
 
