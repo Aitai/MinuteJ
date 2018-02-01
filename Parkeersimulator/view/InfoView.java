@@ -15,6 +15,7 @@ public class InfoView extends AbstractView {
 	public static JLabel entrancePassResQueue = new JLabel();
 	public static JLabel paymentCarQueue = new JLabel();
 	public static JLabel exitCarQueue = new JLabel();
+	public static JLabel freeSpots = new JLabel();
 
 	private static final long serialVersionUID = -3260703954764103294L;
 	public InfoView(Simulator simulator) {
@@ -28,6 +29,7 @@ public class InfoView extends AbstractView {
 		add(entrancePassResQueue);
 		add(paymentCarQueue);
 		add(exitCarQueue);
+		add(freeSpots);
 	}
 	public Dimension getPreferredSize() {
 		return new Dimension(500, 500);
@@ -57,7 +59,7 @@ public class InfoView extends AbstractView {
 	}
 	
 	public static void setFreeSpots(String label) {
-		exitCarQueue.setText(label);
+		freeSpots.setText(label);
 	}
 
 	@Override
