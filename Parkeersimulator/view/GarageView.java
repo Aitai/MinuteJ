@@ -15,7 +15,7 @@ public class GarageView extends AbstractView {
 	private Dimension size;
 	private Image carParkImage;
 	private Simulator simulator;
-//	JTextArea date;
+	// JTextArea date;
 
 	/**
 	 * Constructor for objects of class CarPark
@@ -50,6 +50,7 @@ public class GarageView extends AbstractView {
 			g.drawImage(carParkImage, 0, 0, currentSize.width, currentSize.height, null);
 		}
 	}
+
 	@Override
 	public void updateView() {
 		// Create a new car park image if the size has changed.
@@ -57,20 +58,28 @@ public class GarageView extends AbstractView {
 			size = getSize();
 			carParkImage = createImage(size.width, size.height);
 		}
-//		date = new JTextArea(simulator.daysOfTheWeek());
-//		date.setVisible(true);
+		// date = new JTextArea(simulator.daysOfTheWeek());
+		// date.setVisible(true);
 		Graphics graphics = carParkImage.getGraphics();
 		for (int floor = 0; floor < simulator.getGarageModel().getNumberOfFloors(); floor++) {
 			for (int row = 0; row < simulator.getGarageModel().getNumberOfRows(); row++) {
 				for (int place = 0; place < simulator.getGarageModel().getNumberOfPlaces(); place++) {
 					Location location = new Location(floor, row, place);
 					Car car = simulator.getGarageModel().getCarAt(location);
-					Color color = car == null ? Color.white : car.getColor();
+					Color color;
+					if (car == null) {
+						color = Color.white;
+					} else {
+						color = car.getColor();
+					}
 					drawPlace(graphics, location, color);
 				}
 			}
 		}
-		repaint();
+	
+
+	repaint();
+
 	}
 
 	/**

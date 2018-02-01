@@ -51,7 +51,7 @@ public class Simulator extends ViewModel implements Runnable {
 
 	public void run() {
 		running = true;
-		while(running) {
+		while (running) {
 			tick();
 		}
 	}
@@ -61,7 +61,7 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	public void realTime() {
-		tickPause=60000;
+		tickPause = 60000;
 	}
 
 	public void tick() {
@@ -78,10 +78,12 @@ public class Simulator extends ViewModel implements Runnable {
 		}
 		handleEntrance();
 		InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
-		InfoView.setQueueLabel("Aantal auto's in de rij: " + entranceCarQueue.carsInQueue());
+		InfoView.setCarQueueLabel("Aantal normale auto's in de rij: " + entranceCarQueue.carsInQueue());
+		InfoView.setPassResQueueLabel(
+				"Aantal abonnement houders/gereserveerden in de rij: " + entrancePassQueue.carsInQueue());
+		InfoView.setpaymentCarQueueLabel("Aantal betalende in de rij: " + paymentCarQueue.carsInQueue());
+		InfoView.setexitCarQueueLabel("Aantal auto's in de rij voor de uitgang: " + exitCarQueue.carsInQueue());
 	}
-
-
 
 	public void tickFast() {
 		daysOfTheWeek();
@@ -123,16 +125,16 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	public String fullHour() {
-		if(hour < 10) {
+		if (hour < 10) {
 			fullHour = "0" + hour;
 		} else {
-			fullHour =  "" + hour;
+			fullHour = "" + hour;
 		}
 		return fullHour;
 	}
 
 	public String fullMinute() {
-		if(minute < 10) {
+		if (minute < 10) {
 			fullMinute = "0" + minute;
 		} else {
 			fullMinute = "" + minute;
@@ -142,22 +144,30 @@ public class Simulator extends ViewModel implements Runnable {
 
 	public String daysOfTheWeek() {
 		switch (day) {
-			case 0: 	dayString = "Monday";
-						break;
-			case 1: 	dayString = "Tuesday";
-						break;
-			case 2: 	dayString = "Wednesday";
-						break;
-			case 3: 	dayString = "Thursday";
-						break;
-			case 4: 	dayString = "Friday";
-						break;
-			case 5: 	dayString = "Saturday";
-						break;
-			case 6: 	dayString = "Sunday";
-						break;
-			default: 	dayString = "ERRROR!!!!";
-						break;
+		case 0:
+			dayString = "Monday";
+			break;
+		case 1:
+			dayString = "Tuesday";
+			break;
+		case 2:
+			dayString = "Wednesday";
+			break;
+		case 3:
+			dayString = "Thursday";
+			break;
+		case 4:
+			dayString = "Friday";
+			break;
+		case 5:
+			dayString = "Saturday";
+			break;
+		case 6:
+			dayString = "Sunday";
+			break;
+		default:
+			dayString = "ERRROR!!!!";
+			break;
 
 		}
 		return dayString;
@@ -215,33 +225,35 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	public void ffMinute() {
-//		if (running == false) {
-			tickFast();
-			InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
-//		}
+		// if (running == false) {
+		tickFast();
+		InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
+		// }
 	}
+
 	public void ffHour() {
-			for (int i = 0; i < 60; i++) {
-				tickFast();
-				InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
-			}
-	}
-	public void ffDay() {
-		for (int i = 0; i < 60*24; i++) {
+		for (int i = 0; i < 60; i++) {
 			tickFast();
 			InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
 		}
-}
+	}
+
+	public void ffDay() {
+		for (int i = 0; i < 60 * 24; i++) {
+			tickFast();
+			InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
+		}
+	}
 
 	public void faster() {
-		if (tickPause!=1) {
-			tickPause /=2;
+		if (tickPause != 1) {
+			tickPause /= 2;
 		}
 	}
 
 	public void slower() {
-		if (tickPause<=256) {
-			tickPause*=2;
+		if (tickPause <= 256) {
+			tickPause *= 2;
 		}
 	}
 
