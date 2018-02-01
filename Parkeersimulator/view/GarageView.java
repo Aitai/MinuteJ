@@ -66,7 +66,7 @@ public class GarageView extends AbstractView {
 				for (int place = 0; place < simulator.getGarageModel().getNumberOfPlaces(); place++) {
 					Location location = new Location(floor, row, place);
 					Car car = simulator.getGarageModel().getCarAt(location);
-					Color color;
+					Color color; 
 					if (car == null) {
 						color = Color.white;
 					} else {
