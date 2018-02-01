@@ -48,7 +48,7 @@ public class Garage {
 		garageAndButtons.add(garageController, BorderLayout.SOUTH);
 		garageAndButtons.add(garageView, BorderLayout.CENTER);
 		infoPane.add(info, BorderLayout.EAST);
-		graphPane.add(graph,BorderLayout.EAST);
+		graphPane.add(graph,BorderLayout.LINE_START);
 
 		window.pack();
 		window.setVisible(true);
