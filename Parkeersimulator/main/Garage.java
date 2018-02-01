@@ -27,7 +27,7 @@ public class Garage {
 		// generate random numbers for testing purposes
 		List<Integer> list = new ArrayList<Integer>();
 	      Random random = new Random();
-	      int maxDataPoints = 16;
+	      int maxDataPoints = 24;
 	      int maxScore = 20;
 	      for (int i = 0; i < maxDataPoints ; i++) {
 	         list.add(random.nextInt(maxScore));

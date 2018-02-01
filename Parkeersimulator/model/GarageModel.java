@@ -1,5 +1,8 @@
 package model;
 
+import java.awt.Color;
+
+
 public class GarageModel {
 
 	private int numberOfFloors;
@@ -16,6 +19,27 @@ public class GarageModel {
 		cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
 
 	}
+	private double kostenPM = 0.05;
+    private double dagOmzet = 0;
+	
+	public double calcDagOmzet() {
+//        Car[][][] cars = carController.getAllCars();
+        for (Car[][] cars1 : cars) {
+            for (Car[] cars2 : cars1) {
+                for (Car car : cars2) {
+                    try {
+                        AdHocCar adHocCar = (AdHocCar) car;
+                        if (adHocCar.getColor() == Color.red && adHocCar.getMinutesLeft() == 0) {
+                            dagOmzet += adHocCar.getParkingTime() * kostenPM;
+                        }
+                    } catch (Exception b) {
+                        // Do nothing.
+                    }
+                }
+            }
+        }
+        return dagOmzet;
+    }
 
 	public int getNumberOfFloors() {
 		return numberOfFloors;

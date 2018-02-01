@@ -9,12 +9,14 @@ import model.Simulator;
 public class InfoView extends AbstractView {
 	public static JLabel dateTime = new JLabel();
 	public static JLabel queue = new JLabel();
+	public static JLabel revenue = new JLabel();
 
 	private static final long serialVersionUID = -3260703954764103294L;
 	public InfoView(Simulator simulator) {
 		simulator.addView(this);
 		add(dateTime);
 		add(queue);
+		add(revenue);
 	}
 	public Dimension getPreferredSize() {
 		return new Dimension(500, 500);
@@ -24,6 +26,9 @@ public class InfoView extends AbstractView {
 	}
 	public static void setQueueLabel(String label) {
 		queue.setText(label);
+	}
+	public static void setRevenueLabel(String label) {
+		revenue.setText(label);
 	}
 	@Override
 	public void updateView() {

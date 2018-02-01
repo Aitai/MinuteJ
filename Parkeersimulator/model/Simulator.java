@@ -1,7 +1,11 @@
 package model;
 
 import view.AbstractView;
+import view.CarGraph;
 import view.InfoView;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Random;
 
 public class Simulator extends ViewModel implements Runnable {
@@ -79,9 +83,18 @@ public class Simulator extends ViewModel implements Runnable {
 		handleEntrance();
 		InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
 		InfoView.setQueueLabel("Aantal auto's in de rij: " + entranceCarQueue.carsInQueue());
+		CarGraph.setVal();
+		InfoView.setRevenueLabel("Dagomzet: "+round(garageModel.calcDagOmzet(),2));
 	}
 
 
+	public static double round(double value, int places) {
+	    if (places < 0) throw new IllegalArgumentException();
+
+	    BigDecimal bd = new BigDecimal(value);
+	    bd = bd.setScale(places, RoundingMode.HALF_UP);
+	    return bd.doubleValue();
+	}
 
 	public void tickFast() {
 		daysOfTheWeek();

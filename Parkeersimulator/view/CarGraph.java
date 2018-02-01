@@ -10,6 +10,7 @@ import java.awt.RenderingHints;
 import java.awt.Stroke;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import model.Simulator;
 
@@ -19,15 +20,25 @@ public class CarGraph extends AbstractView {
 	private static final int PREF_W = 200;
 	private static final int PREF_H = 200;
 	private static final int BORDER_GAP = 30;
-	private static final Color GRAPH_COLOR = Color.green;
-	private static final Color GRAPH_POINT_COLOR = new Color(150, 50, 50, 180);
-	private static final Stroke GRAPH_STROKE = new BasicStroke(3f);
+	private static final Color GRAPH_COLOR = Color.blue;
+//	private static final Color GRAPH_POINT_COLOR = new Color(150, 50, 50, 180);
+	private static final Stroke GRAPH_STROKE = new BasicStroke(1);
 	private static final int GRAPH_POINT_WIDTH = 12;
 	private static final int Y_HATCH_CNT = 10;
 	private List<Integer> scores;
 
 	public CarGraph(Simulator simulator, List<Integer> scores) {
 		this.scores = scores;
+	}
+	
+	public static void setVal() {
+		List<Integer> list = new ArrayList<Integer>();
+	      Random random = new Random();
+	      int maxDataPoints = 24;
+	      int maxScore = 20;
+	      for (int i = 0; i < maxDataPoints ; i++) {
+	         list.add(random.nextInt(maxScore));
+	      }
 	}
 
 	@Override
@@ -80,15 +91,15 @@ public class CarGraph extends AbstractView {
 		}
 
 		g2.setStroke(oldStroke);
-		g2.setColor(GRAPH_POINT_COLOR);
-		for (int i = 0; i < graphPoints.size(); i++) {
-			int x = graphPoints.get(i).x - GRAPH_POINT_WIDTH / 2;
-			int y = graphPoints.get(i).y - GRAPH_POINT_WIDTH / 2;
-			;
-			int ovalW = GRAPH_POINT_WIDTH;
-			int ovalH = GRAPH_POINT_WIDTH;
-			g2.fillOval(x, y, ovalW, ovalH);
-		}
+//		g2.setColor(GRAPH_POINT_COLOR);
+//		for (int i = 0; i < graphPoints.size(); i++) {
+//			int x = graphPoints.get(i).x - GRAPH_POINT_WIDTH / 2;
+//			int y = graphPoints.get(i).y - GRAPH_POINT_WIDTH / 2;
+//			;
+//			int ovalW = GRAPH_POINT_WIDTH;
+//			int ovalH = GRAPH_POINT_WIDTH;
+//			g2.fillOval(x, y, ovalW, ovalH);
+//		}
 	}
 
 	@Override
