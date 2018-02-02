@@ -78,7 +78,7 @@ public class GarageController extends AbstractController {
 		add(slower);
 		add(realTime);
 
-		setBackground(Color.BLACK);
+//		setBackground(Color.BLACK);
 
 		setVisible(true);
 	}
