@@ -67,9 +67,8 @@ public class Garage {
 		garageView.setBounds(-50, 20, 800, 300);
 		garageController.setBounds(10, 320, 730, 30);
 		garageController.setBackground(Color.red);
-		info.setBounds(750, 10, 430, 400);
-		info.setBackground(Color.black);
-		graph.setBounds(10, 360, 400, 300);
+		info.setBounds(750, 10, 430, 340);
+		graph.setBounds(10, 360, 400, 290);
 		graph.setBackground(Color.lightGray);
 		
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -38,11 +38,10 @@ public class Simulator extends ViewModel implements Runnable {
 	private int tickPause = 128;
 	private int missedCustomers = 0;
 	private int passHolders = 84;
-	private int specialOccasionArivals = 400;
 
 	private int weekDayArrivals; // average number of arriving cars per hour
-	private int weekendArrivals = 200; // average number of arriving cars per hour
-	private int weekDayPassArrivals = 5; // average number of arriving cars per hour
+	private int weekendArrivals = 150; // average number of arriving cars per hour
+	private int weekDayPassArrivals; // average number of arriving cars per hour
 	private int weekendPassArrivals = 5; // average number of arriving cars per hour
 	private int weekDayResArrivals; // average number of arriving cars per hour
 	private int weekendResArrivals = 50; // average number of arriving cars per hour
@@ -98,6 +97,17 @@ public class Simulator extends ViewModel implements Runnable {
 			e.printStackTrace();
 		}
 		handleEntrance();
+		CarGraph.setVal();
+		setLabels();
+
+		if (exitCarQueue.carsInQueue() > 0) {
+			System.out.println("test");
+			playExitSound();
+		}
+		;
+	}
+
+	public void setLabels() {
 		InfoView.setDayLabel(daysOfTheWeek());
 		InfoView.setTimeLabel(fullHour() + ":" + fullMinute());
 		InfoView.setCarQueueLabel("Aantal normale auto's in de rij: " + entranceCarQueue.carsInQueue());
@@ -105,15 +115,9 @@ public class Simulator extends ViewModel implements Runnable {
 				"Aantal abonnementhouders/gereserveerden in de rij: " + entrancePassQueue.carsInQueue());
 		InfoView.setpaymentCarQueueLabel("Aantal betalende in de rij: " + paymentCarQueue.carsInQueue());
 		InfoView.setexitCarQueueLabel("Aantal auto's in de rij voor de uitgang: " + exitCarQueue.carsInQueue());
-		CarGraph.setVal();
 		InfoView.setRevenueLabel("Ad hoc omzet: " + round(garageModel.calcAdHocRev(), 2));
 		InfoView.setExpectedRevenueLabel("Verwachte ad hoc omzet: " + round(garageModel.calcExpectedAdHocRev(), 2));
 		InfoView.setFreeSpots("Aantal lege plekken: " + garageModel.getNumberOfOpenSpots());
-		if (exitCarQueue.carsInQueue() > 0) {
-			System.out.println("test");
-			playExitSound();
-		}
-		;
 	}
 
 	public static double round(double value, int places) {
@@ -276,30 +280,21 @@ public class Simulator extends ViewModel implements Runnable {
 
 	public void ffMinute() {
 		tickFast();
-		InfoView.setDayLabel(daysOfTheWeek());
-		InfoView.setTimeLabel(fullHour() + ":" + fullMinute());
-		InfoView.setRevenueLabel("Ad hoc omzet: " + round(garageModel.calcAdHocRev(), 2));
-		InfoView.setExpectedRevenueLabel("Verwachte ad hoc omzet: " + round(garageModel.calcExpectedAdHocRev(), 2));
+		setLabels();
 	}
 
 	public void ffHour() {
 		for (int i = 0; i < 60; i++) {
 			tickFast();
-			InfoView.setDayLabel(daysOfTheWeek());
-			InfoView.setTimeLabel(fullHour() + ":" + fullMinute());
-			InfoView.setRevenueLabel("Ad hoc omzet: " + round(garageModel.calcAdHocRev(), 2));
-			InfoView.setExpectedRevenueLabel("Verwachte ad hoc omzet: " + round(garageModel.calcExpectedAdHocRev(), 2));
 		}
+		setLabels();
 	}
 
 	public void ffDay() {
 		for (int i = 0; i < 60 * 24; i++) {
 			tickFast();
-			InfoView.setDayLabel(daysOfTheWeek());
-			InfoView.setTimeLabel(fullHour() + ":" + fullMinute());
-			InfoView.setRevenueLabel("Ad hoc omzet: " + round(garageModel.calcAdHocRev(), 2));
-			InfoView.setExpectedRevenueLabel("Verwachte ad hoc omzet: " + round(garageModel.calcExpectedAdHocRev(), 2));
 		}
+		setLabels();
 	}
 
 	public void faster() {
@@ -357,20 +352,6 @@ public class Simulator extends ViewModel implements Runnable {
 		double totalCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
 		int totalCars = (int) Math.round(totalCarsPerHour / 60);
 
-		// Possibility of people not entering line if it's long
-		int skipped = 0;
-		for (int i = 0; i < totalCars; i++) {
-			int carsInLine = 0;
-			carsInLine = type.equals(PASS) ? entrancePassQueue.carsInQueue() : entranceCarQueue.carsInQueue();
-			double x = Math.random();
-			double skipchance = 1 * (double) carsInLine;
-
-			if (x <= (skipchance / 100)) {
-				missedCustomers++;
-				skipped++;
-			}
-		}
-		totalCars -= skipped;
 		int parkedParkingPass = garageModel.getTotalCars("ParkingPass") + entrancePassQueue.carsInQueue();
 		if (parkedParkingPass >= passHolders && type.equals(PASS)) {
 			return 0;

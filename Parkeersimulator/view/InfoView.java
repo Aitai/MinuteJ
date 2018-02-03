@@ -10,7 +10,7 @@ import model.Simulator;
 public class InfoView extends AbstractView {
 	public static JLabel day = new JLabel();
 	public static JLabel time = new JLabel();
-	public static JLabel queue = new JLabel();
+	public static JLabel leeg = new JLabel();
 	public static JLabel revenue = new JLabel();
 	public static JLabel expectedRevenue = new JLabel();
 	public static JLabel entranceCarQueue = new JLabel();
@@ -25,7 +25,7 @@ public class InfoView extends AbstractView {
 		setLayout(null);
 		add(day);
 		add(time);
-		add(queue);
+		add(leeg);
 		add(revenue);
 		add(expectedRevenue);
 		add(entranceCarQueue);
@@ -35,7 +35,7 @@ public class InfoView extends AbstractView {
 		add(freeSpots);
 		day.setBounds(10,10,400,30);
 		time.setBounds(100,10,310,30);
-		queue.setBounds(10,10,400,60);
+		leeg.setBounds(10,10,400,60);
 		revenue.setBounds(10,10,400,90);
 		expectedRevenue.setBounds(10,10,400,120);
 		entranceCarQueue.setBounds(10,10,400,150);

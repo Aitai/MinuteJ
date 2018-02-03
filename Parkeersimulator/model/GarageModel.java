@@ -112,21 +112,6 @@ public class GarageModel {
 		return car;
 	}
 
-	Location getNearestLocation(Location loc1, Location loc2) {
-		Location nearest;
-		if (loc1.getFloor() < loc2.getFloor()) {
-			nearest = loc1;
-		} else if (loc1.getRow() < loc2.getRow() && loc1.getFloor() <= loc2.getFloor()) {
-			nearest = loc1;
-		} else if (loc1.getPlace() < loc2.getPlace() && loc1.getRow() <= loc2.getRow()
-				&& loc1.getFloor() <= loc2.getFloor()) {
-			nearest = loc1;
-		} else {
-			nearest = loc2;
-		}
-		return nearest;
-	}
-
 	public Location getFirstFreeLocation() {
 		for (int floor = 0; floor < getNumberOfFloors(); floor++) {
 			for (int row = 0; row < getNumberOfRows(); row++) {
