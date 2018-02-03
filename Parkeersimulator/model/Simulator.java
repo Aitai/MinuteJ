@@ -219,7 +219,7 @@ public class Simulator extends ViewModel implements Runnable {
 		carsArriving();
 		carsEntering(entrancePassQueue);
 		carsEntering(entranceCarQueue);
-		// carsEntering(entranceResQueue);
+		carsEntering(entranceResQueue);
 	}
 
 	private void handleExit() {
@@ -395,7 +395,7 @@ public class Simulator extends ViewModel implements Runnable {
 			break;
 		case RES:
 			for (int i = 0; i < totalCars; i++) {
-				entrancePassQueue.addCar(new ReservedCar());
+				entranceResQueue.addCar(new ReservedCar());
 			}
 			break;
 		}
