@@ -1,6 +1,5 @@
 package main;
 
-import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -39,18 +38,34 @@ public class Garage {
 		garageController = new GarageController(simulator);
 		info = new InfoView(simulator);
 		window = new JFrame("Parkeergarage simulatie");
+		
+		window.setSize(1200, 700);
+		window.setResizable(false);
+		window.setLayout(null);
+		window.getContentPane().add(garageView);
+		window.getContentPane().add(info);
+		window.getContentPane().add(garageController);
+		window.getContentPane().add(graph);
+		
+		garageView.setBounds(-50,20,800,300);
+		garageController.setBounds(10,320,730,30);
+		garageController.setBackground(Color.red);
+		info.setBounds(750,10,430,400);
+		info.setBackground(Color.black);
+		graph.setBounds(10,360,400,300);
+		graph.setBackground(Color.lightGray);
 
+//		Container garageAndButtons = window.getContentPane();
+//		Container infoPane = window.getContentPane();
+//		Container graphPane = window.getContentPane();
+//		graphPane.setLayout(new BorderLayout());
+//		garageAndButtons.add(garageController, BorderLayout.SOUTH);
+//		garageAndButtons.add(garageView, BorderLayout.CENTER);
+//		infoPane.add(info, BorderLayout.EAST);
+//		graphPane.add(graph,BorderLayout.LINE_START);
+//
+//		window.pack();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Container garageAndButtons = window.getContentPane();
-		Container infoPane = window.getContentPane();
-		Container graphPane = window.getContentPane();
-		graphPane.setLayout(new BorderLayout());
-		garageAndButtons.add(garageController, BorderLayout.SOUTH);
-		garageAndButtons.add(garageView, BorderLayout.CENTER);
-		infoPane.add(info, BorderLayout.EAST);
-		graphPane.add(graph,BorderLayout.LINE_START);
-
-		window.pack();
 		window.setVisible(true);
 		simulator.tick();
 	}

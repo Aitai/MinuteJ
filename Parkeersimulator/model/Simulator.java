@@ -98,10 +98,10 @@ public class Simulator extends ViewModel implements Runnable {
 			e.printStackTrace();
 		}
 		handleEntrance();
-		InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
+		InfoView.setDayLabel(daysOfTheWeek());
+		InfoView.setTimeLabel(fullHour() + ":" + fullMinute());
 		InfoView.setCarQueueLabel("Aantal normale auto's in de rij: " + entranceCarQueue.carsInQueue());
-		InfoView.setPassResQueueLabel(
-				"Aantal abonnement houders/gereserveerden in de rij: " + entrancePassQueue.carsInQueue());
+		InfoView.setPassResQueueLabel("Aantal abonnementhouders/gereserveerden in de rij: " + entrancePassQueue.carsInQueue());
 		InfoView.setpaymentCarQueueLabel("Aantal betalende in de rij: " + paymentCarQueue.carsInQueue());
 		InfoView.setexitCarQueueLabel("Aantal auto's in de rij voor de uitgang: " + exitCarQueue.carsInQueue());
 		CarGraph.setVal();
@@ -295,7 +295,8 @@ public class Simulator extends ViewModel implements Runnable {
 
 	public void ffMinute() {
 		tickFast();
-		InfoView.setDateTimeLabel(daysOfTheWeek() + "\t" + fullHour() + ":" + fullMinute());
+		InfoView.setDayLabel(daysOfTheWeek());
+		InfoView.setTimeLabel(fullHour() + ":" + fullMinute());
 		InfoView.setRevenueLabel("Ad hoc omzet: " + round(garageModel.calcAdHocRev(), 2));
 		InfoView.setExpectedRevenueLabel("Verwachte ad hoc omzet: " + round(garageModel.calcExpectedAdHocRev(), 2));
 	}
@@ -303,7 +304,8 @@ public class Simulator extends ViewModel implements Runnable {
 	public void ffHour() {
 		for (int i = 0; i < 60; i++) {
 			tickFast();
-			InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
+			InfoView.setDayLabel(daysOfTheWeek());
+			InfoView.setTimeLabel(fullHour() + ":" + fullMinute());
 			InfoView.setRevenueLabel("Ad hoc omzet: " + round(garageModel.calcAdHocRev(), 2));
 			InfoView.setExpectedRevenueLabel("Verwachte ad hoc omzet: " + round(garageModel.calcExpectedAdHocRev(), 2));
 		}
@@ -312,7 +314,8 @@ public class Simulator extends ViewModel implements Runnable {
 	public void ffDay() {
 		for (int i = 0; i < 60 * 24; i++) {
 			tickFast();
-			InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
+			InfoView.setDayLabel(daysOfTheWeek());
+			InfoView.setTimeLabel(fullHour() + ":" + fullMinute());
 			InfoView.setRevenueLabel("Ad hoc omzet: " + round(garageModel.calcAdHocRev(), 2));
 			InfoView.setExpectedRevenueLabel("Verwachte ad hoc omzet: " + round(garageModel.calcExpectedAdHocRev(), 2));
 		}
