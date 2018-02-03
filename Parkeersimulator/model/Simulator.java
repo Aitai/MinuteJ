@@ -36,13 +36,13 @@ public class Simulator extends ViewModel implements Runnable {
 	private int minute = -1;
 
 	private int tickPause = 128;
-    private int missedCustomers = 0;
-    private int passHolders = 1500;
-    private int specialOccasionArivals = 400;
+	private int missedCustomers = 0;
+	private int passHolders = 84;
+	private int specialOccasionArivals = 400;
 
 	private int weekDayArrivals; // average number of arriving cars per hour
 	private int weekendArrivals = 200; // average number of arriving cars per hour
-	private int weekDayPassArrivals; // average number of arriving cars per hour
+	private int weekDayPassArrivals = 5; // average number of arriving cars per hour
 	private int weekendPassArrivals = 5; // average number of arriving cars per hour
 	private int weekDayResArrivals; // average number of arriving cars per hour
 	private int weekendResArrivals = 50; // average number of arriving cars per hour
@@ -101,7 +101,8 @@ public class Simulator extends ViewModel implements Runnable {
 		InfoView.setDayLabel(daysOfTheWeek());
 		InfoView.setTimeLabel(fullHour() + ":" + fullMinute());
 		InfoView.setCarQueueLabel("Aantal normale auto's in de rij: " + entranceCarQueue.carsInQueue());
-		InfoView.setPassResQueueLabel("Aantal abonnementhouders/gereserveerden in de rij: " + entrancePassQueue.carsInQueue());
+		InfoView.setPassResQueueLabel(
+				"Aantal abonnementhouders/gereserveerden in de rij: " + entrancePassQueue.carsInQueue());
 		InfoView.setpaymentCarQueueLabel("Aantal betalende in de rij: " + paymentCarQueue.carsInQueue());
 		InfoView.setexitCarQueueLabel("Aantal auto's in de rij voor de uitgang: " + exitCarQueue.carsInQueue());
 		CarGraph.setVal();
@@ -218,7 +219,7 @@ public class Simulator extends ViewModel implements Runnable {
 		carsArriving();
 		carsEntering(entrancePassQueue);
 		carsEntering(entranceCarQueue);
-		carsEntering(entranceResQueue);
+		// carsEntering(entranceResQueue);
 	}
 
 	private void handleExit() {
@@ -244,44 +245,24 @@ public class Simulator extends ViewModel implements Runnable {
 		addArrivingCars(numberOfCars, RES);
 	}
 
-	private void carsEntering(CarQueue queue){
-        int i=0;
-        // Remove car from the front of the queue and assign to a parking space.
+	private void carsEntering(CarQueue queue) {
+		int i = 0;
+		// Remove car from the front of the queue and assign to a parking space.
 
-        while (queue.carsInQueue()>0 &&
-        		garageModel.getNumberOfOpenSpots()>0 &&
-    			i<enterSpeed) {
-            Location freeLocation = garageModel.getFirstFreeLocation();
-            Location freeReservedLocation = garageModel.getFirstReservedLocation();
-            Car car = queue.nextCar();
+		while (queue.carsInQueue() > 0 && garageModel.getNumberOfOpenSpots() > 0 && i < enterSpeed) {
+			Location freeLocation = garageModel.getFirstFreeLocation();
 
-            if (car.getColor() == Color.blue && freeReservedLocation != null && freeLocation != null) {
-                Location closestSpot = garageModel.getNearestLocation(freeLocation, freeReservedLocation);
-                garageModel.setCarAt(closestSpot, car);
-                queue.removeCar();
-                i++;
-            }
-            else if (car.getColor() == Color.blue && freeLocation == null && freeReservedLocation != null) {
-            	garageModel.setCarAt(freeReservedLocation, car);
-                i++;
-                queue.removeCar();
-            }
-            else if (car.getColor() == Color.blue && freeLocation != null){
-            	garageModel.setCarAt(freeLocation, car);
-                i++;
-                queue.removeCar();
-            }
-            else if (car.getColor() == Color.red && freeLocation != null) {
-            	garageModel.setCarAt(freeLocation, car);
-                i++;
-                queue.removeCar();
-            }
-            else {
-                break;
-            }
-
-        }
-    }
+			Location freeReservedLocation = garageModel.getFirstReservedLocation();
+			Car car = queue.nextCar();
+			if (car.getColor() == Color.blue) {
+				garageModel.setCarAt(freeReservedLocation, car);
+				queue.removeCar();
+			} else {
+				garageModel.setCarAt(freeLocation, car);
+				queue.removeCar();
+			}
+		}
+	}
 
 	public void startPauze() {
 		if (running == false) {
@@ -366,40 +347,38 @@ public class Simulator extends ViewModel implements Runnable {
 			i++;
 		}
 	}
-	private int getTotalCars(int weekDay, int weekend, String type){
-        Random random = new Random();
-        int averageNumberOfCarsPerHour = day < 5
-                ? weekDay
-                : weekend;
 
-        // Calculate the number of cars that arrive this minute.
-        double standardDeviation = averageNumberOfCarsPerHour * 0.3;
-        double totalCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
-        int totalCars = (int)Math.round(totalCarsPerHour / 60);
+	private int getTotalCars(int weekDay, int weekend, String type) {
+		Random random = new Random();
+		int averageNumberOfCarsPerHour = day < 5 ? weekDay : weekend;
 
-        //Possibility of people not entering line if it's long
-        int skipped = 0;
-        for (int i = 0; i < totalCars; i++) {
-            int carsInLine = 0;
-        	carsInLine = type.equals(PASS)?entrancePassQueue.carsInQueue():entranceCarQueue.carsInQueue();
-            double x = Math.random();
-            double skipchance =  1 * (double) carsInLine;
+		// Calculate the number of cars that arrive this minute.
+		double standardDeviation = averageNumberOfCarsPerHour * 0.3;
+		double totalCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
+		int totalCars = (int) Math.round(totalCarsPerHour / 60);
 
-            if (x <= (skipchance / 100)) {
-                missedCustomers++;
-                skipped++;
-            }
-        }
-        totalCars -= skipped;
-        int parkedParkingPass = garageModel.getTotalCars("ParkingPass" ) + entrancePassQueue.carsInQueue();
-        if (parkedParkingPass >= passHolders && type.equals(PASS)) {
-            return 0;
-        }
-        else if (type.equals(PASS) && totalCars >= (passHolders - parkedParkingPass)) {
-            return passHolders - parkedParkingPass;
-        }
-        return totalCars;
-    }
+		// Possibility of people not entering line if it's long
+		int skipped = 0;
+		for (int i = 0; i < totalCars; i++) {
+			int carsInLine = 0;
+			carsInLine = type.equals(PASS) ? entrancePassQueue.carsInQueue() : entranceCarQueue.carsInQueue();
+			double x = Math.random();
+			double skipchance = 1 * (double) carsInLine;
+
+			if (x <= (skipchance / 100)) {
+				missedCustomers++;
+				skipped++;
+			}
+		}
+		totalCars -= skipped;
+		int parkedParkingPass = garageModel.getTotalCars("ParkingPass") + entrancePassQueue.carsInQueue();
+		if (parkedParkingPass >= passHolders && type.equals(PASS)) {
+			return 0;
+		} else if (type.equals(PASS) && totalCars >= (passHolders - parkedParkingPass)) {
+			return passHolders - parkedParkingPass;
+		}
+		return totalCars;
+	}
 
 	private void addArrivingCars(int totalCars, String type) {
 		// Add the cars to the back of the queue.
