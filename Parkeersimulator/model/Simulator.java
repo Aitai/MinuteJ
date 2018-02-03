@@ -186,28 +186,28 @@ public class Simulator extends ViewModel implements Runnable {
 	public String daysOfTheWeek() {
 		switch (day) {
 		case 0:
-			dayString = "Monday";
+			dayString = "Maandag";
 			break;
 		case 1:
-			dayString = "Tuesday";
+			dayString = "Dinsdag";
 			break;
 		case 2:
-			dayString = "Wednesday";
+			dayString = "Woensdag";
 			break;
 		case 3:
-			dayString = "Thursday";
+			dayString = "Donderdag";
 			break;
 		case 4:
-			dayString = "Friday";
+			dayString = "Vrijdag";
 			break;
 		case 5:
-			dayString = "Saturday";
+			dayString = "Zaterdag";
 			break;
 		case 6:
-			dayString = "Sunday";
+			dayString = "Zondag";
 			break;
 		default:
-			dayString = "ERRROR!!!!";
+			dayString = "Geen geldige dag!";
 			break;
 
 		}
