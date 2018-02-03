@@ -41,7 +41,7 @@ public class GarageController extends AbstractController {
 				simulator.ffHour();
 			}
 		});
-		
+
 		ffDay = new JButton("1 dag");
 		ffDay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -62,7 +62,7 @@ public class GarageController extends AbstractController {
 				simulator.slower();
 			}
 		});
-		
+
 		realTime = new JButton("Realtime");
 		realTime.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -78,7 +78,7 @@ public class GarageController extends AbstractController {
 		add(slower);
 		add(realTime);
 
-		setBackground(Color.BLACK);
+//		setBackground(Color.BLACK);
 
 		setVisible(true);
 	}

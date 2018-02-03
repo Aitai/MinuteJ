@@ -15,7 +15,6 @@ public class GarageView extends AbstractView {
 	private Dimension size;
 	private Image carParkImage;
 	private Simulator simulator;
-//	JTextArea date;
 
 	/**
 	 * Constructor for objects of class CarPark
@@ -50,36 +49,49 @@ public class GarageView extends AbstractView {
 			g.drawImage(carParkImage, 0, 0, currentSize.width, currentSize.height, null);
 		}
 	}
+
 	@Override
 	public void updateView() {
-		// Create a new car park image if the size has changed.
+        // Create a new car park image if the size has changed.
 		if (!size.equals(getSize())) {
 			size = getSize();
 			carParkImage = createImage(size.width, size.height);
 		}
-//		date = new JTextArea(simulator.daysOfTheWeek());
-//		date.setVisible(true);
 		Graphics graphics = carParkImage.getGraphics();
-		for (int floor = 0; floor < simulator.getGarageModel().getNumberOfFloors(); floor++) {
-			for (int row = 0; row < simulator.getGarageModel().getNumberOfRows(); row++) {
-				for (int place = 0; place < simulator.getGarageModel().getNumberOfPlaces(); place++) {
+		for(int floor = 0; floor < simulator.getGarageModel().getNumberOfFloors(); floor++) {
+			for(int row = 0; row < simulator.getGarageModel().getNumberOfRows(); row++) {
+				for(int place = 0; place < simulator.getGarageModel().getNumberOfPlaces(); place++) {
 					Location location = new Location(floor, row, place);
 					Car car = simulator.getGarageModel().getCarAt(location);
-					Color color = car == null ? Color.white : car.getColor();
-					drawPlace(graphics, location, color);
+					if (location.getReserved()) {
+						Color color = car == null ? Color.lightGray : car.getColor();
+						drawPlace(graphics, location, color);
+					} else {
+						Color color = car == null ? Color.white : car.getColor();
+						drawPlace(graphics, location, color);
+					}
 				}
 			}
 		}
 		repaint();
-	}
+    }
 
 	/**
 	 * Paint a place on this car park view in a given color.
 	 */
+//	private void drawPlace(Graphics graphics, Location location, Color color) {
+//		graphics.setColor(color);
+//		graphics.fillRect(location.getFloor() * 260 + (1 + (int) Math.floor(location.getRow() * 0.5)) * 75
+//				+ (location.getRow() % 2) * 20, 60 + location.getPlace() * 10, 20 - 1, 10 - 1); // TODO use dynamic
+//																								// size or constants
+//	}
 	private void drawPlace(Graphics graphics, Location location, Color color) {
 		graphics.setColor(color);
 		graphics.fillRect(location.getFloor() * 260 + (1 + (int) Math.floor(location.getRow() * 0.5)) * 75
-				+ (location.getRow() % 2) * 20, 60 + location.getPlace() * 10, 20 - 1, 10 - 1); // TODO use dynamic
+				+ (location.getRow() % 2) * 20,
+				location.getPlace() * 10,
+				20 - 1,
+				10 - 1); // TODO use dynamic
 																								// size or constants
 	}
 }

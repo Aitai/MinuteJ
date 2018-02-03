@@ -1,8 +1,17 @@
 package model;
 
 import view.AbstractView;
+import view.CarGraph;
 import view.InfoView;
+
+import java.awt.Color;
+import java.io.InputStream;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Random;
+
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 
 public class Simulator extends ViewModel implements Runnable {
 
@@ -27,10 +36,13 @@ public class Simulator extends ViewModel implements Runnable {
 	private int minute = -1;
 
 	private int tickPause = 128;
+	private int missedCustomers = 0;
+	private int passHolders = 84;
+	private int specialOccasionArivals = 400;
 
 	private int weekDayArrivals; // average number of arriving cars per hour
 	private int weekendArrivals = 200; // average number of arriving cars per hour
-	private int weekDayPassArrivals; // average number of arriving cars per hour
+	private int weekDayPassArrivals = 5; // average number of arriving cars per hour
 	private int weekendPassArrivals = 5; // average number of arriving cars per hour
 	private int weekDayResArrivals; // average number of arriving cars per hour
 	private int weekendResArrivals = 50; // average number of arriving cars per hour
@@ -49,9 +61,18 @@ public class Simulator extends ViewModel implements Runnable {
 
 	}
 
+	private void playExitSound() {
+		try {
+			InputStream inputStream = getClass().getResourceAsStream("../media/splat.au");
+			AudioStream audioStream = new AudioStream(inputStream);
+			AudioPlayer.player.start(audioStream);
+		} catch (Exception e) {
+		}
+	}
+
 	public void run() {
 		running = true;
-		while(running) {
+		while (running) {
 			tick();
 		}
 	}
@@ -61,7 +82,7 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	public void realTime() {
-		tickPause=60000;
+		tickPause = 60000;
 	}
 
 	public void tick() {
@@ -77,11 +98,32 @@ public class Simulator extends ViewModel implements Runnable {
 			e.printStackTrace();
 		}
 		handleEntrance();
-		InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
-		InfoView.setQueueLabel("Aantal auto's in de rij: " + entranceCarQueue.carsInQueue());
+		InfoView.setDayLabel(daysOfTheWeek());
+		InfoView.setTimeLabel(fullHour() + ":" + fullMinute());
+		InfoView.setCarQueueLabel("Aantal normale auto's in de rij: " + entranceCarQueue.carsInQueue());
+		InfoView.setPassResQueueLabel(
+				"Aantal abonnementhouders/gereserveerden in de rij: " + entrancePassQueue.carsInQueue());
+		InfoView.setpaymentCarQueueLabel("Aantal betalende in de rij: " + paymentCarQueue.carsInQueue());
+		InfoView.setexitCarQueueLabel("Aantal auto's in de rij voor de uitgang: " + exitCarQueue.carsInQueue());
+		CarGraph.setVal();
+		InfoView.setRevenueLabel("Ad hoc omzet: " + round(garageModel.calcAdHocRev(), 2));
+		InfoView.setExpectedRevenueLabel("Verwachte ad hoc omzet: " + round(garageModel.calcExpectedAdHocRev(), 2));
+		InfoView.setFreeSpots("Aantal lege plekken: " + garageModel.getNumberOfOpenSpots());
+		if (exitCarQueue.carsInQueue() > 0) {
+			System.out.println("test");
+			playExitSound();
+		}
+		;
 	}
 
+	public static double round(double value, int places) {
+		if (places < 0)
+			throw new IllegalArgumentException();
 
+		BigDecimal bd = new BigDecimal(value);
+		bd = bd.setScale(places, RoundingMode.HALF_UP);
+		return bd.doubleValue();
+	}
 
 	public void tickFast() {
 		daysOfTheWeek();
@@ -90,6 +132,8 @@ public class Simulator extends ViewModel implements Runnable {
 		handleExit();
 		updateViews();
 		handleEntrance();
+		garageModel.calcAdHocRev();
+		garageModel.calcExpectedAdHocRev();
 	}
 
 	public void eveningArrivals() {
@@ -123,16 +167,16 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	public String fullHour() {
-		if(hour < 10) {
+		if (hour < 10) {
 			fullHour = "0" + hour;
 		} else {
-			fullHour =  "" + hour;
+			fullHour = "" + hour;
 		}
 		return fullHour;
 	}
 
 	public String fullMinute() {
-		if(minute < 10) {
+		if (minute < 10) {
 			fullMinute = "0" + minute;
 		} else {
 			fullMinute = "" + minute;
@@ -142,22 +186,30 @@ public class Simulator extends ViewModel implements Runnable {
 
 	public String daysOfTheWeek() {
 		switch (day) {
-			case 0: 	dayString = "Monday";
-						break;
-			case 1: 	dayString = "Tuesday";
-						break;
-			case 2: 	dayString = "Wednesday";
-						break;
-			case 3: 	dayString = "Thursday";
-						break;
-			case 4: 	dayString = "Friday";
-						break;
-			case 5: 	dayString = "Saturday";
-						break;
-			case 6: 	dayString = "Sunday";
-						break;
-			default: 	dayString = "ERRROR!!!!";
-						break;
+		case 0:
+			dayString = "Maandag";
+			break;
+		case 1:
+			dayString = "Dinsdag";
+			break;
+		case 2:
+			dayString = "Woensdag";
+			break;
+		case 3:
+			dayString = "Donderdag";
+			break;
+		case 4:
+			dayString = "Vrijdag";
+			break;
+		case 5:
+			dayString = "Zaterdag";
+			break;
+		case 6:
+			dayString = "Zondag";
+			break;
+		default:
+			dayString = "Geen geldige dag!";
+			break;
 
 		}
 		return dayString;
@@ -167,7 +219,7 @@ public class Simulator extends ViewModel implements Runnable {
 		carsArriving();
 		carsEntering(entrancePassQueue);
 		carsEntering(entranceCarQueue);
-		carsEntering(entranceResQueue);
+		// carsEntering(entranceResQueue);
 	}
 
 	private void handleExit() {
@@ -185,22 +237,30 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	private void carsArriving() {
-		int numberOfCars = getNumberOfCars(weekDayArrivals, weekendArrivals);
+		int numberOfCars = getTotalCars(weekDayArrivals, weekendArrivals, AD_HOC);
 		addArrivingCars(numberOfCars, AD_HOC);
-		numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
+		numberOfCars = getTotalCars(weekDayPassArrivals, weekendPassArrivals, PASS);
 		addArrivingCars(numberOfCars, PASS);
-		numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArrivals);
+		numberOfCars = getTotalCars(weekDayResArrivals, weekendResArrivals, RES);
 		addArrivingCars(numberOfCars, RES);
 	}
 
 	private void carsEntering(CarQueue queue) {
 		int i = 0;
 		// Remove car from the front of the queue and assign to a parking space.
+
 		while (queue.carsInQueue() > 0 && garageModel.getNumberOfOpenSpots() > 0 && i < enterSpeed) {
-			Car car = queue.removeCar();
 			Location freeLocation = garageModel.getFirstFreeLocation();
-			garageModel.setCarAt(freeLocation, car);
-			i++;
+
+			Location freeReservedLocation = garageModel.getFirstReservedLocation();
+			Car car = queue.nextCar();
+			if (car.getColor() == Color.blue) {
+				garageModel.setCarAt(freeReservedLocation, car);
+				queue.removeCar();
+			} else {
+				garageModel.setCarAt(freeLocation, car);
+				queue.removeCar();
+			}
 		}
 	}
 
@@ -215,35 +275,42 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	public void ffMinute() {
-//		if (running == false) {
-			tickFast();
-			InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
-//		}
+		tickFast();
+		InfoView.setDayLabel(daysOfTheWeek());
+		InfoView.setTimeLabel(fullHour() + ":" + fullMinute());
+		InfoView.setRevenueLabel("Ad hoc omzet: " + round(garageModel.calcAdHocRev(), 2));
+		InfoView.setExpectedRevenueLabel("Verwachte ad hoc omzet: " + round(garageModel.calcExpectedAdHocRev(), 2));
 	}
+
 	public void ffHour() {
-			for (int i = 0; i < 60; i++) {
-				tickFast();
-				InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
-			}
-	}
-	public void ffDay() {
-		for (int i = 0; i < 60*24; i++) {
+		for (int i = 0; i < 60; i++) {
 			tickFast();
-			InfoView.setDateTimeLabel(daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute());
+			InfoView.setDayLabel(daysOfTheWeek());
+			InfoView.setTimeLabel(fullHour() + ":" + fullMinute());
+			InfoView.setRevenueLabel("Ad hoc omzet: " + round(garageModel.calcAdHocRev(), 2));
+			InfoView.setExpectedRevenueLabel("Verwachte ad hoc omzet: " + round(garageModel.calcExpectedAdHocRev(), 2));
 		}
-}
+	}
+
+	public void ffDay() {
+		for (int i = 0; i < 60 * 24; i++) {
+			tickFast();
+			InfoView.setDayLabel(daysOfTheWeek());
+			InfoView.setTimeLabel(fullHour() + ":" + fullMinute());
+			InfoView.setRevenueLabel("Ad hoc omzet: " + round(garageModel.calcAdHocRev(), 2));
+			InfoView.setExpectedRevenueLabel("Verwachte ad hoc omzet: " + round(garageModel.calcExpectedAdHocRev(), 2));
+		}
+	}
 
 	public void faster() {
-		if (tickPause!=1) {
-			tickPause /=2;
-			System.out.println(tickPause);
+		if (tickPause != 1) {
+			tickPause /= 2;
 		}
 	}
 
 	public void slower() {
-		if (tickPause<=256) {
-			tickPause*=2;
-			System.out.println(tickPause);
+		if (tickPause <= 256) {
+			tickPause *= 2;
 		}
 	}
 
@@ -281,33 +348,53 @@ public class Simulator extends ViewModel implements Runnable {
 		}
 	}
 
-	private int getNumberOfCars(int weekDay, int weekend) {
+	private int getTotalCars(int weekDay, int weekend, String type) {
 		Random random = new Random();
-
-		// Get the average number of cars that arrive per hour.
 		int averageNumberOfCarsPerHour = day < 5 ? weekDay : weekend;
 
 		// Calculate the number of cars that arrive this minute.
 		double standardDeviation = averageNumberOfCarsPerHour * 0.3;
-		double numberOfCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
-		return (int) Math.round(numberOfCarsPerHour / 60);
+		double totalCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
+		int totalCars = (int) Math.round(totalCarsPerHour / 60);
+
+		// Possibility of people not entering line if it's long
+		int skipped = 0;
+		for (int i = 0; i < totalCars; i++) {
+			int carsInLine = 0;
+			carsInLine = type.equals(PASS) ? entrancePassQueue.carsInQueue() : entranceCarQueue.carsInQueue();
+			double x = Math.random();
+			double skipchance = 1 * (double) carsInLine;
+
+			if (x <= (skipchance / 100)) {
+				missedCustomers++;
+				skipped++;
+			}
+		}
+		totalCars -= skipped;
+		int parkedParkingPass = garageModel.getTotalCars("ParkingPass") + entrancePassQueue.carsInQueue();
+		if (parkedParkingPass >= passHolders && type.equals(PASS)) {
+			return 0;
+		} else if (type.equals(PASS) && totalCars >= (passHolders - parkedParkingPass)) {
+			return passHolders - parkedParkingPass;
+		}
+		return totalCars;
 	}
 
-	private void addArrivingCars(int numberOfCars, String type) {
+	private void addArrivingCars(int totalCars, String type) {
 		// Add the cars to the back of the queue.
 		switch (type) {
 		case AD_HOC:
-			for (int i = 0; i < numberOfCars; i++) {
+			for (int i = 0; i < totalCars; i++) {
 				entranceCarQueue.addCar(new AdHocCar());
 			}
 			break;
 		case PASS:
-			for (int i = 0; i < numberOfCars; i++) {
+			for (int i = 0; i < totalCars; i++) {
 				entrancePassQueue.addCar(new ParkingPassCar());
 			}
 			break;
 		case RES:
-			for (int i = 0; i < numberOfCars; i++) {
+			for (int i = 0; i < totalCars; i++) {
 				entrancePassQueue.addCar(new ReservedCar());
 			}
 			break;

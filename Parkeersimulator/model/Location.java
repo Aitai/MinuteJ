@@ -5,6 +5,7 @@ public class Location {
 	private int floor;
 	private int row;
 	private int place;
+	private Boolean reserved = false;
 
 	/**
 	 * Constructor for objects of class Location
@@ -13,6 +14,9 @@ public class Location {
 		this.floor = floor;
 		this.row = row;
 		this.place = place;
+		if (row == 0 ) {
+            reserved = true;
+        }
 	}
 
 	/**
@@ -29,18 +33,21 @@ public class Location {
 
 	/**
 	 * Return a string of the form floor,row,place.
-	 * 
+	 *
 	 * @return A string representation of the location.
 	 */
 	public String toString() {
 		return floor + "," + row + "," + place;
 	}
+	public boolean getReserved() {
+        return reserved;
+    }
 
 	/**
 	 * Use the 10 bits for each of the floor, row and place values. Except for very
 	 * big car parks, this should give a unique hash code for each (floor, row,
 	 * place) tupel.
-	 * 
+	 *
 	 * @return A hashcode for the location.
 	 */
 	public int hashCode() {
