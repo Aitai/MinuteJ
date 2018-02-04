@@ -261,7 +261,7 @@ public class Simulator extends ViewModel implements Runnable {
 	private void carsEntering(CarQueue queue) {
 		int i = 0;
 		// Remove car from the front of the queue and assign to a parking space.
-
+		//TODO Tweede wachtrij toevoegen voor mensen met een abonnement.
 		while (queue.carsInQueue() > 0 && garageModel.getNumberOfOpenFreeSpots() > 0 && i < enterSpeed) {
 			Location freeLocation = garageModel.getFirstFreeLocation();
 
