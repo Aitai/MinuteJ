@@ -14,7 +14,7 @@ public class GarageModel {
 		this.numberOfFloors = numberOfFloors;
 		this.numberOfRows = numberOfRows;
 		this.numberOfPlaces = numberOfPlaces;
-		this.numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces - 4;
+		this.numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces -84;
 		cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
 
 	}
@@ -73,7 +73,7 @@ public class GarageModel {
 		return numberOfPlaces;
 	}
 
-	public int getNumberOfOpenSpots() {
+	public int getNumberOfOpenFreeSpots() {
 		return numberOfOpenSpots;
 	}
 

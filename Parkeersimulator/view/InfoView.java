@@ -37,7 +37,7 @@ public class InfoView extends AbstractView {
 		day.setBounds(10,10,400,30);
 		dayOfMonth.setBounds(90,10,400,30);
 		month.setBounds(120,10,400,30);
-		time.setBounds(300,10,310,30);
+		time.setBounds(200,10,310,30);
 		empty.setBounds(10,10,400,60);
 		revenue.setBounds(10,10,400,90);
 		expectedRevenue.setBounds(10,10,400,120);

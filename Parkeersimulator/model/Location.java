@@ -39,6 +39,8 @@ public class Location {
 	public String toString() {
 		return floor + "," + row + "," + place;
 	}
+
+
 	public boolean getReserved() {
         return reserved;
     }

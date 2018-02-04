@@ -17,9 +17,9 @@ import sun.audio.AudioStream;
 
 public class Simulator extends ViewModel implements Runnable {
 
-	private static final String AD_HOC = "1";
-	private static final String PASS = "2";
-	private static final String RES = "3";
+	private static final String AD_HOC = "AD_HOC";
+	private static final String PASS = "PASS";
+	private static final String RES = "RES";
 	Calendar calendar = new GregorianCalendar(2018,1,4,9,59,0);
 
 	private CarQueue entranceCarQueue;
@@ -108,11 +108,11 @@ public class Simulator extends ViewModel implements Runnable {
 		InfoView.setTimeLabel(String.format("%02d:%02d", calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE)));
 		InfoView.setCarQueueLabel("Aantal normale auto's in de rij: " + entranceCarQueue.carsInQueue());
 		InfoView.setPassResQueueLabel("Aantal abonnementhouders/gereserveerden in de rij: " + entrancePassQueue.carsInQueue());
-		InfoView.setpaymentCarQueueLabel("Aantal betalende in de rij: " + paymentCarQueue.carsInQueue());
+		InfoView.setpaymentCarQueueLabel("Aantal betalenden in de rij: " + paymentCarQueue.carsInQueue());
 		InfoView.setexitCarQueueLabel("Aantal auto's in de rij voor de uitgang: " + exitCarQueue.carsInQueue());
 		InfoView.setRevenueLabel("Ad hoc omzet: " + round(garageModel.calcAdHocRev(), 2));
 		InfoView.setExpectedRevenueLabel("Verwachte ad hoc omzet: " + round(garageModel.calcExpectedAdHocRev(), 2));
-		InfoView.setFreeSpots("Aantal lege plekken: " + garageModel.getNumberOfOpenSpots());
+		InfoView.setFreeSpots("Aantal lege plekken: " + garageModel.getNumberOfOpenFreeSpots());
 	}
 
 	public static double round(double value, int places) {
@@ -125,7 +125,6 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	public void tickFast() {
-		daysOfTheWeek();
 		eveningArrivals();
 		advanceTime();
 		handleExit();
@@ -231,8 +230,8 @@ public class Simulator extends ViewModel implements Runnable {
 
 	private void handleEntrance() {
 		carsArriving();
-		carsEntering(entrancePassQueue);
 		carsEntering(entranceCarQueue);
+		carsEntering(entrancePassQueue);
 		carsEntering(entranceResQueue);
 	}
 
@@ -263,7 +262,7 @@ public class Simulator extends ViewModel implements Runnable {
 		int i = 0;
 		// Remove car from the front of the queue and assign to a parking space.
 
-		while (queue.carsInQueue() > 0 && garageModel.getNumberOfOpenSpots() > 0 && i < enterSpeed) {
+		while (queue.carsInQueue() > 0 && garageModel.getNumberOfOpenFreeSpots() > 0 && i < enterSpeed) {
 			Location freeLocation = garageModel.getFirstFreeLocation();
 
 			Location freeReservedLocation = garageModel.getFirstReservedLocation();
@@ -275,6 +274,7 @@ public class Simulator extends ViewModel implements Runnable {
 				garageModel.setCarAt(freeLocation, car);
 				queue.removeCar();
 			}
+			i++;
 		}
 	}
 
