@@ -8,6 +8,8 @@ import java.awt.Color;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Random;
 
 import sun.audio.AudioPlayer;
@@ -18,6 +20,7 @@ public class Simulator extends ViewModel implements Runnable {
 	private static final String AD_HOC = "1";
 	private static final String PASS = "2";
 	private static final String RES = "3";
+	Calendar calendar = new GregorianCalendar(2018,1,4,9,59,0);
 
 	private CarQueue entranceCarQueue;
 	private CarQueue entrancePassQueue;
@@ -28,16 +31,11 @@ public class Simulator extends ViewModel implements Runnable {
 	private boolean running;
 	private Thread t;
 	private String dayString;
-	private String fullMinute;
-	private String fullHour;
-
-	private int day = 0;
-	private int hour = 10;
-	private int minute = -1;
+	private String monthString;
 
 	private int tickPause = 128;
-	private int missedCustomers = 0;
 	private int passHolders = 84;
+
 
 	private int weekDayArrivals; // average number of arriving cars per hour
 	private int weekendArrivals = 150; // average number of arriving cars per hour
@@ -76,10 +74,6 @@ public class Simulator extends ViewModel implements Runnable {
 		}
 	}
 
-	public String getLabel() {
-		return daysOfTheWeek() + "   " + fullHour() + ":" + fullMinute();
-	}
-
 	public void realTime() {
 		tickPause = 60000;
 	}
@@ -102,17 +96,18 @@ public class Simulator extends ViewModel implements Runnable {
 
 		if (exitCarQueue.carsInQueue() > 0) {
 			System.out.println("test");
-			playExitSound();
+//			playExitSound();
 		}
 		;
 	}
 
 	public void setLabels() {
 		InfoView.setDayLabel(daysOfTheWeek());
-		InfoView.setTimeLabel(fullHour() + ":" + fullMinute());
+		InfoView.setMonthLabel(monthName());
+		InfoView.setDayOfMonthLabel("  "+calendar.get(Calendar.DAY_OF_MONTH));
+		InfoView.setTimeLabel(String.format("%02d:%02d", calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE)));
 		InfoView.setCarQueueLabel("Aantal normale auto's in de rij: " + entranceCarQueue.carsInQueue());
-		InfoView.setPassResQueueLabel(
-				"Aantal abonnementhouders/gereserveerden in de rij: " + entrancePassQueue.carsInQueue());
+		InfoView.setPassResQueueLabel("Aantal abonnementhouders/gereserveerden in de rij: " + entrancePassQueue.carsInQueue());
 		InfoView.setpaymentCarQueueLabel("Aantal betalende in de rij: " + paymentCarQueue.carsInQueue());
 		InfoView.setexitCarQueueLabel("Aantal auto's in de rij voor de uitgang: " + exitCarQueue.carsInQueue());
 		InfoView.setRevenueLabel("Ad hoc omzet: " + round(garageModel.calcAdHocRev(), 2));
@@ -141,8 +136,8 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	public void eveningArrivals() {
-		if (hour >= 22 || hour <= 7) {
-			if (day <= 5) {
+		if (calendar.get(Calendar.HOUR_OF_DAY) >= 22 || calendar.get(Calendar.HOUR_OF_DAY) <= 7) {
+			if (calendar.get(Calendar.DAY_OF_WEEK) <= 5) {
 				weekDayArrivals = 40;
 				weekDayPassArrivals = 20;
 				weekDayResArrivals = 5;
@@ -156,67 +151,82 @@ public class Simulator extends ViewModel implements Runnable {
 
 	private void advanceTime() {
 		// Advance the time by one minute.
-		minute++;
-		while (minute > 59) {
-			minute -= 60;
-			hour++;
-		}
-		while (hour > 23) {
-			hour -= 24;
-			day++;
-		}
-		while (day > 6) {
-			day -= 7;
-		}
-	}
-
-	public String fullHour() {
-		if (hour < 10) {
-			fullHour = "0" + hour;
-		} else {
-			fullHour = "" + hour;
-		}
-		return fullHour;
-	}
-
-	public String fullMinute() {
-		if (minute < 10) {
-			fullMinute = "0" + minute;
-		} else {
-			fullMinute = "" + minute;
-		}
-		return fullMinute;
+		calendar.add(Calendar.MINUTE, 1);
 	}
 
 	public String daysOfTheWeek() {
-		switch (day) {
-		case 0:
+		switch (calendar.get(Calendar.DAY_OF_WEEK)) {
+		case 1:
 			dayString = "Maandag";
 			break;
-		case 1:
+		case 2:
 			dayString = "Dinsdag";
 			break;
-		case 2:
+		case 3:
 			dayString = "Woensdag";
 			break;
-		case 3:
+		case 4:
 			dayString = "Donderdag";
 			break;
-		case 4:
+		case 5:
 			dayString = "Vrijdag";
 			break;
-		case 5:
+		case 6:
 			dayString = "Zaterdag";
 			break;
-		case 6:
+		case 7:
 			dayString = "Zondag";
 			break;
 		default:
 			dayString = "Geen geldige dag!";
 			break;
-
 		}
 		return dayString;
+	}
+
+	public String monthName() {
+		switch (calendar.get(Calendar.MONTH)) {
+		case 0:
+			monthString = "Januari";
+			break;
+		case 1:
+			monthString = "Februari";
+			break;
+		case 2:
+			monthString = "Maart";
+			break;
+		case 3:
+			monthString = "April";
+			break;
+		case 4:
+			monthString = "Mei";
+			break;
+		case 5:
+			monthString = "Juni";
+			break;
+		case 6:
+			monthString = "Juli";
+			break;
+		case 7:
+			monthString = "Augustus";
+			break;
+		case 8:
+			monthString = "September";
+			break;
+		case 9:
+			monthString = "Oktober";
+			break;
+		case 10:
+			monthString = "November";
+			break;
+		case 11:
+			monthString = "December";
+			break;
+		default:
+			monthString = "Geen geldige maand!";
+			break;
+		}
+		return monthString;
 	}
 
 	private void handleEntrance() {
@@ -345,7 +355,7 @@ public class Simulator extends ViewModel implements Runnable {
 
 	private int getTotalCars(int weekDay, int weekend, String type) {
 		Random random = new Random();
-		int averageNumberOfCarsPerHour = day < 5 ? weekDay : weekend;
+		int averageNumberOfCarsPerHour = calendar.get(Calendar.DAY_OF_WEEK) < 6 ? weekDay : weekend;
 
 		// Calculate the number of cars that arrive this minute.
 		double standardDeviation = averageNumberOfCarsPerHour * 0.3;

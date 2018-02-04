@@ -1,16 +1,15 @@
 package view;
 
-import java.awt.Color;
 import java.awt.Dimension;
-
 import javax.swing.JLabel;
-
 import model.Simulator;
 
 public class InfoView extends AbstractView {
 	public static JLabel day = new JLabel();
+	public static JLabel month = new JLabel();
+	public static JLabel dayOfMonth = new JLabel();
 	public static JLabel time = new JLabel();
-	public static JLabel leeg = new JLabel();
+	public static JLabel empty = new JLabel();
 	public static JLabel revenue = new JLabel();
 	public static JLabel expectedRevenue = new JLabel();
 	public static JLabel entranceCarQueue = new JLabel();
@@ -24,8 +23,10 @@ public class InfoView extends AbstractView {
 		simulator.addView(this);
 		setLayout(null);
 		add(day);
+		add(month);
+		add(dayOfMonth);
 		add(time);
-		add(leeg);
+		add(empty);
 		add(revenue);
 		add(expectedRevenue);
 		add(entranceCarQueue);
@@ -34,8 +35,10 @@ public class InfoView extends AbstractView {
 		add(exitCarQueue);
 		add(freeSpots);
 		day.setBounds(10,10,400,30);
-		time.setBounds(100,10,310,30);
-		leeg.setBounds(10,10,400,60);
+		dayOfMonth.setBounds(90,10,400,30);
+		month.setBounds(120,10,400,30);
+		time.setBounds(300,10,310,30);
+		empty.setBounds(10,10,400,60);
 		revenue.setBounds(10,10,400,90);
 		expectedRevenue.setBounds(10,10,400,120);
 		entranceCarQueue.setBounds(10,10,400,150);
@@ -43,14 +46,18 @@ public class InfoView extends AbstractView {
 		paymentCarQueue.setBounds(10,10,400,210);
 		exitCarQueue.setBounds(10,10,400,240);
 		freeSpots.setBounds(10,10,400,270);
-		day.setForeground(Color.red);
-		time.setForeground(Color.cyan);
 	}
 	public Dimension getPreferredSize() {
 		return new Dimension(500, 500);
 	}
 	public static void setDayLabel(String label) {
 		day.setText(label);
+	}
+	public static void setMonthLabel(String label) {
+		month.setText(label);
+	}
+	public static void setDayOfMonthLabel(String label) {
+		dayOfMonth.setText(label);
 	}
 	public static void setTimeLabel(String label) {
 		time.setText(label);
