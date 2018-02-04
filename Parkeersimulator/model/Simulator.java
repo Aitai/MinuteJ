@@ -110,8 +110,8 @@ public class Simulator extends ViewModel implements Runnable {
 		InfoView.setPassResQueueLabel("Aantal abonnementhouders/gereserveerden in de rij: " + entrancePassQueue.carsInQueue());
 		InfoView.setpaymentCarQueueLabel("Aantal betalenden in de rij: " + paymentCarQueue.carsInQueue());
 		InfoView.setexitCarQueueLabel("Aantal auto's in de rij voor de uitgang: " + exitCarQueue.carsInQueue());
-		InfoView.setRevenueLabel("Ad hoc omzet: " + round(garageModel.calcAdHocRev(), 2));
-		InfoView.setExpectedRevenueLabel("Verwachte ad hoc omzet: " + round(garageModel.calcExpectedAdHocRev(), 2));
+		InfoView.setRevenueLabel("Ad hoc omzet: \u20AC" + round(garageModel.calcAdHocRev(), 2));
+		InfoView.setExpectedRevenueLabel("Verwachte ad hoc omzet: \u20AC" + round(garageModel.calcExpectedAdHocRev(), 2));
 		InfoView.setFreeSpots("Aantal lege plekken: " + garageModel.getNumberOfOpenFreeSpots());
 	}
 
