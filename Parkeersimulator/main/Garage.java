@@ -5,6 +5,7 @@ import model.Simulator;
 import view.CarGraph;
 import view.GarageView;
 import view.InfoView;
+import view.LegendaView;
 import view.SettingsView;
 
 import javax.swing.*;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Random;
 
 class Garage {
+	static JMenuItem testItem = new JMenuItem("test");
 
 	private Garage() {
 		// generate random numbers for testing purposes
@@ -28,6 +30,7 @@ class Garage {
 		JMenu menu = new JMenu("Opties");
 
 		JMenuItem pauseItem = new JMenuItem("Start/pause");
+		JMenuItem hundredItem = new JMenuItem("Spoel 100 stappen vooruit");
 		JMenuItem settingsItem = new JMenuItem("Instellingen");
 		JMenuItem graphItem = new JMenuItem("Toon/verberg grafiek");
 		JMenuItem exitItem = new JMenuItem("Sluiten");
@@ -37,9 +40,11 @@ class Garage {
 		CarGraph graph = new CarGraph(simulator, list);
 		GarageController garageController = new GarageController(simulator);
 		InfoView info = new InfoView(simulator);
+		LegendaView legenda = new LegendaView(simulator);
 		JFrame window = new JFrame("Parkeergarage simulatie");
 
 		pauseItem.addActionListener(e -> simulator.startPause());
+		hundredItem.addActionListener(e -> simulator.ffHundred());
 		settingsItem.addActionListener(e -> new SettingsView(simulator));
 		graphItem.addActionListener(e -> {
 			graph.setVisible(!graph.isVisible());
@@ -57,6 +62,7 @@ class Garage {
 
 		window.add(garageView);
 		window.add(info);
+		window.add(legenda);
 		window.add(garageController);
 		window.add(graph);
 		window.setJMenuBar(menuBar);
@@ -64,6 +70,7 @@ class Garage {
 
 		// Voeg de menuitems toe aan de menubalk.
 		menu.add(pauseItem);
+		menu.add(hundredItem);
 		menu.add(settingsItem);
 		menu.add(graphItem);
 		menu.add(exitItem);
@@ -71,13 +78,17 @@ class Garage {
 		garageView.setBounds(-50, 20, 800, 300);
 		garageController.setBounds(10, 320, 730, 30);
 		// garageController.setBackground(Color.red);
-		info.setBounds(750, 10, 430, 340);
+		info.setBounds(750, 10, 430, 150);
+		legenda.setBounds(750, 150, 430, 300);
 		graph.setBounds(10, 360, 400, 290);
 		// graph.setBackground(Color.lightGray);
 
 		window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		window.setVisible(true);
-		simulator.tick();
+
+		// Teken de garage en de labels zonder een tick uit te voeren.
+		simulator.updateViews();
+		simulator.setLabels();
 	}
 
 	public static void main(String[] args) {

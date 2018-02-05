@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class ViewModel {
-    final List<AbstractView> views;
+	final List<AbstractView> views;
 
-    ViewModel() {
-        views = new ArrayList<>();
-    }
+	ViewModel() {
+		views = new ArrayList<>();
+	}
 
-    public void addView(AbstractView view) {
-        views.add(view);
-    }
+	public void addView(AbstractView view) {
+		views.add(view);
+	}
 }
