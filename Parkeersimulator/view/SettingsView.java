@@ -156,7 +156,7 @@ public class SettingsView extends AbstractView {
 				}
 				simulator.setWeekendResArrivals(Integer.parseInt(weekendResArrivals));
 
-				String costPerMinute = t8.getText();
+				String costPerMinute = t9.getText();
 				if (Double.valueOf(costPerMinute) < 0) {
 					throw new Exception();
 				}

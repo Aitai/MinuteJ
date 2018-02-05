@@ -28,8 +28,8 @@ public class CarGraph extends AbstractView {
 	/**
 	 * Maakt een nieuwe grafiek aan voor aantal auto's
 	 *
-	 * @param simulator
-	 * @param scores
+	 * @param simulator De hoofdklasse
+	 * @param scores Waarden voor de y-as van de grafiek
 	 */
 	public CarGraph(Simulator simulator, List<Integer> scores) {
 		this.scores = scores;
@@ -48,10 +48,10 @@ public class CarGraph extends AbstractView {
 		}
 	}
 
-	@Override
 	/**
 	 * Tekent de grafiek
 	 */
+	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
@@ -109,18 +109,18 @@ public class CarGraph extends AbstractView {
 		// }
 	}
 
-	@Override
 	/**
 	 * Geeft de grootte terug
 	 */
+	@Override
 	public Dimension getPreferredSize() {
 		return new Dimension(PREF_W, PREF_H);
 	}
 
-	@Override
 	/**
 	 * Update de grafiek
 	 */
+	@Override
 	public void updateView() {
 	}
 }
