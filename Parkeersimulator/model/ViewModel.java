@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class ViewModel {
-    public List<AbstractView> views;
+    final List<AbstractView> views;
 
-    public ViewModel() {
+    ViewModel() {
         views = new ArrayList<>();
     }
 

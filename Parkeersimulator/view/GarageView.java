@@ -11,7 +11,7 @@ public class GarageView extends AbstractView {
     private static final long serialVersionUID = -3032548983692121385L;
     private Dimension size;
     private Image carParkImage;
-    private Simulator simulator;
+    private final Simulator simulator;
 
     /**
      * Constructor for objects of class CarPark

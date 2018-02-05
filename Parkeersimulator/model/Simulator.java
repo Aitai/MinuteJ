@@ -19,16 +19,16 @@ public class Simulator extends ViewModel implements Runnable {
     private static final String AD_HOC = "AD_HOC";
     private static final String PASS = "PASS";
     private static final String RES = "RES";
-    Calendar calendar = new GregorianCalendar(2018, 1, 4, 9, 59, 0);
-    int enterSpeed = 3; // number of cars that can enter per minute
-    int paymentSpeed = 7; // number of cars that can pay per minute
-    int exitSpeed = 5; // number of cars that can leave per minute
-    private CarQueue entranceCarQueue;
-    private CarQueue entrancePassQueue;
-    private CarQueue entranceResQueue;
-    private CarQueue paymentCarQueue;
-    private CarQueue exitCarQueue;
-    private GarageModel garageModel;
+    private final Calendar calendar = new GregorianCalendar(2018, 1, 4, 9, 59, 0);
+    private final int enterSpeed = 3; // number of cars that can enter per minute
+    private final int paymentSpeed = 7; // number of cars that can pay per minute
+    private final int exitSpeed = 5; // number of cars that can leave per minute
+    private final CarQueue entranceCarQueue;
+    private final CarQueue entrancePassQueue;
+    private final CarQueue entranceResQueue;
+    private final CarQueue paymentCarQueue;
+    private final CarQueue exitCarQueue;
+    private final GarageModel garageModel;
     private boolean running;
     private int tickPause = 128;
     private int weekDayArrivals; // average number of arriving cars per hour
@@ -45,7 +45,7 @@ public class Simulator extends ViewModel implements Runnable {
 
     }
 
-    public static double round(double value, int places) {
+    private static double round(double value, int places) {
         if (places < 0)
             throw new IllegalArgumentException();
 
@@ -96,7 +96,7 @@ public class Simulator extends ViewModel implements Runnable {
         }
 	}
 
-    public void setLabels() {
+    private void setLabels() {
         InfoView.setDayLabel(daysOfTheWeek());
         InfoView.setMonthLabel(monthName());
         InfoView.setDayOfMonthLabel("  " + calendar.get(Calendar.DAY_OF_MONTH));
@@ -110,7 +110,7 @@ public class Simulator extends ViewModel implements Runnable {
         InfoView.setFreeSpots("Aantal lege plekken: " + garageModel.getNumberOfOpenFreeSpots());
     }
 
-    public void tickFast() {
+    private void tickFast() {
         eveningArrivals();
         advanceTime();
         handleExit();
@@ -120,7 +120,7 @@ public class Simulator extends ViewModel implements Runnable {
         garageModel.calcExpectedAdHocRev();
     }
 
-    public void eveningArrivals() {
+    private void eveningArrivals() {
         if (calendar.get(Calendar.HOUR_OF_DAY) >= 22 || calendar.get(Calendar.HOUR_OF_DAY) <= 7) {
             if (calendar.get(Calendar.DAY_OF_WEEK) <= 5) {
                 weekDayArrivals = 40;
@@ -139,7 +139,7 @@ public class Simulator extends ViewModel implements Runnable {
         calendar.add(Calendar.MINUTE, 1);
     }
 
-    public String daysOfTheWeek() {
+    private String daysOfTheWeek() {
         String dayString;
         switch (calendar.get(Calendar.DAY_OF_WEEK)) {
             case 1:
@@ -170,7 +170,7 @@ public class Simulator extends ViewModel implements Runnable {
         return dayString;
     }
 
-    public String monthName() {
+    private String monthName() {
         String monthString;
         switch (calendar.get(Calendar.MONTH)) {
             case 0:

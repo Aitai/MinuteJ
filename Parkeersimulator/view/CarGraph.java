@@ -18,7 +18,7 @@ public class CarGraph extends AbstractView {
     private static final Stroke GRAPH_STROKE = new BasicStroke(1);
     private static final int GRAPH_POINT_WIDTH = 12;
     private static final int Y_HATCH_CNT = 10;
-    private List<Integer> scores;
+    private final List<Integer> scores;
 
     public CarGraph(Simulator simulator, List<Integer> scores) {
         this.scores = scores;

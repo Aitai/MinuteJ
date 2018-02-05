@@ -5,8 +5,8 @@ import java.awt.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class BarChart extends JPanel {
-    private Map<Color, Integer> bars = new LinkedHashMap<Color, Integer>();
+class BarChart extends JPanel {
+    private final Map<Color, Integer> bars = new LinkedHashMap<Color, Integer>();
 
     /**
      * 17. Add new bar to chart 18.

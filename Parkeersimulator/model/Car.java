@@ -12,7 +12,7 @@ public abstract class Car {
     /**
      * Constructor for objects of class Car
      */
-    public Car() {
+    Car() {
 
     }
 
@@ -28,7 +28,7 @@ public abstract class Car {
         return minutesLeft;
     }
 
-    public void setMinutesLeft(int minutesLeft) {
+    void setMinutesLeft(int minutesLeft) {
         this.minutesLeft = minutesLeft;
     }
 
@@ -44,7 +44,7 @@ public abstract class Car {
         return hasToPay;
     }
 
-    public void setHasToPay(boolean hasToPay) {
+    void setHasToPay(boolean hasToPay) {
         this.hasToPay = hasToPay;
     }
 

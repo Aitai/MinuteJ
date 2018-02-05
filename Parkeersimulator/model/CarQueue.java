@@ -3,8 +3,8 @@ package model;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class CarQueue {
-    private Queue<Car> queue = new LinkedList<>();
+class CarQueue {
+    private final Queue<Car> queue = new LinkedList<>();
 
     public void addCar(Car car) {
         queue.add(car);

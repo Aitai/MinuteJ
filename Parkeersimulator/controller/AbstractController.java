@@ -2,9 +2,9 @@ package controller;
 
 import javax.swing.*;
 
-public abstract class AbstractController extends JPanel {
+abstract class AbstractController extends JPanel {
     private static final long serialVersionUID = 4113198028695964708L;
 
-    public AbstractController() {
+    AbstractController() {
     }
 }

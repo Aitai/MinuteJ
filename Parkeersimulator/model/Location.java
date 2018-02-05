@@ -2,9 +2,9 @@ package model;
 
 public class Location {
 
-    private int floor;
-    private int row;
-    private int place;
+    private final int floor;
+    private final int row;
+    private final int place;
     private Boolean reserved = false;
 
     /**

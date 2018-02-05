@@ -7,18 +7,18 @@ import java.awt.*;
 
 public class InfoView extends AbstractView {
     private static final long serialVersionUID = -3260703954764103294L;
-    public static JLabel day = new JLabel();
-    public static JLabel month = new JLabel();
-    public static JLabel dayOfMonth = new JLabel();
-    public static JLabel time = new JLabel();
-    public static JLabel empty = new JLabel();
-    public static JLabel revenue = new JLabel();
-    public static JLabel expectedRevenue = new JLabel();
-    public static JLabel entranceCarQueue = new JLabel();
-    public static JLabel entrancePassResQueue = new JLabel();
-    public static JLabel paymentCarQueue = new JLabel();
-    public static JLabel exitCarQueue = new JLabel();
-    public static JLabel freeSpots = new JLabel();
+    private static final JLabel day = new JLabel();
+    private static final JLabel month = new JLabel();
+    private static final JLabel dayOfMonth = new JLabel();
+    private static final JLabel time = new JLabel();
+    private static final JLabel empty = new JLabel();
+    private static final JLabel revenue = new JLabel();
+    private static final JLabel expectedRevenue = new JLabel();
+    private static final JLabel entranceCarQueue = new JLabel();
+    private static final JLabel entrancePassResQueue = new JLabel();
+    private static final JLabel paymentCarQueue = new JLabel();
+    private static final JLabel exitCarQueue = new JLabel();
+    private static final JLabel freeSpots = new JLabel();
 
     public InfoView(Simulator simulator) {
         simulator.addView(this);

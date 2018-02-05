@@ -4,12 +4,12 @@ import java.awt.*;
 
 public class GarageModel {
 
-    private int numberOfFloors;
-    private int numberOfRows;
-    private int numberOfPlaces;
+    private final int numberOfFloors;
+    private final int numberOfRows;
+    private final int numberOfPlaces;
     private int numberOfOpenSpots;
-    private Car[][][] cars;
-    private double costPerMinute = 0.05;
+    private final Car[][][] cars;
+    private final double costPerMinute = 0.05;
     private double expectedAdHocRev = 0;
     private double totalInput = 0;
     private double totalOutput = 0;

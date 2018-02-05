@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Garage {
+class Garage {
 
-    public Garage() {
+    private Garage() {
         // generate random numbers for testing purposes
         List<Integer> list = new ArrayList<Integer>();
         Random random = new Random();
