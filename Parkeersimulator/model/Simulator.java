@@ -13,7 +13,11 @@ import java.math.RoundingMode;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Random;
-
+/**
+ * 
+ * @author MinuteJ
+ * @version 1.3.0
+ */
 public class Simulator extends ViewModel implements Runnable {
 
     private static final String AD_HOC = "AD_HOC";

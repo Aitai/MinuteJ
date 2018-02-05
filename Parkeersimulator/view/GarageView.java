@@ -1,5 +1,9 @@
 package view;
-
+/**
+ * 
+ * @author MinuteJ
+ * @version 1.0.0
+ */
 import model.Car;
 import model.Location;
 import model.Simulator;

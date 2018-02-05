@@ -1,5 +1,9 @@
 package view;
-
+/**
+ * 
+ * @author MinuteJ
+ * @version 1.0.0
+ */
 import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedHashMap;
@@ -9,10 +13,10 @@ class BarChart extends JPanel {
     private final Map<Color, Integer> bars = new LinkedHashMap<>();
 
     /**
-     * 17. Add new bar to chart 18.
+     * 
      *
-     * @param color  color to display bar 19.
-     * @param random size of bar 20.
+     * @param color  color to display bar
+     * @param random size of bar
      */
 
     public void addBar(Color color, Integer random) {

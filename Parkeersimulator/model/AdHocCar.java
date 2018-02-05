@@ -2,7 +2,11 @@ package model;
 
 import java.awt.*;
 import java.util.Random;
-
+/**
+ * 
+ * @author MinuteJ
+ * 1.0.0
+ */
 public class AdHocCar extends Car {
     private static final Color COLOR = Color.red;
     private final int stayMinutes;

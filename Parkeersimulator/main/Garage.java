@@ -1,5 +1,9 @@
 package main;
-
+/**
+ * 
+ * @author MinuteJ
+ * @version 2
+ */
 import controller.GarageController;
 import model.Simulator;
 import view.CarGraph;

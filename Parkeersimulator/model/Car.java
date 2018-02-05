@@ -1,7 +1,11 @@
 package model;
 
 import java.awt.*;
-
+/**
+ * 
+ * @author MinuteJ
+ * 1.0.0
+ */
 public abstract class Car {
 
     private Location location;

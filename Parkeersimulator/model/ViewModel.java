@@ -1,5 +1,9 @@
 package model;
-
+/**
+ * 
+ * @author MinuteJ
+ * @version 1.0.0
+ */
 import view.AbstractView;
 
 import java.util.ArrayList;

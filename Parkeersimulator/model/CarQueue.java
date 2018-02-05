@@ -2,7 +2,11 @@ package model;
 
 import java.util.LinkedList;
 import java.util.Queue;
-
+/**
+ * 
+ * @author MinuteJ
+ * @version 1.0.0
+ */
 class CarQueue {
     private final Queue<Car> queue = new LinkedList<>();
 

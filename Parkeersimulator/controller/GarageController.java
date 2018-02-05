@@ -1,5 +1,9 @@
 package controller;
-
+/**
+ * 
+ * @author MinuteJ
+ * @version 1
+ */
 import model.Simulator;
 
 import javax.swing.*;

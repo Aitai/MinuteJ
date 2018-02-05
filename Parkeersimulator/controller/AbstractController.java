@@ -1,5 +1,9 @@
 package controller;
-
+/**
+ * 
+ * @author MinuteJ
+ * @version 1
+ */
 import javax.swing.*;
 
 abstract class AbstractController extends JPanel {

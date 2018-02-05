@@ -1,7 +1,11 @@
 package model;
 
 import java.awt.*;
-
+/**
+ * 
+ * @author MinuteJ
+ * @version 1.1.0
+ */
 public class GarageModel {
 
     private final int numberOfFloors;

@@ -1,5 +1,9 @@
 package model;
-
+/**
+ * 
+ * @author MinuteJ
+ * @version 1.0.0
+ */
 public class Location {
 
     private final int floor;

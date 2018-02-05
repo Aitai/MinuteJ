@@ -1,5 +1,9 @@
 package view;
-
+/**
+ * 
+ * @author MinuteJ
+ * @version 1.0.0
+ */
 import javax.swing.*;
 
 public abstract class AbstractView extends JPanel {
