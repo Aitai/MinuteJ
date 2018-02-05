@@ -61,6 +61,7 @@ public class GarageModel {
 						AdHocCar adHocCar = (AdHocCar) car;
 						if (adHocCar.getMinutesLeft() == 0 && adHocCar.getColor() == Color.red) {
 							adHocRev += adHocCar.getParkingTime() * costPerMinute;
+						}
 					} catch (Exception ignored) {
 					}
 				}
