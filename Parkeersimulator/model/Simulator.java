@@ -14,6 +14,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Random;
 /**
+ * De klasse voor 
  * 
  * @author MinuteJ
  * @version 1.3.0
