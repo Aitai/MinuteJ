@@ -8,8 +8,6 @@ import view.InfoView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -58,7 +56,7 @@ class Garage {
         graph.setBounds(10, 360, 400, 290);
         graph.setBackground(Color.lightGray);
 
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setVisible(true);
         simulator.tick();
     }

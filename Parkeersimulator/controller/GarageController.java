@@ -3,8 +3,6 @@ package controller;
 import model.Simulator;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class GarageController extends AbstractController {
     private static final long serialVersionUID = 3253955925290497248L;

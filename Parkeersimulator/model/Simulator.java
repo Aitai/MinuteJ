@@ -20,9 +20,6 @@ public class Simulator extends ViewModel implements Runnable {
     private static final String PASS = "PASS";
     private static final String RES = "RES";
     private final Calendar calendar = new GregorianCalendar(2018, 1, 4, 9, 59, 0);
-    private final int enterSpeed = 3; // number of cars that can enter per minute
-    private final int paymentSpeed = 7; // number of cars that can pay per minute
-    private final int exitSpeed = 5; // number of cars that can leave per minute
     private final CarQueue entranceCarQueue;
     private final CarQueue entrancePassQueue;
     private final CarQueue entranceResQueue;
@@ -253,6 +250,7 @@ public class Simulator extends ViewModel implements Runnable {
         int i = 0;
         // Remove car from the front of the queue and assign to a parking space.
         //TODO Tweede wachtrij toevoegen voor mensen met een abonnement.
+        int enterSpeed = 3;
         while (queue.carsInQueue() > 0 && garageModel.getNumberOfOpenFreeSpots() > 0 && i < enterSpeed) {
             Location freeLocation = garageModel.getFirstFreeLocation();
 
@@ -327,6 +325,7 @@ public class Simulator extends ViewModel implements Runnable {
     private void carsPaying() {
         // Let cars pay.
         int i = 0;
+        int paymentSpeed = 7;
         while (paymentCarQueue.carsInQueue() > 0 && i < paymentSpeed) {
             Car car = paymentCarQueue.removeCar();
             // TODO Handle payment.
@@ -338,6 +337,7 @@ public class Simulator extends ViewModel implements Runnable {
     private void carsLeaving() {
         // Let cars leave.
         int i = 0;
+        int exitSpeed = 5;
         while (exitCarQueue.carsInQueue() > 0 && i < exitSpeed) {
             exitCarQueue.removeCar();
             i++;
