@@ -2,7 +2,7 @@ package main;
 /**
  * 
  * @author MinuteJ
- * @version 2
+ * @version 1.1.2
  */
 import controller.GarageController;
 import model.Simulator;
