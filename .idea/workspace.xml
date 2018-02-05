@@ -2,19 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94a480e1-05b5-4810-96a0-2584276381bc" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Parkeersimulator/controller/AbstractController.java" afterPath="$PROJECT_DIR$/Parkeersimulator/controller/AbstractController.java" />
+      <change beforePath="$PROJECT_DIR$/Parkeersimulator/controller/GarageController.java" afterPath="$PROJECT_DIR$/Parkeersimulator/controller/GarageController.java" />
       <change beforePath="$PROJECT_DIR$/Parkeersimulator/main/Garage.java" afterPath="$PROJECT_DIR$/Parkeersimulator/main/Garage.java" />
-      <change beforePath="$PROJECT_DIR$/Parkeersimulator/model/AdHocCar.java" afterPath="$PROJECT_DIR$/Parkeersimulator/model/AdHocCar.java" />
-      <change beforePath="$PROJECT_DIR$/Parkeersimulator/model/Car.java" afterPath="$PROJECT_DIR$/Parkeersimulator/model/Car.java" />
-      <change beforePath="$PROJECT_DIR$/Parkeersimulator/model/CarQueue.java" afterPath="$PROJECT_DIR$/Parkeersimulator/model/CarQueue.java" />
-      <change beforePath="$PROJECT_DIR$/Parkeersimulator/model/GarageModel.java" afterPath="$PROJECT_DIR$/Parkeersimulator/model/GarageModel.java" />
-      <change beforePath="$PROJECT_DIR$/Parkeersimulator/model/Location.java" afterPath="$PROJECT_DIR$/Parkeersimulator/model/Location.java" />
-      <change beforePath="$PROJECT_DIR$/Parkeersimulator/model/Simulator.java" afterPath="$PROJECT_DIR$/Parkeersimulator/model/Simulator.java" />
-      <change beforePath="$PROJECT_DIR$/Parkeersimulator/model/ViewModel.java" afterPath="$PROJECT_DIR$/Parkeersimulator/model/ViewModel.java" />
       <change beforePath="$PROJECT_DIR$/Parkeersimulator/view/BarChart.java" afterPath="$PROJECT_DIR$/Parkeersimulator/view/BarChart.java" />
       <change beforePath="$PROJECT_DIR$/Parkeersimulator/view/CarGraph.java" afterPath="$PROJECT_DIR$/Parkeersimulator/view/CarGraph.java" />
-      <change beforePath="$PROJECT_DIR$/Parkeersimulator/view/GarageView.java" afterPath="$PROJECT_DIR$/Parkeersimulator/view/GarageView.java" />
-      <change beforePath="$PROJECT_DIR$/Parkeersimulator/view/InfoView.java" afterPath="$PROJECT_DIR$/Parkeersimulator/view/InfoView.java" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -59,11 +50,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Garage.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Garage.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Parkeersimulator/main/Garage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="16" column="6" lean-forward="false" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
+            <state relative-caret-position="120">
+              <caret line="20" column="43" lean-forward="false" selection-start-line="20" selection-start-column="43" selection-end-line="20" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GarageController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Parkeersimulator/controller/GarageController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -293,6 +294,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="25" width="1922" height="1082" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -309,7 +311,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection Results" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32959184" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32959184" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -377,8 +379,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Parkeersimulator/main/Garage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="16" column="6" lean-forward="false" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
+        <state relative-caret-position="120">
+          <caret line="20" column="43" lean-forward="false" selection-start-line="20" selection-start-column="43" selection-end-line="20" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Parkeersimulator/controller/GarageController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
         </state>
       </provider>

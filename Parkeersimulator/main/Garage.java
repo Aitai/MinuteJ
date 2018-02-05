@@ -18,7 +18,7 @@ class Garage {
 
     private Garage() {
         // generate random numbers for testing purposes
-        List<Integer> list = new ArrayList<Integer>();
+        List<Integer> list = new ArrayList<>();
         Random random = new Random();
         int maxDataPoints = 24;
         int maxScore = 20;
@@ -30,12 +30,7 @@ class Garage {
         JMenu menu = new JMenu("Opties");
         JMenuItem settingsItem = new JMenuItem("Instellingen");
 
-        settingsItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("setting test");
-            }
-        });
+        settingsItem.addActionListener(e -> System.out.println("setting test"));
 
         Simulator simulator = new Simulator();
         GarageView garageView = new GarageView(simulator);

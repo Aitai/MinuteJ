@@ -13,53 +13,25 @@ public class GarageController extends AbstractController {
         super();
 
 		JButton startPauze = new JButton("Start/Pauze");
-        startPauze.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                simulator.startPauze();
-            }
-        });
+        startPauze.addActionListener(e -> simulator.startPauze());
 
 		JButton step = new JButton("1 minuut");
-        step.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                simulator.ffMinute();
-            }
-        });
+        step.addActionListener(e -> simulator.ffMinute());
 
 		JButton ffHour = new JButton("1 uur");
-        ffHour.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                simulator.ffHour();
-            }
-        });
+        ffHour.addActionListener(e -> simulator.ffHour());
 
 		JButton ffDay = new JButton("1 dag");
-        ffDay.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                simulator.ffDay();
-            }
-        });
+        ffDay.addActionListener(e -> simulator.ffDay());
 
 		JButton faster = new JButton("Sneller");
-        faster.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                simulator.faster();
-            }
-        });
+        faster.addActionListener(e -> simulator.faster());
 
 		JButton slower = new JButton("Langzamer");
-        slower.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                simulator.slower();
-            }
-        });
+        slower.addActionListener(e -> simulator.slower());
 
 		JButton realTime = new JButton("Realtime");
-        realTime.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                simulator.realTime();
-            }
-        });
+        realTime.addActionListener(e -> simulator.realTime());
 
         add(startPauze);
         add(step);

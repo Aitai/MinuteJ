@@ -25,7 +25,7 @@ public class CarGraph extends AbstractView {
     }
 
     public static void setVal() {
-        List<Integer> list = new ArrayList<Integer>();
+        List<Integer> list = new ArrayList<>();
         Random random = new Random();
         int maxDataPoints = 24;
         int maxScore = 20;
@@ -43,7 +43,7 @@ public class CarGraph extends AbstractView {
         double xScale = ((double) getWidth() - 2 * BORDER_GAP) / (scores.size() - 1);
         double yScale = ((double) getHeight() - 2 * BORDER_GAP) / (MAX_SCORE - 1);
 
-        List<Point> graphPoints = new ArrayList<Point>();
+        List<Point> graphPoints = new ArrayList<>();
         for (int i = 0; i < scores.size(); i++) {
             int x1 = (int) (i * xScale + BORDER_GAP);
             int y1 = (int) ((MAX_SCORE - scores.get(i)) * yScale + BORDER_GAP);
