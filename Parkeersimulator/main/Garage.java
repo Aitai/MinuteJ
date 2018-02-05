@@ -15,7 +15,7 @@ import java.util.Random;
 /**
  * De klasse voor het starten en plaatsen van de simulator.
  * 
- * @author MinuteJ 
+ * @author MinuteJ
  * @version 1.1.2
  */
 class Garage {

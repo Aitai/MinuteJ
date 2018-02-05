@@ -1,4 +1,5 @@
 package view;
+
 /**
  * 
  * @author MinuteJ
@@ -10,46 +11,47 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 class BarChart extends JPanel {
-    private final Map<Color, Integer> bars = new LinkedHashMap<>();
+	private final Map<Color, Integer> bars = new LinkedHashMap<>();
 
-    /**
-     * 
-     *
-     * @param color  color to display bar
-     * @param random size of bar
-     */
+	/**
+	 * 
+	 *
+	 * @param color
+	 *            color to display bar
+	 * @param random
+	 *            size of bar
+	 */
 
-    public void addBar(Color color, Integer random) {
-        bars.put(color, random);
-        repaint();
-    }
+	public void addBar(Color color, Integer random) {
+		bars.put(color, random);
+		repaint();
+	}
 
-    protected void paintComponent(Graphics g) {
+	protected void paintComponent(Graphics g) {
 
-        // determine longest bar
-        int max = Integer.MIN_VALUE;
-        for (Integer value : bars.values()) {
-            max = Math.max(max, value);
-        }
-        // paint bars
-        int width = (getWidth() / bars.size()) - 2;
-        int x = 1;
-        for (Color color : bars.keySet()) {
-            int value = bars.get(color);
-            int height = (int) ((getHeight() - 5) * ((double) value / max));
-            g.setColor(color);
-            g.fillRect(x, getHeight() - height, width, height);
-            g.setColor(Color.black);
-            g.drawRect(x, getHeight() - height, width, height);
-            x += (width + 2);
-        }
-    }
+		// determine longest bar
+		int max = Integer.MIN_VALUE;
+		for (Integer value : bars.values()) {
+			max = Math.max(max, value);
+		}
+		// paint bars
+		int width = (getWidth() / bars.size()) - 2;
+		int x = 1;
+		for (Color color : bars.keySet()) {
+			int value = bars.get(color);
+			int height = (int) ((getHeight() - 5) * ((double) value / max));
+			g.setColor(color);
+			g.fillRect(x, getHeight() - height, width, height);
+			g.setColor(Color.black);
+			g.drawRect(x, getHeight() - height, width, height);
+			x += (width + 2);
+		}
+	}
 
-    @Override
+	@Override
 
-    public Dimension getPreferredSize() {
-        return new Dimension(bars.size() * 10 + 2, 50);
-    }
-
+	public Dimension getPreferredSize() {
+		return new Dimension(bars.size() * 10 + 2, 50);
+	}
 
 }

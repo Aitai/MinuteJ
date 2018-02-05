@@ -10,23 +10,23 @@ import java.util.Random;
  * @version 1.0.0
  */
 public class ReservedCar extends Car {
-    private static final Color COLOR = Color.green;
+	private static final Color COLOR = Color.green;
 
-    /**
-     * Creër een nieuwe een gereserveerde auto, bepaal hoelang deze blijft
-     * en of hij moet betalen
-     */
-    public ReservedCar() {
-        Random random = new Random();
-        int stayMinutes = (int) (15 + random.nextFloat() * 3 * 60);
-        this.setMinutesLeft(stayMinutes);
-        this.setHasToPay(false);
-    }
+	/**
+	 * Creeer een nieuwe een gereserveerde auto, bepaal hoelang deze blijft en of hij
+	 * moet betalen
+	 */
+	public ReservedCar() {
+		Random random = new Random();
+		int stayMinutes = (int) (15 + random.nextFloat() * 3 * 60);
+		this.setMinutesLeft(stayMinutes);
+		this.setHasToPay(false);
+	}
 
-    /**
-     * @return geeft de kleur van de auto
-     */
-    public Color getColor() {
-        return COLOR;
-    }
+	/**
+	 * @return geeft de kleur van de auto
+	 */
+	public Color getColor() {
+		return COLOR;
+	}
 }

@@ -1,4 +1,5 @@
 package view;
+
 /**
  * 
  * @author MinuteJ
@@ -20,7 +21,7 @@ public class SettingsView extends AbstractView {
 	private final JFrame settingsWindow;
 
 	private JTextField t1;
-    private JTextField t2;
+	private JTextField t2;
 	private final Simulator simulator;
 
 	public SettingsView(Simulator simulator) {
@@ -71,11 +72,15 @@ public class SettingsView extends AbstractView {
 		update.addActionListener(e -> {
 			try {
 				String tickPause = t1.getText();
-				if (Integer.parseInt(tickPause)<1) { throw new Exception("a");}
+				if (Integer.parseInt(tickPause) < 1) {
+					throw new Exception("a");
+				}
 				simulator.setTickPause(Integer.parseInt(tickPause));
 
 				String numberOfPasses = t2.getText();
-				if (Integer.parseInt(numberOfPasses)<1||Integer.parseInt(numberOfPasses)>84) { throw new Exception("b");}
+				if (Integer.parseInt(numberOfPasses) < 1 || Integer.parseInt(numberOfPasses) > 84) {
+					throw new Exception("b");
+				}
 				simulator.setNumberOfPasses(Integer.parseInt(numberOfPasses));
 
 				settingsWindow.dispose();
