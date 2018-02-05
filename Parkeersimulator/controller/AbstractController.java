@@ -1,14 +1,10 @@
 package controller;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
-import model.Simulator;
+abstract class AbstractController extends JPanel {
+    private static final long serialVersionUID = 4113198028695964708L;
 
-public abstract class AbstractController extends JPanel {
-	private static final long serialVersionUID = 4113198028695964708L;
-	protected Simulator simulator;
-
-	public AbstractController(Simulator simulator) {
-		this.simulator = simulator;
-	}
+    AbstractController() {
+    }
 }
