@@ -1,15 +1,14 @@
 package view;
 
+import model.Location;
+import model.Simulator;
+import java.awt.*;
+import model.Car;
 /**
  *
  * @author MinuteJ
  * @version 1.0.0
  */
-import model.Car;
-import model.Location;
-import model.Simulator;
-
-import java.awt.*;
 
 public class GarageView extends AbstractView {
 
@@ -52,10 +51,10 @@ public class GarageView extends AbstractView {
 		}
 	}
 
-	@Override
 	/**
 	 * Create a new car park image if the size has changed.
 	 */
+	@Override
 	public void updateView() {
 		if (!size.equals(getSize())) {
 			size = getSize();

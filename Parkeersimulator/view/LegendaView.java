@@ -3,12 +3,10 @@ package view;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import model.Simulator;
-
 public class LegendaView extends AbstractView {
 	private static final long serialVersionUID = 961956082556411201L;
 
-	public LegendaView(Simulator simulator) {
+	public LegendaView() {
 	}
 
 	@Override

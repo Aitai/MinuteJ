@@ -51,10 +51,11 @@ class BarChart extends JPanel {
 		}
 	}
 
-	@Override
+
 	/**
 	 * Geeft de grootte van het diagram
 	 */
+	@Override
 	public Dimension getPreferredSize() {
 		return new Dimension(bars.size() * 10 + 2, 50);
 	}

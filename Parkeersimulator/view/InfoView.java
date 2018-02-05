@@ -178,10 +178,10 @@ public class InfoView extends AbstractView {
 		return new Dimension(500, 500);
 	}
 
-	@Override
 	/**
 	 * Update de view
 	 */
+	@Override
 	public void updateView() {
 	}
 }

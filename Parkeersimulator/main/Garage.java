@@ -20,8 +20,6 @@ import java.util.Random;
  * @version 1.1.2
  */
 class Garage {
-	static JMenuItem testItem = new JMenuItem("test");
-
 	/**
 	 * Maak een nieuwe simulator aan met daarin alle benodigde items
 	 */
@@ -49,7 +47,7 @@ class Garage {
 		CarGraph graph = new CarGraph(simulator, list);
 		GarageController garageController = new GarageController(simulator);
 		InfoView info = new InfoView(simulator);
-		LegendaView legenda = new LegendaView(simulator);
+		LegendaView legenda = new LegendaView();
 		JFrame window = new JFrame("Parkeergarage simulatie");
 
 		pauseItem.addActionListener(e -> simulator.startPause());

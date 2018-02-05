@@ -203,7 +203,7 @@ public class Simulator extends ViewModel implements Runnable {
 	/**
 	 * Update de de simulatie met 1 stap
 	 */
-	public void tick() {
+	private void tick() {
 		daysOfTheWeek();
 		eveningArrivals();
 		advanceTime();
@@ -220,8 +220,7 @@ public class Simulator extends ViewModel implements Runnable {
 		setLabels();
 
 		if (exitCarQueue.carsInQueue() > 0) {
-			System.out.println("test");
-			// playExitSound();
+			 playExitSound();
 		}
 	}
 
