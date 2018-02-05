@@ -16,13 +16,6 @@ import java.util.Random;
 
 public class Garage {
 
-    private JFrame window;
-    private Simulator simulator;
-    private GarageView garageView;
-    private GarageController garageController;
-    private InfoView info;
-    private CarGraph graph;
-
     public Garage() {
         // generate random numbers for testing purposes
         List<Integer> list = new ArrayList<Integer>();
@@ -44,12 +37,12 @@ public class Garage {
             }
         });
 
-        simulator = new Simulator();
-        garageView = new GarageView(simulator);
-        graph = new CarGraph(simulator, list);
-        garageController = new GarageController(simulator);
-        info = new InfoView(simulator);
-        window = new JFrame("Parkeergarage simulatie");
+        Simulator simulator = new Simulator();
+        GarageView garageView = new GarageView(simulator);
+        CarGraph graph = new CarGraph(simulator, list);
+        GarageController garageController = new GarageController(simulator);
+        InfoView info = new InfoView(simulator);
+        JFrame window = new JFrame("Parkeergarage simulatie");
 
         window.setSize(1200, 700);
         window.setResizable(false);

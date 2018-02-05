@@ -6,8 +6,8 @@ import java.util.Queue;
 public class CarQueue {
     private Queue<Car> queue = new LinkedList<>();
 
-    public boolean addCar(Car car) {
-        return queue.add(car);
+    public void addCar(Car car) {
+        queue.add(car);
     }
 
     public Car removeCar() {

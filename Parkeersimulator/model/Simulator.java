@@ -30,17 +30,10 @@ public class Simulator extends ViewModel implements Runnable {
     private CarQueue exitCarQueue;
     private GarageModel garageModel;
     private boolean running;
-    private Thread t;
-    private String dayString;
-    private String monthString;
     private int tickPause = 128;
-    private int passHolders = 84;
     private int weekDayArrivals; // average number of arriving cars per hour
-    private int weekendArrivals = 150; // average number of arriving cars per hour
     private int weekDayPassArrivals; // average number of arriving cars per hour
-    private int weekendPassArrivals = 5; // average number of arriving cars per hour
     private int weekDayResArrivals; // average number of arriving cars per hour
-    private int weekendResArrivals = 50; // average number of arriving cars per hour
 
     public Simulator() {
         entranceCarQueue = new CarQueue();
@@ -66,7 +59,7 @@ public class Simulator extends ViewModel implements Runnable {
             InputStream inputStream = getClass().getResourceAsStream("../media/splat.au");
             AudioStream audioStream = new AudioStream(inputStream);
             AudioPlayer.player.start(audioStream);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
     }
 
@@ -147,6 +140,7 @@ public class Simulator extends ViewModel implements Runnable {
     }
 
     public String daysOfTheWeek() {
+        String dayString;
         switch (calendar.get(Calendar.DAY_OF_WEEK)) {
             case 1:
                 dayString = "Maandag";
@@ -177,6 +171,7 @@ public class Simulator extends ViewModel implements Runnable {
     }
 
     public String monthName() {
+        String monthString;
         switch (calendar.get(Calendar.MONTH)) {
             case 0:
                 monthString = "Januari";
@@ -243,10 +238,13 @@ public class Simulator extends ViewModel implements Runnable {
     }
 
     private void carsArriving() {
+        int weekendArrivals = 150;
         int numberOfCars = getTotalCars(weekDayArrivals, weekendArrivals, AD_HOC);
         addArrivingCars(numberOfCars, AD_HOC);
+        int weekendPassArrivals = 5;
         numberOfCars = getTotalCars(weekDayPassArrivals, weekendPassArrivals, PASS);
         addArrivingCars(numberOfCars, PASS);
+        int weekendResArrivals = 50;
         numberOfCars = getTotalCars(weekDayResArrivals, weekendResArrivals, RES);
         addArrivingCars(numberOfCars, RES);
     }
@@ -273,7 +271,7 @@ public class Simulator extends ViewModel implements Runnable {
 
     public void startPauze() {
         if (!running) {
-            t = new Thread(this);
+            Thread t = new Thread(this);
             t.start();
             running = true;
         } else {
@@ -356,6 +354,7 @@ public class Simulator extends ViewModel implements Runnable {
         int totalCars = (int) Math.round(totalCarsPerHour / 60);
 
         int parkedParkingPass = garageModel.getTotalCars("ParkingPass") + entrancePassQueue.carsInQueue();
+        int passHolders = 84;
         if (parkedParkingPass >= passHolders && type.equals(PASS)) {
             return 0;
         } else if (type.equals(PASS) && totalCars >= (passHolders - parkedParkingPass)) {

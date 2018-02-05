@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94a480e1-05b5-4810-96a0-2584276381bc" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/Parkeersimulator/controller/AbstractController.java" afterPath="$PROJECT_DIR$/Parkeersimulator/controller/AbstractController.java" />
+      <change beforePath="$PROJECT_DIR$/Parkeersimulator/controller/GarageController.java" afterPath="$PROJECT_DIR$/Parkeersimulator/controller/GarageController.java" />
+      <change beforePath="$PROJECT_DIR$/Parkeersimulator/main/Garage.java" afterPath="$PROJECT_DIR$/Parkeersimulator/main/Garage.java" />
+      <change beforePath="$PROJECT_DIR$/Parkeersimulator/model/CarQueue.java" afterPath="$PROJECT_DIR$/Parkeersimulator/model/CarQueue.java" />
       <change beforePath="$PROJECT_DIR$/Parkeersimulator/model/GarageModel.java" afterPath="$PROJECT_DIR$/Parkeersimulator/model/GarageModel.java" />
       <change beforePath="$PROJECT_DIR$/Parkeersimulator/model/Simulator.java" afterPath="$PROJECT_DIR$/Parkeersimulator/model/Simulator.java" />
+      <change beforePath="$PROJECT_DIR$/Parkeersimulator/view/CarGraph.java" afterPath="$PROJECT_DIR$/Parkeersimulator/view/CarGraph.java" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,8 +23,41 @@
       <file leaf-file-name="GarageModel.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Parkeersimulator/model/GarageModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="168" column="20" lean-forward="false" selection-start-line="168" selection-start-column="20" selection-end-line="168" selection-end-column="20" />
+            <state relative-caret-position="202">
+              <caret line="83" column="16" lean-forward="false" selection-start-line="83" selection-start-column="16" selection-end-line="83" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CarGraph.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Parkeersimulator/view/CarGraph.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="36" column="13" lean-forward="true" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+              <folding>
+                <element signature="e#791#792#0" expanded="true" />
+                <element signature="e#827#828#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AbstractController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Parkeersimulator/controller/AbstractController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" column="20" lean-forward="true" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Garage.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Parkeersimulator/main/Garage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="18" column="4" lean-forward="false" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -30,7 +67,7 @@
         <entry file="file://$PROJECT_DIR$/Parkeersimulator/model/Simulator.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="193">
-              <caret line="137" column="26" lean-forward="false" selection-start-line="137" selection-start-column="26" selection-end-line="137" selection-end-column="26" />
+              <caret line="130" column="26" lean-forward="false" selection-start-line="130" selection-start-column="26" selection-end-line="130" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -64,6 +101,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/Parkeersimulator/main/Garage.java" />
+        <option value="$PROJECT_DIR$/Parkeersimulator/view/CarGraph.java" />
+        <option value="$PROJECT_DIR$/Parkeersimulator/controller/AbstractController.java" />
         <option value="$PROJECT_DIR$/Parkeersimulator/model/GarageModel.java" />
       </list>
     </option>
@@ -289,7 +329,7 @@
     <entry file="file://$PROJECT_DIR$/Parkeersimulator/model/Simulator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="193">
-          <caret line="137" column="26" lean-forward="false" selection-start-line="137" selection-start-column="26" selection-end-line="137" selection-end-column="26" />
+          <caret line="130" column="26" lean-forward="false" selection-start-line="130" selection-start-column="26" selection-end-line="130" selection-end-column="26" />
           <folding />
         </state>
       </provider>
@@ -302,10 +342,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Parkeersimulator/main/Garage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="18" column="4" lean-forward="false" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Parkeersimulator/view/CarGraph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="36" column="13" lean-forward="true" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+          <folding>
+            <element signature="e#791#792#0" expanded="true" />
+            <element signature="e#827#828#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Parkeersimulator/controller/AbstractController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="20" lean-forward="true" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Parkeersimulator/model/GarageModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="168" column="20" lean-forward="false" selection-start-line="168" selection-start-column="20" selection-end-line="168" selection-end-column="20" />
+        <state relative-caret-position="202">
+          <caret line="83" column="16" lean-forward="false" selection-start-line="83" selection-start-column="16" selection-end-line="83" selection-end-column="16" />
           <folding />
         </state>
       </provider>

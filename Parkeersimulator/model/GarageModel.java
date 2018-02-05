@@ -31,7 +31,7 @@ public class GarageModel {
                         if (adHocCar.getMinutesLeft() == 0 && adHocCar.getColor() == Color.red) {
                             totalOutput += adHocCar.getParkingTime() * costPerMinute;
                         }
-                    } catch (Exception b) {
+                    } catch (Exception ignored) {
                     }
                 }
             }
@@ -50,7 +50,7 @@ public class GarageModel {
                             totalInput += adHocCar.getParkingTime() * costPerMinute;
                         }
                         expectedAdHocRev = (totalInput - totalOutput);
-                    } catch (Exception b) {
+                    } catch (Exception ignored) {
                     }
                 }
             }
@@ -81,32 +81,29 @@ public class GarageModel {
         return cars[location.getFloor()][location.getRow()][location.getPlace()];
     }
 
-    public boolean setCarAt(Location location, Car car) {
+    public void setCarAt(Location location, Car car) {
         if (locationIsInvalid(location)) {
-            return false;
+            return;
         }
         Car oldCar = getCarAt(location);
         if (oldCar == null) {
             cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
             car.setLocation(location);
             numberOfOpenSpots--;
-            return true;
         }
-        return false;
     }
 
-    public Car removeCarAt(Location location) {
+    public void removeCarAt(Location location) {
         if (locationIsInvalid(location)) {
-            return null;
+            return;
         }
         Car car = getCarAt(location);
         if (car == null) {
-            return null;
+            return;
         }
         cars[location.getFloor()][location.getRow()][location.getPlace()] = null;
         car.setLocation(null);
         numberOfOpenSpots++;
-        return car;
     }
 
     public Location getFirstFreeLocation() {
