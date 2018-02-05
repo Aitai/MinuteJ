@@ -14,7 +14,7 @@ public class AdHocCar extends Car {
     private final int stayMinutes;
 
     /**
-     * Creër een nieuwe ad hoc auto, bepaal hoelang deze blijft
+     * Creï¿½r een nieuwe ad hoc auto, bepaal hoelang deze blijft
      * en of hij moet betalen
      */
     public AdHocCar() {
@@ -25,14 +25,14 @@ public class AdHocCar extends Car {
     }
     
     /**
-     * @return geeft de parkeer tijd in minuten
+     * @return de parkeer tijd in minuten
      */
     public int getParkingTime() {
         return stayMinutes;
     }
 
     /**
-     * @return geeft de kleur van de auto
+     * @return de kleur van de auto
      */
     public Color getColor() {
         return COLOR;

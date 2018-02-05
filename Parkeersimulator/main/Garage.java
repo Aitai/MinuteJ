@@ -1,9 +1,5 @@
 package main;
-/**
- * 
- * @author MinuteJ
- * @version 1.1.2
- */
+
 import controller.GarageController;
 import model.Simulator;
 import view.CarGraph;
@@ -16,8 +12,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * De klasse voor het starten en plaatsen van de simulator.
+ * 
+ * @author MinuteJ 
+ * @version 1.1.2
+ */
 class Garage {
 
+	/**
+	 * Maak een nieuwe simulator aan met daarin alle benodigde items
+	 */
 	private Garage() {
 		// generate random numbers for testing purposes
 		List<Integer> list = new ArrayList<>();

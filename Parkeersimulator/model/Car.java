@@ -2,6 +2,7 @@ package model;
 
 import java.awt.*;
 /**
+ * De klasse voor het aanmaken van een auto
  * 
  * @author MinuteJ
  * 1.0.0
@@ -20,6 +21,7 @@ public abstract class Car {
 
     }
 
+    
     public Location getLocation() {
         return location;
     }

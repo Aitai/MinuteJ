@@ -1,16 +1,22 @@
 package controller;
-/**
- * 
- * @author MinuteJ
- * @version 1.0.0
- */
+
 import model.Simulator;
 
 import javax.swing.*;
-
+/**
+ * De klasse voor de knoppen van de simulatie
+ * 
+ * @author MinuteJ 
+ * @version 1.0.0
+ */
 public class GarageController extends AbstractController {
     private static final long serialVersionUID = 3253955925290497248L;
 
+    /**
+     * Maak een nieuw Garagecontroller aan met alle JButtons
+     * 
+     * @param simulator
+     */
 	public GarageController(Simulator simulator) {
         super();
 
