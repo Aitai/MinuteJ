@@ -314,6 +314,9 @@ public class Simulator extends ViewModel implements Runnable {
 		return monthString;
 	}
 
+	/**
+	 * Methode die de ingangen regelt
+	 */
 	private void handleEntrance() {
 		carsArriving();
 		carsEntering(entranceCarQueue);
@@ -321,20 +324,28 @@ public class Simulator extends ViewModel implements Runnable {
 		carsEntering(entranceResQueue);
 	}
 
+	/**
+	 * Methode die de uitgangen regelt
+	 */
 	private void handleExit() {
 		carsReadyToLeave();
 		carsPaying();
 		carsLeaving();
 	}
 
+	/**
+	 * Update alle views
+	 */
 	private void updateViews() {
 		garageModel.tick();
-		// Update the car park view.
 		for (AbstractView av : views) {
 			av.updateView();
 		}
 	}
 
+	/**
+	 * Methode dat ervoor zorgt dat de auto's aankomen
+	 */
 	private void carsArriving() {
 		int numberOfCars = getTotalCars(weekDayArrivals, weekendArrivals, AD_HOC);
 		addArrivingCars(numberOfCars, AD_HOC);
@@ -344,9 +355,14 @@ public class Simulator extends ViewModel implements Runnable {
 		addArrivingCars(numberOfCars, RES);
 	}
 
+	/**
+	 * Haal de eerste auto uit de rij en plaats deze op een parkeerplaats
+	 * 
+	 * @param queue
+	 *            de rij waarvan de auto gehaald moet worden
+	 */
 	private void carsEntering(CarQueue queue) {
 		int i = 0;
-		// Remove car from the front of the queue and assign to a parking space.
 		// TODO Tweede wachtrij toevoegen voor mensen met een abonnement.
 		while (queue.carsInQueue() > 0 && garageModel.getNumberOfOpenFreeSpots() > 0 && i < enterSpeed) {
 			Location freeLocation = garageModel.getFirstFreeLocation();
@@ -364,6 +380,9 @@ public class Simulator extends ViewModel implements Runnable {
 		}
 	}
 
+	/**
+	 * De methode achter de functie van de start/pauze knop
+	 */
 	public void startPause() {
 		if (!running) {
 			Thread t = new Thread(this);
@@ -374,11 +393,17 @@ public class Simulator extends ViewModel implements Runnable {
 		}
 	}
 
+	/**
+	 * De methode achter de 1 minuut vooruit knop
+	 */
 	public void ffMinute() {
 		tickFast();
 		setLabels();
 	}
 
+	/**
+	 * De methode achter de 1 uur vooruit knop
+	 */
 	public void ffHour() {
 		for (int i = 0; i < 60; i++) {
 			tickFast();
@@ -386,6 +411,9 @@ public class Simulator extends ViewModel implements Runnable {
 		setLabels();
 	}
 
+	/**
+	 * De methode achter de 1 dag vooruit knop
+	 */
 	public void ffDay() {
 		for (int i = 0; i < 60 * 24; i++) {
 			tickFast();
@@ -393,20 +421,28 @@ public class Simulator extends ViewModel implements Runnable {
 		setLabels();
 	}
 
+	/**
+	 * De methode achter de sneller knop
+	 */
 	public void faster() {
 		if (tickPause != 1) {
 			tickPause /= 2;
 		}
 	}
 
+	/**
+	 * De methode achter de langzamer knop
+	 */
 	public void slower() {
 		if (tickPause <= 256) {
 			tickPause *= 2;
 		}
 	}
 
+	/**
+	 * Methode die auto's toevoegd aan de rij om te betalen
+	 */
 	private void carsReadyToLeave() {
-		// Add leaving cars to the payment queue.
 		Car car = garageModel.getFirstLeavingCar();
 		while (car != null) {
 			if (car.getHasToPay()) {
@@ -419,8 +455,10 @@ public class Simulator extends ViewModel implements Runnable {
 		}
 	}
 
+	/**
+	 * Methode die auto's laat betalen
+	 */
 	private void carsPaying() {
-		// Let cars pay.
 		int i = 0;
 		while (paymentCarQueue.carsInQueue() > 0 && i < paymentSpeed) {
 			Car car = paymentCarQueue.removeCar();
@@ -430,8 +468,10 @@ public class Simulator extends ViewModel implements Runnable {
 		}
 	}
 
+	/**
+	 * Methode die ervoor zorgt dat de auto's de garage kunnen verlaten
+	 */
 	private void carsLeaving() {
-		// Let cars leave.
 		int i = 0;
 		while (exitCarQueue.carsInQueue() > 0 && i < exitSpeed) {
 			exitCarQueue.removeCar();
@@ -439,6 +479,14 @@ public class Simulator extends ViewModel implements Runnable {
 		}
 	}
 
+	/**
+	 * Geef het totaal aantal auto's terug
+	 * 
+	 * @param weekDay aantal auto's per uur doordeweeks
+	 * @param weekend aantal auto's per uur 's weekends
+	 * @param type auto
+	 * @return
+	 */
 	private int getTotalCars(int weekDay, int weekend, String type) {
 		Random random = new Random();
 		int averageNumberOfCarsPerHour = calendar.get(Calendar.DAY_OF_WEEK) < 6 ? weekDay : weekend;
@@ -457,8 +505,13 @@ public class Simulator extends ViewModel implements Runnable {
 		return totalCars;
 	}
 
+	/**
+	 * Voeg aankomende auto's toe aan het eind van de rij
+	 * 
+	 * @param totalCars
+	 * @param type
+	 */
 	private void addArrivingCars(int totalCars, String type) {
-		// Add the cars to the back of the queue.
 		switch (type) {
 		case AD_HOC:
 			for (int i = 0; i < totalCars; i++) {
@@ -478,11 +531,21 @@ public class Simulator extends ViewModel implements Runnable {
 		}
 	}
 
+	/**
+	 * Methode dat een auto van zijn parkeerplek afhaalt
+	 * 
+	 * @param car
+	 */
 	private void carLeavesSpot(Car car) {
 		garageModel.removeCarAt(car.getLocation());
 		exitCarQueue.addCar(car);
 	}
 
+	/**
+	 * Geeft het garagemodel terug
+	 * 
+	 * @return garagemodel
+	 */
 	public GarageModel getGarageModel() {
 		return garageModel;
 	}
