@@ -28,6 +28,15 @@ public class Simulator extends ViewModel implements Runnable {
     private final GarageModel garageModel;
     private boolean running;
     private int tickPause = 128;
+
+    int enterSpeed = 3;
+    int exitSpeed = 5;
+    int paymentSpeed = 7;
+    int passHolders = 84;
+    int weekendArrivals = 150;
+    int weekendPassArrivals = 5;
+    int weekendResArrivals = 50;
+
     private int weekDayArrivals; // average number of arriving cars per hour
     private int weekDayPassArrivals; // average number of arriving cars per hour
     private int weekDayResArrivals; // average number of arriving cars per hour
@@ -51,6 +60,18 @@ public class Simulator extends ViewModel implements Runnable {
         return bd.doubleValue();
     }
 
+    public void setTickPause(int a) {
+    	tickPause = a;
+    }
+    public int getTickPause() {
+    	return tickPause;
+    }
+    public void setNumberOfPasses(int a) {
+    	passHolders = a;
+    }
+    public int getNumberOfPasses() {
+    	return passHolders;
+    }
     private void playExitSound() {
         try {
             InputStream inputStream = getClass().getResourceAsStream("../media/splat.au");
@@ -235,13 +256,10 @@ public class Simulator extends ViewModel implements Runnable {
     }
 
     private void carsArriving() {
-        int weekendArrivals = 150;
         int numberOfCars = getTotalCars(weekDayArrivals, weekendArrivals, AD_HOC);
         addArrivingCars(numberOfCars, AD_HOC);
-        int weekendPassArrivals = 5;
         numberOfCars = getTotalCars(weekDayPassArrivals, weekendPassArrivals, PASS);
         addArrivingCars(numberOfCars, PASS);
-        int weekendResArrivals = 50;
         numberOfCars = getTotalCars(weekDayResArrivals, weekendResArrivals, RES);
         addArrivingCars(numberOfCars, RES);
     }
@@ -250,7 +268,6 @@ public class Simulator extends ViewModel implements Runnable {
         int i = 0;
         // Remove car from the front of the queue and assign to a parking space.
         //TODO Tweede wachtrij toevoegen voor mensen met een abonnement.
-        int enterSpeed = 3;
         while (queue.carsInQueue() > 0 && garageModel.getNumberOfOpenFreeSpots() > 0 && i < enterSpeed) {
             Location freeLocation = garageModel.getFirstFreeLocation();
 
@@ -267,7 +284,7 @@ public class Simulator extends ViewModel implements Runnable {
         }
     }
 
-    public void startPauze() {
+    public void startPause() {
         if (!running) {
             Thread t = new Thread(this);
             t.start();
@@ -325,7 +342,6 @@ public class Simulator extends ViewModel implements Runnable {
     private void carsPaying() {
         // Let cars pay.
         int i = 0;
-        int paymentSpeed = 7;
         while (paymentCarQueue.carsInQueue() > 0 && i < paymentSpeed) {
             Car car = paymentCarQueue.removeCar();
             // TODO Handle payment.
@@ -337,7 +353,6 @@ public class Simulator extends ViewModel implements Runnable {
     private void carsLeaving() {
         // Let cars leave.
         int i = 0;
-        int exitSpeed = 5;
         while (exitCarQueue.carsInQueue() > 0 && i < exitSpeed) {
             exitCarQueue.removeCar();
             i++;
@@ -354,7 +369,6 @@ public class Simulator extends ViewModel implements Runnable {
         int totalCars = (int) Math.round(totalCarsPerHour / 60);
 
         int parkedParkingPass = garageModel.getTotalCars("ParkingPass") + entrancePassQueue.carsInQueue();
-        int passHolders = 84;
         if (parkedParkingPass >= passHolders && type.equals(PASS)) {
             return 0;
         } else if (type.equals(PASS) && totalCars >= (passHolders - parkedParkingPass)) {

@@ -11,7 +11,7 @@ public class GarageController extends AbstractController {
         super();
 
 		JButton startPauze = new JButton("Start/Pauze");
-        startPauze.addActionListener(e -> simulator.startPauze());
+        startPauze.addActionListener(e -> simulator.startPause());
 
 		JButton step = new JButton("1 minuut");
         step.addActionListener(e -> simulator.ffMinute());
