@@ -1,17 +1,17 @@
 package view;
 
-/**
- * 
- * @author MinuteJ
- * @version 1.0.0
- */
 import model.Simulator;
-
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Klasse voor een grafiek van alle auto's
+ * 
+ * @author MinuteJ 
+ * @version 1.0.0
+ */
 @SuppressWarnings("serial")
 public class CarGraph extends AbstractView {
 	private static final int MAX_SCORE = 20;
@@ -25,10 +25,19 @@ public class CarGraph extends AbstractView {
 	private static final int Y_HATCH_CNT = 10;
 	private final List<Integer> scores;
 
+	/**
+	 * Maakt een nieuwe grafiek aan voor aantal auto's
+	 * 
+	 * @param simulator
+	 * @param scores
+	 */
 	public CarGraph(Simulator simulator, List<Integer> scores) {
 		this.scores = scores;
 	}
 
+	/**
+	 * 
+	 */
 	public static void setVal() {
 		List<Integer> list = new ArrayList<>();
 		Random random = new Random();
@@ -40,6 +49,9 @@ public class CarGraph extends AbstractView {
 	}
 
 	@Override
+	/**
+	 * Tekent de grafiek
+	 */
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
@@ -98,11 +110,17 @@ public class CarGraph extends AbstractView {
 	}
 
 	@Override
+	/**
+	 * Geeft de grootte terug
+	 */
 	public Dimension getPreferredSize() {
 		return new Dimension(PREF_W, PREF_H);
 	}
 
 	@Override
+	/**
+	 * Update de grafiek
+	 */
 	public void updateView() {
 	}
 }

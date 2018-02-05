@@ -1,32 +1,35 @@
 package view;
 
-/**
- * 
- * @author MinuteJ
- * @version 1.0.0
- */
 import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * Klasse voor een staafdiagram view
+ * 
+ * @author MinuteJ
+ * @version 1.0.0
+ */
 class BarChart extends JPanel {
 	private final Map<Color, Integer> bars = new LinkedHashMap<>();
 
 	/**
-	 * 
+	 * Voeg een nieuwe staaf toe aan het diagram
 	 *
 	 * @param color
-	 *            color to display bar
+	 *            kleur van de staaf
 	 * @param random
-	 *            size of bar
+	 *            grootte van de staaf
 	 */
-
 	public void addBar(Color color, Integer random) {
 		bars.put(color, random);
 		repaint();
 	}
 
+	/**
+	 * Teken de diagram
+	 */
 	protected void paintComponent(Graphics g) {
 
 		// determine longest bar
@@ -49,7 +52,9 @@ class BarChart extends JPanel {
 	}
 
 	@Override
-
+	/**
+	 * Geeft de grootte van het diagram
+	 */
 	public Dimension getPreferredSize() {
 		return new Dimension(bars.size() * 10 + 2, 50);
 	}

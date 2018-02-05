@@ -1,15 +1,16 @@
 package view;
 
-/**
- * 
- * @author MinuteJ
- * @version 1.0.0
- */
-import model.Simulator;
-
 import javax.swing.*;
+
+import model.Simulator;
 import java.awt.*;
 
+/**
+ * Klasse dat alle zakelijke gegevens laat zien
+ * 
+ * @author MinuteJ 
+ * @version 1.0.0
+ */ 
 public class InfoView extends AbstractView {
 	private static final long serialVersionUID = -3260703954764103294L;
 	private static final JLabel day = new JLabel();
@@ -25,6 +26,11 @@ public class InfoView extends AbstractView {
 	private static final JLabel exitCarQueue = new JLabel();
 	private static final JLabel freeSpots = new JLabel();
 
+	/**
+	 * Maakt een nieuwe view aan voor belangrijke informatie
+	 * 
+	 * @param simulator
+	 */
 	public InfoView(Simulator simulator) {
 		simulator.addView(this);
 		setLayout(null);
@@ -54,55 +60,106 @@ public class InfoView extends AbstractView {
 		freeSpots.setBounds(10, 10, 400, 270);
 	}
 
+	/**
+	 * Pas de dag aan voor het datum label
+	 * 
+	 * @param label
+	 */
 	public static void setDayLabel(String label) {
 		day.setText(label);
 	}
 
+	/**
+	 * Pas de maand aan voor het datum label
+	 * @param label
+	 */
 	public static void setMonthLabel(String label) {
 		month.setText(label);
 	}
 
+	/**
+	 * Pas de dag van de maand aan voor het datum label
+	 * @param label
+	 */
 	public static void setDayOfMonthLabel(String label) {
 		dayOfMonth.setText(label);
 	}
 
+	/**
+	 * Pas de tijd aan voor het tijd label
+	 * @param label
+	 */
 	public static void setTimeLabel(String label) {
 		time.setText(label);
 	}
 
+	/**
+	 * Pas de normale auto rij label aan
+	 * @param label
+	 */
 	public static void setCarQueueLabel(String label) {
 		entranceCarQueue.setText(label);
 	}
 
+	/**
+	 * Pas de omzet label aan
+	 * @param label
+	 */
 	public static void setRevenueLabel(String label) {
 		revenue.setText(label);
 	}
 
+	/**
+	 * Pas de verwachte omzet label aan
+	 * @param label
+	 */
 	public static void setExpectedRevenueLabel(String label) {
 		expectedRevenue.setText(label);
 	}
 
+	/**
+	 * Pas de abonnement en reservatie rij label aan
+	 * @param label
+	 */
 	public static void setPassResQueueLabel(String label) {
 		entrancePassResQueue.setText(label);
 	}
 
+	/**
+	 * Pas de rij voor auto's die aan het betalen zijn aan
+	 * @param label
+	 */
 	public static void setpaymentCarQueueLabel(String label) {
 		paymentCarQueue.setText(label);
 	}
 
+	/**
+	 * Pas de rij voor de auto's die voor de uitgang staan aan
+	 * @param label
+	 */
 	public static void setexitCarQueueLabel(String label) {
 		exitCarQueue.setText(label);
 	}
 
+	/**
+	 * Pas het aantal vrije parkeerplekken aan
+	 * @param label
+	 */
 	public static void setFreeSpots(String label) {
 		freeSpots.setText(label);
 	}
 
+	/**
+	 * Krijg de grootte terug
+	 */
 	public Dimension getPreferredSize() {
 		return new Dimension(500, 500);
 	}
 
 	@Override
+	/**
+	 * Update de view
+	 */
 	public void updateView() {
 	}
 }

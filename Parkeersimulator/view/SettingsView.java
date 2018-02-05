@@ -1,21 +1,20 @@
 package view;
 
-/**
- * 
- * @author MinuteJ
- * @version 1.0.0
- */
-import java.awt.GridLayout;
-
+import java.awt.GridLayout; 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 import model.Simulator;
 
+/**
+ * De klasse voor alle instellingen
+ * 
+ * @author MinuteJ 
+ * @version 1.0.0
+ */
 public class SettingsView extends AbstractView {
 	private static final long serialVersionUID = -2458498389310217800L;
 	private final JFrame settingsWindow;
@@ -24,6 +23,10 @@ public class SettingsView extends AbstractView {
 	private JTextField t2;
 	private final Simulator simulator;
 
+	/**
+	 * Maak een nieuwe instellingen menu aan
+	 * @param simulator
+	 */
 	public SettingsView(Simulator simulator) {
 
 		this.simulator = simulator;
