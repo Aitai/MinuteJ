@@ -1,5 +1,10 @@
 package view;
 
+/**
+ *
+ * @author MinuteJ
+ * @version 1.0.0
+ */
 import model.Car;
 import model.Location;
 import model.Simulator;
@@ -48,8 +53,10 @@ public class GarageView extends AbstractView {
 	}
 
 	@Override
+	/**
+	 * Create a new car park image if the size has changed.
+	 */
 	public void updateView() {
-		// Create a new car park image if the size has changed.
 		if (!size.equals(getSize())) {
 			size = getSize();
 			carParkImage = createImage(size.width, size.height);
