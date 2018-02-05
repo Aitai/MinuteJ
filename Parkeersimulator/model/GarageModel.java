@@ -75,14 +75,14 @@ public class GarageModel {
     }
 
     public Car getCarAt(Location location) {
-        if (!locationIsValid(location)) {
+        if (locationIsInvalid(location)) {
             return null;
         }
         return cars[location.getFloor()][location.getRow()][location.getPlace()];
     }
 
     public boolean setCarAt(Location location, Car car) {
-        if (!locationIsValid(location)) {
+        if (locationIsInvalid(location)) {
             return false;
         }
         Car oldCar = getCarAt(location);
@@ -96,7 +96,7 @@ public class GarageModel {
     }
 
     public Car removeCarAt(Location location) {
-        if (!locationIsValid(location)) {
+        if (locationIsInvalid(location)) {
             return null;
         }
         Car car = getCarAt(location);
@@ -166,16 +166,13 @@ public class GarageModel {
         }
     }
 
-    private boolean locationIsValid(Location location) {
+    private boolean locationIsInvalid(Location location) {
         int floor = location.getFloor();
         int row = location.getRow();
         int place = location.getPlace();
-        if (floor < 0 || floor >= numberOfFloors || row < 0 || row > numberOfRows || place < 0
-                || place > numberOfPlaces) {
-            return false;
-        }
-        return true;
-    }
+		return floor < 0 || floor >= numberOfFloors || row < 0 || row > numberOfRows || place < 0
+                || place > numberOfPlaces;
+	}
 
     public int getTotalCars(String type) {
         int total = 0;

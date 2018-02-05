@@ -101,8 +101,7 @@ public class Simulator extends ViewModel implements Runnable {
             System.out.println("test");
 //			playExitSound();
         }
-        ;
-    }
+	}
 
     public void setLabels() {
         InfoView.setDayLabel(daysOfTheWeek());
@@ -273,7 +272,7 @@ public class Simulator extends ViewModel implements Runnable {
     }
 
     public void startPauze() {
-        if (running == false) {
+        if (!running) {
             t = new Thread(this);
             t.start();
             running = true;
