@@ -103,8 +103,8 @@ class Garage {
 		pieChart.plot.setBackgroundPaint(window.getBackground());
 		pieChart.chart.setBackgroundPaint(window.getBackground());
 
-//		pieChart.dataset.setValue("Ad hoc auto's", garageModel.getNumberOfAdHocCars());
-//		pieChart.dataset.setValue("Vrije plaatsen", garageModel.getNumberOfOpenFreeSpots());
+		pieChart.dataset.setValue("Ad hoc auto's", garageModel.getNumberOfAdHocCars());
+		pieChart.dataset.setValue("Vrije plaatsen", garageModel.getNumberOfOpenFreeSpots());
 		
 		// Teken de garage en de labels zonder een tick uit te voeren.
 		simulator.updateViews();
