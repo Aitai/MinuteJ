@@ -20,6 +20,7 @@ public class GarageModel {
 	private double totalInput = 0;
 	private double adHocRev = 0;
 	private double expectedAdHocRev = 0;
+	public int numberOfAdHocCars = 0;
 
 	/**
 	 * Maak een nieuw Garagemodel aan met de gegeven grootte
@@ -61,6 +62,7 @@ public class GarageModel {
 						AdHocCar adHocCar = (AdHocCar) car;
 						if (adHocCar.getMinutesLeft() == 0 && adHocCar.getColor() == Color.red) {
 							adHocRev += adHocCar.getParkingTime() * costPerMinute;
+							numberOfAdHocCars--;
 						}
 					} catch (Exception ignored) {
 					}
@@ -84,6 +86,7 @@ public class GarageModel {
 						if (adHocCar.getColor() == Color.red
 								&& adHocCar.getParkingTime() == adHocCar.getMinutesLeft()) {
 							totalInput += adHocCar.getParkingTime() * costPerMinute;
+							numberOfAdHocCars++;
 						}
 						expectedAdHocRev = (totalInput - adHocRev);
 					} catch (Exception ignored) {
@@ -94,6 +97,10 @@ public class GarageModel {
 		return expectedAdHocRev;
 	}
 
+	
+	public int getNumberOfAdHocCars() {
+		return numberOfAdHocCars;
+	}
 	/**
 	 * Krijg de hoeveelheid etages
 	 *
