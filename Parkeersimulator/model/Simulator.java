@@ -2,10 +2,7 @@ package model;
 
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
-import view.AbstractView;
-import view.CarGraph;
-import view.InfoView;
-import view.PieChart;
+import view.*;
 
 import java.awt.*;
 import java.io.InputStream;
@@ -33,7 +30,7 @@ public class Simulator extends ViewModel implements Runnable {
 	private final CarQueue paymentCarQueue;
 	private final CarQueue exitCarQueue;
 	private final GarageModel garageModel;
-	PieChart pieChart = new PieChart(this);
+	MainView mainView;
 	private boolean running;
 	private int tickPause = 128;
 
@@ -49,6 +46,10 @@ public class Simulator extends ViewModel implements Runnable {
 	private int weekDayPassArrivals; // average number of arriving cars per hour
 	private int weekDayResArrivals; // average number of arriving cars per hour
 
+	private int numberOfAdHocCars = 0;
+	private int numberOfParkingPassCars = 0;
+	private int numberOfResCars = 0;
+
 	/**
 	 * Maak een nieuwe simulator instantie
 	 */
@@ -59,6 +60,7 @@ public class Simulator extends ViewModel implements Runnable {
 		paymentCarQueue = new CarQueue();
 		exitCarQueue = new CarQueue();
 		garageModel = new GarageModel(3, 6, 28);
+		mainView = new MainView(this);
 	}
 
 	/**
@@ -212,6 +214,7 @@ public class Simulator extends ViewModel implements Runnable {
 		handleExit();
 		updateViews();
 		updatePieChart();
+//		updateBarChart();
 		// Pause.
 		try {
 			Thread.sleep(tickPause);
@@ -247,6 +250,9 @@ public class Simulator extends ViewModel implements Runnable {
 		InfoView.setFreeSpots("Aantal lege ad hoc plekken: " + garageModel.getNumberOfOpenFreeSpots());
 		InfoView.setPassSpots("Aantal lege abonnement plekken: " + garageModel.getNumberOfOpenPassSpots());
 		InfoView.setCostLabel("Kosten per minuut voor ad hoc auto's: \u20AC" + garageModel.getCostPerMinute());
+		InfoView.setAdHocCars("Aantal ad hoc auto's in de garage " + numberOfAdHocCars);
+		InfoView.setParkingPassCars("Aantal abonnement auto's in de garage " + numberOfParkingPassCars);
+		InfoView.setResCars("Aantal gereserveerde auto's in de garage " + numberOfResCars);
 	}
 
 	/**
@@ -258,6 +264,7 @@ public class Simulator extends ViewModel implements Runnable {
 		handleExit();
 		updateViews();
 		handleEntrance();
+		updatePieChart();
 		garageModel.calcAdHocRev();
 		garageModel.calcExpectedAdHocRev();
 	}
@@ -280,11 +287,17 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	public void updatePieChart() {
-		running = false;
-		pieChart.dataset.setValue("Ad hoc auto's", garageModel.getNumberOfAdHocCars());
-		pieChart.dataset.setValue("Vrije plaatsen", garageModel.getNumberOfOpenFreeSpots());
-		running = true;
+		mainView.pieChart.createPiePiece("Ad hoc auto's", numberOfAdHocCars);
+		mainView.pieChart.createPiePiece("Abonnement auto's", numberOfParkingPassCars);
+		mainView.pieChart.createPiePiece("Gereserveerde auto's", numberOfResCars);
+		mainView.pieChart.createPiePiece("Vrije ad hoc plaatsen", garageModel.getNumberOfOpenFreeSpots());
+		mainView.pieChart.createPiePiece("Vrije abonnee plaatsen", garageModel.getNumberOfOpenPassSpots());
 	}
+	
+//	public void updateBarChart() {
+//		mainView.barChart.addBar(Color.red, numberOfAdHocCars);
+//		mainView.barChart.addBar(Color.blue, numberOfParkingPassCars);
+//	}
 	/**
 	 * Advance the time by one minute
 	 */
@@ -434,14 +447,19 @@ public class Simulator extends ViewModel implements Runnable {
 			Location freeLocation = garageModel.getFirstFreeLocation();
 			Location freeReservedLocation = garageModel.getFirstReservedLocation();
 			Car car = queue.nextCar();
-
 			if ((car.getColor() == Color.red || car.getColor() == Color.green)
 					&& garageModel.getNumberOfOpenFreeSpots() > 0) {
 				garageModel.setCarAt(freeLocation, car);
 				queue.removeCar();
+				if(car.getColor() == Color.green) {
+					numberOfResCars++;
+				} else if(car.getColor() == Color.red) {
+					numberOfAdHocCars++;
+				}
 			} else if (car.getColor() == Color.blue && garageModel.getNumberOfOpenPassSpots() > 0) {
 				garageModel.setPassCarAt(freeReservedLocation, car);
 				queue.removeCar();
+				numberOfParkingPassCars++;
 			}
 			i++;
 		}
@@ -525,12 +543,13 @@ public class Simulator extends ViewModel implements Runnable {
 			if (car.getHasToPay()) {
 				car.setIsPaying(true);
 				paymentCarQueue.addCar(car);
+				numberOfAdHocCars--;
 			} else if (car.getColor() == Color.blue) {
 				carLeavesSpot(car, PASS);
-				System.out.println("leave pass");
+				numberOfParkingPassCars--;
 			} else if (car.getColor() == Color.green) {
-				System.out.println("leave res");
 				carLeavesSpot(car, RES);
+				numberOfResCars--;
 			}
 			car = garageModel.getFirstLeavingCar();
 		}
@@ -544,8 +563,6 @@ public class Simulator extends ViewModel implements Runnable {
 		while (paymentCarQueue.carsInQueue() > 0 && i < paymentSpeed) {
 			Car car = paymentCarQueue.removeCar();
 			if (car.getColor() == Color.red) {
-				System.out.println("pay ad hoc");
-
 				carLeavesSpot(car, AD_HOC);
 			}
 			i++;
@@ -589,6 +606,18 @@ public class Simulator extends ViewModel implements Runnable {
 		return totalCars;
 	}
 
+	public int getNumberOfAdHocCars() {
+		return numberOfAdHocCars;
+	}
+	
+	public int getNumberOfParkingPassCars() {
+		return numberOfParkingPassCars;
+	}
+	
+	public int getNumberOfResCars() {
+		return numberOfResCars;
+	}
+	
 	/**
 	 * Voeg aankomende auto's toe aan het eind van de rij
 	 *

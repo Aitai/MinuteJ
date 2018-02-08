@@ -1,63 +1,58 @@
 package view;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import javax.swing.JPanel;
 
-/**
- * Klasse voor een staafdiagram view
- *
- * @author MinuteJ
- * @version 1.0.0
- */
-class BarChart extends JPanel {
-	private final Map<Color, Integer> bars = new LinkedHashMap<>();
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel; 
+import org.jfree.chart.JFreeChart; 
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.CategoryDataset; 
+import org.jfree.data.category.DefaultCategoryDataset; 
+import org.jfree.ui.ApplicationFrame; 
+import org.jfree.ui.RefineryUtilities; 
 
-	/**
-	 * Voeg een nieuwe staaf toe aan het diagram
-	 *
-	 * @param color
-	 *            kleur van de staaf
-	 * @param random
-	 *            grootte van de staaf
-	 */
-	public void addBar(Color color, Integer random) {
-		bars.put(color, random);
-		repaint();
-	}
+public class BarChart extends JPanel {
+   
+   public BarChart(String chartTitle ) {
+	   
+      JFreeChart barChart = ChartFactory.createBarChart(
+         chartTitle,           
+         "Category",            
+         "Score",            
+         createDataset(),          
+         PlotOrientation.VERTICAL,           
+         true, true, false);
+         
+      ChartPanel chartPanel = new ChartPanel( barChart );        
+      chartPanel.setPreferredSize(new java.awt.Dimension( 560 , 367 ) );        
+   }
+   
+   private CategoryDataset createDataset( ) {
+      final String fiat = "FIAT";        
+      final String audi = "AUDI";        
+      final String ford = "FORD";        
+      final String speed = "Speed";        
+      final String millage = "Millage";        
+      final String userrating = "User Rating";        
+      final String safety = "safety";        
+      final DefaultCategoryDataset dataset = 
+      new DefaultCategoryDataset( );  
 
-	/**
-	 * Teken de diagram
-	 */
-	protected void paintComponent(Graphics g) {
+      dataset.addValue( 1.0 , fiat , speed );        
+      dataset.addValue( 3.0 , fiat , userrating );        
+      dataset.addValue( 5.0 , fiat , millage ); 
+      dataset.addValue( 5.0 , fiat , safety );           
 
-		// determine longest bar
-		int max = Integer.MIN_VALUE;
-		for (Integer value : bars.values()) {
-			max = Math.max(max, value);
-		}
-		// paint bars
-		int width = (getWidth() / bars.size()) - 2;
-		int x = 1;
-		for (Color color : bars.keySet()) {
-			int value = bars.get(color);
-			int height = (int) ((getHeight() - 5) * ((double) value / max));
-			g.setColor(color);
-			g.fillRect(x, getHeight() - height, width, height);
-			g.setColor(Color.black);
-			g.drawRect(x, getHeight() - height, width, height);
-			x += (width + 2);
-		}
-	}
+      dataset.addValue( 5.0 , audi , speed );        
+      dataset.addValue( 6.0 , audi , userrating );       
+      dataset.addValue( 10.0 , audi , millage );        
+      dataset.addValue( 4.0 , audi , safety );
 
+      dataset.addValue( 4.0 , ford , speed );        
+      dataset.addValue( 2.0 , ford , userrating );        
+      dataset.addValue( 3.0 , ford , millage );        
+      dataset.addValue( 6.0 , ford , safety );               
 
-	/**
-	 * Geeft de grootte van het diagram
-	 */
-	@Override
-	public Dimension getPreferredSize() {
-		return new Dimension(bars.size() * 10 + 2, 50);
-	}
-
+      return dataset; 
+   }
 }
