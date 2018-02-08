@@ -33,7 +33,7 @@ public class Simulator extends ViewModel implements Runnable {
 	private final CarQueue paymentCarQueue;
 	private final CarQueue exitCarQueue;
 	private final GarageModel garageModel;
-	PieChart pieChart;
+	PieChart pieChart = new PieChart(this);
 	private boolean running;
 	private int tickPause = 128;
 
@@ -58,7 +58,6 @@ public class Simulator extends ViewModel implements Runnable {
 		entranceResQueue = new CarQueue();
 		paymentCarQueue = new CarQueue();
 		exitCarQueue = new CarQueue();
-		pieChart = new PieChart(this);
 		garageModel = new GarageModel(3, 6, 28);
 	}
 
@@ -281,8 +280,10 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	public void updatePieChart() {
+		running = false;
 		pieChart.dataset.setValue("Ad hoc auto's", garageModel.getNumberOfAdHocCars());
 		pieChart.dataset.setValue("Vrije plaatsen", garageModel.getNumberOfOpenFreeSpots());
+		running = true;
 	}
 	/**
 	 * Advance the time by one minute

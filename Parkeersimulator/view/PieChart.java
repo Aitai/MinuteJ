@@ -25,7 +25,7 @@ public class PieChart extends AbstractView{
 		simulator.addView(this);
 
 		dataset = new DefaultPieDataset();
-        
+
         chart = ChartFactory.createPieChart("Aantal auto's in de parkeergarage", dataset, false, false, false);
         plot = (PiePlot) chart.getPlot();
         
@@ -44,6 +44,7 @@ public class PieChart extends AbstractView{
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(300, 300));
         this.add(chartPanel);
+        
     }
     
     @Override
@@ -52,6 +53,7 @@ public class PieChart extends AbstractView{
     }
 
 	@Override
-	public void updateView() {	
+	public void updateView() {
+		repaint();
 	}
 }

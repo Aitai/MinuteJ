@@ -97,14 +97,14 @@ class Garage {
 		// graph.setBackground(Color.lightGray);
 		pieChart.setBounds(360, 360, 400, 400);
 		
-		window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		window.setVisible(true);
-		
-		pieChart.plot.setBackgroundPaint(window.getBackground());
-		pieChart.chart.setBackgroundPaint(window.getBackground());
-
 		pieChart.dataset.setValue("Ad hoc auto's", garageModel.getNumberOfAdHocCars());
 		pieChart.dataset.setValue("Vrije plaatsen", garageModel.getNumberOfOpenFreeSpots());
+
+		pieChart.plot.setBackgroundPaint(window.getBackground());
+		pieChart.chart.setBackgroundPaint(window.getBackground());
+		
+		window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		window.setVisible(true);
 		
 		// Teken de garage en de labels zonder een tick uit te voeren.
 		simulator.updateViews();
