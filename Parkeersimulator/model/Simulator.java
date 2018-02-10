@@ -213,7 +213,7 @@ public class Simulator extends ViewModel implements Runnable {
 		advanceTime();
 		handleExit();
 		updateViews();
-		updatePieChart();
+		updateCharts();
 //		updateBarChart();
 		// Pause.
 		try {
@@ -226,7 +226,7 @@ public class Simulator extends ViewModel implements Runnable {
 		setLabels();
 
 		if (exitCarQueue.carsInQueue() > 0) {
-			 playExitSound();
+//			 playExitSound();
 		}
 	}
 
@@ -264,11 +264,11 @@ public class Simulator extends ViewModel implements Runnable {
 		handleExit();
 		updateViews();
 		handleEntrance();
-		updatePieChart();
+		updateCharts();
 		garageModel.calcAdHocRev();
 		garageModel.calcExpectedAdHocRev();
 	}
-	
+
 	/**
 	 * Pas de simulatie aan zodat er minder auto's in de nacht komen
 	 */
@@ -286,14 +286,22 @@ public class Simulator extends ViewModel implements Runnable {
 		}
 	}
 
-	public void updatePieChart() {
+	public void updateCharts() {
 		mainView.pieChart.createPiePiece("Ad hoc auto's", numberOfAdHocCars);
 		mainView.pieChart.createPiePiece("Abonnement auto's", numberOfParkingPassCars);
 		mainView.pieChart.createPiePiece("Gereserveerde auto's", numberOfResCars);
 		mainView.pieChart.createPiePiece("Vrije ad hoc plaatsen", garageModel.getNumberOfOpenFreeSpots());
 		mainView.pieChart.createPiePiece("Vrije abonnee plaatsen", garageModel.getNumberOfOpenPassSpots());
+
+		if(calendar.get(Calendar.HOUR_OF_DAY)>0) {
+			mainView.lineChart.updateChart(numberOfAdHocCars, "Ad hoc", ""+calendar.get(Calendar.HOUR_OF_DAY));
+		}
+		else {
+			mainView.lineChart.clearChart();
+			// mainView.lineChart.updateChart(numberOfAdHocCars, "Ad hoc", ""+calendar.get(Calendar.HOUR_OF_DAY));
+		}
 	}
-	
+
 //	public void updateBarChart() {
 //		mainView.barChart.addBar(Color.red, numberOfAdHocCars);
 //		mainView.barChart.addBar(Color.blue, numberOfParkingPassCars);
@@ -609,15 +617,15 @@ public class Simulator extends ViewModel implements Runnable {
 	public int getNumberOfAdHocCars() {
 		return numberOfAdHocCars;
 	}
-	
+
 	public int getNumberOfParkingPassCars() {
 		return numberOfParkingPassCars;
 	}
-	
+
 	public int getNumberOfResCars() {
 		return numberOfResCars;
 	}
-	
+
 	/**
 	 * Voeg aankomende auto's toe aan het eind van de rij
 	 *

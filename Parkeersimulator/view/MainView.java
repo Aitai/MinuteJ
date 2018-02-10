@@ -14,7 +14,8 @@ import java.util.Random;
 public class MainView{
 
     public PieChart pieChart;
-    public BarChart barChart;
+    public LineChart lineChart;
+//    public BarChart barChart;
     GarageModel garageModel;
 
     public MainView(Simulator simulator)
@@ -40,7 +41,8 @@ public class MainView{
 
         GarageView garageView = new GarageView(simulator);
         pieChart = new PieChart();
-        barChart = new BarChart("Test");
+        lineChart = new LineChart();
+//        barChart = new BarChart("Test");
         CarGraph graph = new CarGraph(simulator, list);
         GarageController garageController = new GarageController(simulator);
         InfoView info = new InfoView(simulator);
@@ -54,14 +56,14 @@ public class MainView{
         graphItem.addActionListener(e -> {
             graph.setVisible(!graph.isVisible());
             if (graph.isVisible()) {
-                window.setSize(1200, 800);
+                window.setSize(1200, 900);
             } else {
                 window.setSize(1200, 420);
             }
         });
         exitItem.addActionListener(e -> window.dispose());
 
-        window.setSize(1200, 800);
+        window.setSize(1200, 900);
         window.setResizable(false);
         window.setLayout(null);
 
@@ -69,8 +71,9 @@ public class MainView{
         window.add(info);
         window.add(legenda);
         window.add(garageController);
-        window.add(barChart);
+//        window.add(barChart);
         window.add(pieChart);
+        window.add(lineChart);
         window.setJMenuBar(menuBar);
         menuBar.add(menu);
 
@@ -83,12 +86,11 @@ public class MainView{
 
         garageView.setBounds(-50, 20, 800, 300);
         garageController.setBounds(10, 320, 730, 40);
-        // garageController.setBackground(Color.red);
         info.setBounds(750, 10, 430, 240);
         legenda.setBounds(660, 180, 430, 300);
-        barChart.setBounds(10, 300, 400, 290);
-        // graph.setBackground(Color.lightGray);
-        pieChart.setBounds(360, 360, 400, 400);
+//        barChart.setBounds(360, 360, 400, 400);
+        lineChart.setBounds(10, 360, 600, 410);
+        pieChart.setBounds(610, 360, 400, 400);
 
         pieChart.createPiePiece("Ad hoc auto's", simulator.getNumberOfAdHocCars());
         pieChart.createPiePiece("Abonnement auto's", simulator.getNumberOfParkingPassCars());
@@ -98,7 +100,7 @@ public class MainView{
 
         pieChart.plot.setBackgroundPaint(window.getBackground());
         pieChart.chart.setBackgroundPaint(window.getBackground());
-        
+
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setVisible(true);
 
