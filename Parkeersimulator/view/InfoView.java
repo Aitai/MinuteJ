@@ -27,6 +27,9 @@ public class InfoView extends AbstractView {
 	private static final JLabel freeSpots = new JLabel();
 	private static final JLabel passSpots = new JLabel();
 	private static final JLabel cost = new JLabel();
+	private static final JLabel numberOfAdHocCars = new JLabel();
+	private static final JLabel numberOfParkingPassCars = new JLabel();
+	private static final JLabel numberOfResCars = new JLabel();
 
 	/**
 	 * Maakt een nieuwe view aan voor belangrijke informatie
@@ -50,6 +53,9 @@ public class InfoView extends AbstractView {
 		add(freeSpots);
 		add(passSpots);
 		add(cost);
+		add(numberOfAdHocCars);
+		add(numberOfParkingPassCars);
+		add(numberOfResCars);
 		day.setBounds(10, 10, 400, 30);
 		dayOfMonth.setBounds(90, 10, 400, 30);
 		month.setBounds(120, 10, 400, 30);
@@ -64,6 +70,9 @@ public class InfoView extends AbstractView {
 		freeSpots.setBounds(10, 10, 400, 270);
 		passSpots.setBounds(10, 10, 400, 300);
 		cost.setBounds(10, 10, 400, 330);
+		numberOfAdHocCars.setBounds(10, 10, 400, 360);
+		numberOfParkingPassCars.setBounds(10, 10, 400, 390);
+		numberOfResCars.setBounds(10, 10, 400, 420);
 	}
 
 	/**
@@ -77,6 +86,7 @@ public class InfoView extends AbstractView {
 
 	/**
 	 * Pas de maand aan voor het datum label
+	 * 
 	 * @param label
 	 */
 	public static void setMonthLabel(String label) {
@@ -85,6 +95,7 @@ public class InfoView extends AbstractView {
 
 	/**
 	 * Pas de dag van de maand aan voor het datum label
+	 * 
 	 * @param label
 	 */
 	public static void setDayOfMonthLabel(String label) {
@@ -93,6 +104,7 @@ public class InfoView extends AbstractView {
 
 	/**
 	 * Pas de tijd aan voor het tijd label
+	 * 
 	 * @param label
 	 */
 	public static void setTimeLabel(String label) {
@@ -101,6 +113,7 @@ public class InfoView extends AbstractView {
 
 	/**
 	 * Pas de normale auto rij label aan
+	 * 
 	 * @param label
 	 */
 	public static void setCarQueueLabel(String label) {
@@ -109,6 +122,7 @@ public class InfoView extends AbstractView {
 
 	/**
 	 * Pas de omzet label aan
+	 * 
 	 * @param label
 	 */
 	public static void setRevenueLabel(String label) {
@@ -117,6 +131,7 @@ public class InfoView extends AbstractView {
 
 	/**
 	 * Pas de verwachte omzet label aan
+	 * 
 	 * @param label
 	 */
 	public static void setExpectedRevenueLabel(String label) {
@@ -125,6 +140,7 @@ public class InfoView extends AbstractView {
 
 	/**
 	 * Pas de abonnement en reservatie rij label aan
+	 * 
 	 * @param label
 	 */
 	public static void setPassResQueueLabel(String label) {
@@ -133,6 +149,7 @@ public class InfoView extends AbstractView {
 
 	/**
 	 * Pas de rij voor auto's die aan het betalen zijn aan
+	 * 
 	 * @param label
 	 */
 	public static void setpaymentCarQueueLabel(String label) {
@@ -141,6 +158,7 @@ public class InfoView extends AbstractView {
 
 	/**
 	 * Pas de rij voor de auto's die voor de uitgang staan aan
+	 * 
 	 * @param label
 	 */
 	public static void setexitCarQueueLabel(String label) {
@@ -149,6 +167,7 @@ public class InfoView extends AbstractView {
 
 	/**
 	 * Pas het aantal vrije parkeerplekken aan
+	 * 
 	 * @param label
 	 */
 	public static void setFreeSpots(String label) {
@@ -157,6 +176,7 @@ public class InfoView extends AbstractView {
 
 	/**
 	 * Pas het aantal abonnement parkeerplekken aan
+	 * 
 	 * @param label
 	 */
 	public static void setPassSpots(String label) {
@@ -165,12 +185,24 @@ public class InfoView extends AbstractView {
 
 	/**
 	 * Pas de kosten per minuut voor ad hoc auto's aan
+	 * 
 	 * @param label
 	 */
 	public static void setCostLabel(String label) {
 		cost.setText(label);
 	}
 
+	public static void setAdHocCars(String label) {
+		numberOfAdHocCars.setText(label);
+	}
+	
+	public static void setParkingPassCars(String label) {
+		numberOfParkingPassCars.setText(label);
+	}
+	
+	public static void setResCars(String label) {
+		numberOfResCars.setText(label);
+	}
 	/**
 	 * Krijg de grootte terug
 	 */
