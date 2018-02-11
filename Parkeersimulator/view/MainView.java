@@ -51,7 +51,6 @@ public class MainView{
         pieChart = new PieChart();
         lineChart = new LineChart();
         barChart = new BarChart("Omzet");
-        CarGraph graph = new CarGraph(simulator, list);
         GarageController garageController = new GarageController(simulator);
         InfoView info = new InfoView(simulator);
         LegendaView legenda = new LegendaView();
@@ -61,14 +60,7 @@ public class MainView{
         pauseItem.addActionListener(e -> simulator.startPause());
         hundredItem.addActionListener(e -> simulator.ffHundred());
         settingsItem.addActionListener(e -> new SettingsView(simulator));
-        graphItem.addActionListener(e -> {
-            graph.setVisible(!graph.isVisible());
-            if (graph.isVisible()) {
-                window.setSize(1650, 850);
-            } else {
-                window.setSize(1200, 420);
-            }
-        });
+
         exitItem.addActionListener(e -> window.dispose());
 
         // Zet de groote van het hoofdscherm
