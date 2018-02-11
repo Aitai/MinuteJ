@@ -290,7 +290,6 @@ public class Simulator extends ViewModel implements Runnable {
 			e.printStackTrace();
 		}
 		handleEntrance();
-		CarGraph.setVal();
 		setLabels();
 
 		if (exitCarQueue.carsInQueue() > 0) {
@@ -364,7 +363,7 @@ public class Simulator extends ViewModel implements Runnable {
 		mainView.pieChart.createPiePiece("Vrije ad hoc plaatsen", garageModel.getNumberOfOpenFreeSpots());
 		mainView.pieChart.createPiePiece("Vrije abonnee plaatsen", garageModel.getNumberOfOpenPassSpots());
 
-		mainView.barChart.updateBarChart(garageModel.calcExpectedAdHocRev(), garageModel.calcAdHocRev());
+		mainView.barChart.updateBarChart(garageModel.getExpectedAdHocRev(), garageModel.getAdHocRev());
 
 		if(calendar.get(Calendar.HOUR_OF_DAY)>0) {
 			mainView.lineChart.updateChart(numberOfAdHocCars, "Ad hoc", ""+calendar.get(Calendar.HOUR_OF_DAY));
