@@ -102,10 +102,21 @@ public class GarageModel {
         return expectedAdHocRev;
     }
 
+
+    /**
+     * Krijg de hoeveelheid omzet
+     *
+     * @return De hoeveelheid omzet
+     */
     public double getAdHocRev() {
         return adHocRev;
     }
 
+    /**
+     * Krijg de hoeveelheid verwachte omzet
+     *
+     * @return De hoeveelheid verwachte omzet
+     */
     public double getExpectedAdHocRev() {
         return expectedAdHocRev;
     }
