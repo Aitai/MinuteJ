@@ -5,6 +5,7 @@ import sun.audio.AudioStream;
 import view.*;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -214,7 +215,6 @@ public class Simulator extends ViewModel implements Runnable {
 		handleExit();
 		updateViews();
 		updateCharts();
-//		updateBarChart();
 		// Pause.
 		try {
 			Thread.sleep(tickPause);
@@ -293,6 +293,8 @@ public class Simulator extends ViewModel implements Runnable {
 		mainView.pieChart.createPiePiece("Vrije ad hoc plaatsen", garageModel.getNumberOfOpenFreeSpots());
 		mainView.pieChart.createPiePiece("Vrije abonnee plaatsen", garageModel.getNumberOfOpenPassSpots());
 
+		mainView.barChart.updateBarChart(garageModel.calcExpectedAdHocRev(), garageModel.calcAdHocRev());
+
 		if(calendar.get(Calendar.HOUR_OF_DAY)>0) {
 			mainView.lineChart.updateChart(numberOfAdHocCars, "Ad hoc", ""+calendar.get(Calendar.HOUR_OF_DAY));
 		}
@@ -301,6 +303,7 @@ public class Simulator extends ViewModel implements Runnable {
 			// mainView.lineChart.updateChart(numberOfAdHocCars, "Ad hoc", ""+calendar.get(Calendar.HOUR_OF_DAY));
 		}
 	}
+
 
 //	public void updateBarChart() {
 //		mainView.barChart.addBar(Color.red, numberOfAdHocCars);

@@ -15,7 +15,7 @@ public class MainView{
 
     public PieChart pieChart;
     public LineChart lineChart;
-//    public BarChart barChart;
+    public BarChart barChart;
     GarageModel garageModel;
 
     public MainView(Simulator simulator)
@@ -42,7 +42,7 @@ public class MainView{
         GarageView garageView = new GarageView(simulator);
         pieChart = new PieChart();
         lineChart = new LineChart();
-//        barChart = new BarChart("Test");
+        barChart = new BarChart("Omzet");
         CarGraph graph = new CarGraph(simulator, list);
         GarageController garageController = new GarageController(simulator);
         InfoView info = new InfoView(simulator);
@@ -63,7 +63,7 @@ public class MainView{
         });
         exitItem.addActionListener(e -> window.dispose());
 
-        window.setSize(1200, 900);
+        window.setSize(1650, 850);
         window.setResizable(false);
         window.setLayout(null);
 
@@ -71,7 +71,7 @@ public class MainView{
         window.add(info);
         window.add(legenda);
         window.add(garageController);
-//        window.add(barChart);
+        window.add(barChart);
         window.add(pieChart);
         window.add(lineChart);
         window.setJMenuBar(menuBar);
@@ -88,7 +88,7 @@ public class MainView{
         garageController.setBounds(10, 320, 730, 40);
         info.setBounds(750, 10, 430, 240);
         legenda.setBounds(660, 180, 430, 300);
-//        barChart.setBounds(360, 360, 400, 400);
+        barChart.setBounds(1050, 360, 550, 400);
         lineChart.setBounds(10, 360, 600, 410);
         pieChart.setBounds(610, 360, 400, 400);
 
