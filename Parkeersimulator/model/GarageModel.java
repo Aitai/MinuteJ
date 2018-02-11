@@ -105,6 +105,12 @@ public class GarageModel {
 		return expectedAdHocRev;
 	}
 
+	public double getAdHocRev() {
+		return adHocRev;
+	}
+	public double getExpectedAdHocRev() {
+		return expectedAdHocRev;
+	}
 	/**
 	 * Krijg de hoeveelheid etages
 	 *
