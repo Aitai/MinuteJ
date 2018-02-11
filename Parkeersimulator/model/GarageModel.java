@@ -41,10 +41,20 @@ public class GarageModel {
 
 	}
 
+	/**
+	 * Zet de waarde van de kosten per minuut voor ad hoc auto's
+	 * 
+	 * @param a
+	 */
 	public void setCostPerMinute(double a) {
 		costPerMinute = a;
 	}
 
+	/**
+	 * Krijg de kosten per minuut voor ad hoc auto's
+	 * 
+	 * @return kosten ad hoc auto's
+	 */
 	public double getCostPerMinute() {
 		return costPerMinute;
 	}
@@ -155,12 +165,12 @@ public class GarageModel {
 	}
 
 	/**
-	 * Zet de auto op een bepaalde locatie
+	 * Zet een ad hoc of gereserveerde auto op een bepaalde locatie
 	 *
 	 * @param location
-	 *            de locatie
+	 *            de locatie waar de auto kan staan
 	 * @param car
-	 *            de auto
+	 *            de auto voor die locatie
 	 */
 	public void setCarAt(Location location, Car car) {
 		if (locationIsInvalid(location)) {
@@ -174,6 +184,14 @@ public class GarageModel {
 		}
 	}
 
+	/**
+	 * Zet een abonnement auto op één van de gereserveerde plekken
+	 * 
+	 * @param location
+	 * 				de locatie waar de auto kan staan
+	 * @param car
+	 * 				de auto voor die locatie
+	 */
 	public void setPassCarAt(Location location, Car car) {
 		if (locationIsInvalid(location)) {
 			return;

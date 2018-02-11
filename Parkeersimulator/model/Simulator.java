@@ -3,9 +3,7 @@ package model;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 import view.*;
-
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -120,58 +118,128 @@ public class Simulator extends ViewModel implements Runnable {
 		return passHolders;
 	}
 
+	/**
+	 * Zet het aantal auto's dat kan binnen komen per minuut
+	 * 
+	 * @param a
+	 */
 	public void setEnterSpeed(int a) {
 		enterSpeed = a;
 	}
-
+	
+	/**
+	 * Krijg het aantal auto's dat binnen komt per minuut
+	 * 
+	 * @return aantal auto's dat kan binnen komen per minuut
+	 */
 	public int getEnterSpeed() {
 		return enterSpeed;
 	}
 
+	/**
+	 * Zet het aantal auto's dat kan uitrijden per minuut
+	 * 
+	 * @param a
+	 */
 	public void setExitSpeed(int a) {
 		exitSpeed = a;
 	}
 
+	/**
+	 * Krijg het aantal auto's dat kan wegrijden per minuut
+	 * 
+	 * @return het aantal auto's dat kan wegrijden per minuut
+	 */
 	public int getExitSpeed() {
 		return exitSpeed;
 	}
 
+	/**
+	 * Zet de snelheid van het betalen per minuut
+	 * 
+	 * @param a
+	 */
 	public void setPaymentSpeed(int a) {
 		paymentSpeed = a;
 	}
 
+	/**
+	 * Krijg de snelheid van het betalen per minuut
+	 * 
+	 * @return de snelheid van het betalen per minuut
+	 */
 	public int getPaymentSpeed() {
 		return paymentSpeed;
 	}
 
+	/**
+	 * Zet het aantal ad hoc auto's die komen in het weekend
+	 * 
+	 * @param a
+	 */
 	public void setWeekendArrivals(int a) {
 		weekendArrivals = a;
 	}
 
+	/**
+	 * Krijg het aantal ad hoc auto's die komen in het weekend
+	 * 
+	 * @return het aantal ad hoc auto's die komen in het weekend
+	 */
 	public int getWeekendArrivals() {
 		return weekendArrivals;
 	}
 
+	/**
+	 * Zet aantal abonnement houders die komen in het weekend
+	 * 
+	 * @param a
+	 */
 	public void setWeekendPassArrivals(int a) {
 		weekendPassArrivals = a;
 	}
 
+	/**
+	 * Krijg aantal abonnement houders die komen in het weekend
+	 * 
+	 * @return aantal abonnement houders die komen in het weekend
+	 */
 	public int getWeekendPassArrivals() {
 		return weekendPassArrivals;
 	}
 
+	/**
+	 * Zet de aantal gereserveerde auto's die komen in het weekend
+	 * 
+	 * @param a
+	 */
 	public void setWeekendResArrivals(int a) {
 		weekendResArrivals = a;
 	}
 
+	/**
+	 * Krijg de aantal gereserveerde auto's in het weekend
+	 * 
+	 * @return het aantal gereserveerde auto's in het weekend
+	 */
 	public int getWeekendResArrivals() {
 		return weekendResArrivals;
 	}
 
+	/**
+	 * Zet de kosten per minuut voor ad hoc auto's
+	 * 
+	 * @param a
+	 */
 	public void setCostPerMinute(double a) {
 		garageModel.setCostPerMinute(a);
 	}
 
+	/**
+	 * Krijg de kosten van ad hoc auto's per minuut
+	 * 
+	 * @return kosten per minuut voor ad hoc auto's
+	 */
 	public double getCostPerMinute() {
 		return garageModel.getCostPerMinute();
 	}
@@ -226,7 +294,7 @@ public class Simulator extends ViewModel implements Runnable {
 		setLabels();
 
 		if (exitCarQueue.carsInQueue() > 0) {
-//			 playExitSound();
+			 playExitSound();
 		}
 	}
 
@@ -286,6 +354,9 @@ public class Simulator extends ViewModel implements Runnable {
 		}
 	}
 
+	/**
+	 * Update alle diagrammen
+	 */
 	public void updateCharts() {
 		mainView.pieChart.createPiePiece("Ad hoc auto's", numberOfAdHocCars);
 		mainView.pieChart.createPiePiece("Abonnement auto's", numberOfParkingPassCars);
@@ -304,11 +375,6 @@ public class Simulator extends ViewModel implements Runnable {
 		}
 	}
 
-
-//	public void updateBarChart() {
-//		mainView.barChart.addBar(Color.red, numberOfAdHocCars);
-//		mainView.barChart.addBar(Color.blue, numberOfParkingPassCars);
-//	}
 	/**
 	 * Advance the time by one minute
 	 */
@@ -617,14 +683,29 @@ public class Simulator extends ViewModel implements Runnable {
 		return totalCars;
 	}
 
+	/**
+	 * Krijg het aantal ad hoc auto's die zich op dat moment in de garage bevinden
+	 * 
+	 * @return ad hoc auto's in de garage
+	 */
 	public int getNumberOfAdHocCars() {
 		return numberOfAdHocCars;
 	}
 
+	/**
+	 * Krijg het aantal abonnement auto's die zich op dat moment in de garage bevinden
+	 * 
+	 * @return abonnement auto's in de garage
+	 */
 	public int getNumberOfParkingPassCars() {
 		return numberOfParkingPassCars;
 	}
 
+	/**
+	 * Krijg het aantal gereserveerde auto's die zich op dat moment in de garage bevinden
+	 * 
+	 * @return gereserveerde auto's in de garage
+	 */
 	public int getNumberOfResCars() {
 		return numberOfResCars;
 	}

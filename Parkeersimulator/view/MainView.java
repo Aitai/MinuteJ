@@ -3,14 +3,17 @@ package view;
 import controller.GarageController;
 import model.GarageModel;
 import model.Simulator;
-
 import javax.swing.*;
-
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * De klasse waar alle views worden getekend en toegevoegd in één hoofd scherm
+ * 
+ * @author MinuteJ
+ * @version 1.0.0
+ */
 public class MainView{
 
     public PieChart pieChart;
@@ -38,7 +41,6 @@ public class MainView{
         JMenuItem settingsItem = new JMenuItem("Instellingen");
         JMenuItem graphItem = new JMenuItem("Toon/verberg grafiek");
         JMenuItem exitItem = new JMenuItem("Sluiten");
-
         GarageView garageView = new GarageView(simulator);
         pieChart = new PieChart();
         lineChart = new LineChart();
@@ -67,6 +69,7 @@ public class MainView{
         window.setResizable(false);
         window.setLayout(null);
 
+        // Voeg alle views toe aan het scherm
         window.add(garageView);
         window.add(info);
         window.add(legenda);
@@ -84,6 +87,7 @@ public class MainView{
         menu.add(graphItem);
         menu.add(exitItem);
 
+        // Zet alle views op een vaste plek
         garageView.setBounds(-50, 20, 800, 300);
         garageController.setBounds(10, 320, 730, 40);
         info.setBounds(750, 10, 430, 240);
@@ -91,13 +95,15 @@ public class MainView{
         barChart.setBounds(1050, 360, 550, 400);
         lineChart.setBounds(10, 360, 600, 410);
         pieChart.setBounds(610, 360, 400, 400);
-
+        
+        // Tekent de eerste waarden van het taart diagram
         pieChart.createPiePiece("Ad hoc auto's", simulator.getNumberOfAdHocCars());
         pieChart.createPiePiece("Abonnement auto's", simulator.getNumberOfParkingPassCars());
 		pieChart.createPiePiece("Gereserveerde auto's", simulator.getNumberOfResCars());
 		pieChart.createPiePiece("Vrije ad hoc plaatsen", garageModel.getNumberOfOpenFreeSpots());
 		pieChart.createPiePiece("Vrije abonnee plaatsen", garageModel.getNumberOfOpenPassSpots());
 
+		// Zet de achtergrond kleur van het taart diagram
         pieChart.plot.setBackgroundPaint(window.getBackground());
         pieChart.chart.setBackgroundPaint(window.getBackground());
 
