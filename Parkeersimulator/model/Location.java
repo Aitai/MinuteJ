@@ -1,6 +1,7 @@
 package model;
 
 /**
+ * Klasse voor het krijgen en geven van een locatie
  *
  * @author MinuteJ
  * @version 1.0.0
