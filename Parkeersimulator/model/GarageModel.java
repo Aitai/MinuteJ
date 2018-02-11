@@ -3,6 +3,7 @@ package model;
 import java.awt.*;
 
 /**
+ * Klasse voor locatie en omzet gegevens van de simulatie
  *
  * @author MinuteJ
  * @version 1.1.0
@@ -200,7 +201,7 @@ public class GarageModel {
 	}
 
 	/**
-	 * Zet een abonnement auto op één van de gereserveerde plekken
+	 * Zet een abonnement auto op ï¿½ï¿½n van de gereserveerde plekken
 	 *
 	 * @param location
 	 * 				de locatie waar de auto kan staan

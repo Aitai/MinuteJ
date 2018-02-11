@@ -12,7 +12,7 @@ import java.util.GregorianCalendar;
 import java.util.Random;
 
 /**
- * De klasse voor alle data (manipulatie) van de simulatie
+ * De klasse voor alle data (manipulatie) van de draaiende simulatie
  *
  * @author MinuteJ
  * @version 1.3.0
