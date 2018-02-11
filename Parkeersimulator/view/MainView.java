@@ -21,6 +21,12 @@ public class MainView{
     public BarChart barChart;
     GarageModel garageModel;
 
+    /**
+     * Maak een nieuwe hoofd scherm instantie
+     * 
+     * @param simulator
+     * 				de simulator waarvoor dit hoofdscherm wordt gebruikt
+     */
     public MainView(Simulator simulator)
 
     {
@@ -65,6 +71,7 @@ public class MainView{
         });
         exitItem.addActionListener(e -> window.dispose());
 
+        // Zet de groote van het hoofdscherm
         window.setSize(1650, 850);
         window.setResizable(false);
         window.setLayout(null);
