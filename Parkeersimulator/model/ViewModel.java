@@ -1,6 +1,7 @@
 package model;
 
 import view.AbstractView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,13 +12,13 @@ import java.util.List;
  * @version 1.0.0
  */
 public abstract class ViewModel {
-	final List<AbstractView> views;
+    final List<AbstractView> views;
 
-	ViewModel() {
-		views = new ArrayList<>();
-	}
+    ViewModel() {
+        views = new ArrayList<>();
+    }
 
-	public void addView(AbstractView view) {
-		views.add(view);
-	}
+    public void addView(AbstractView view) {
+        views.add(view);
+    }
 }

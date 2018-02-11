@@ -1,63 +1,59 @@
 package view;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import javax.swing.JPanel;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
- * Klasse voor een staafdiagram view
- *
- * @author MinuteJ
- * @version 1.0.0
+ * De klasse voor het weergeven van de omzet als een barchart
  */
-class BarChart extends JPanel {
-	private final Map<Color, Integer> bars = new LinkedHashMap<>();
+public class BarChart extends JPanel {
 
-	/**
-	 * Voeg een nieuwe staaf toe aan het diagram
-	 *
-	 * @param color
-	 *            kleur van de staaf
-	 * @param random
-	 *            grootte van de staaf
-	 */
-	public void addBar(Color color, Integer random) {
-		bars.put(color, random);
-		repaint();
-	}
+    private final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-	/**
-	 * Teken de diagram
-	 */
-	protected void paintComponent(Graphics g) {
+    /**
+     * Maakt een nieuwe barchart aan
+     *
+     * @param chartTitle de titel van de nieuwe barchart
+     */
+    public BarChart(String chartTitle) {
 
-		// determine longest bar
-		int max = Integer.MIN_VALUE;
-		for (Integer value : bars.values()) {
-			max = Math.max(max, value);
-		}
-		// paint bars
-		int width = (getWidth() / bars.size()) - 2;
-		int x = 1;
-		for (Color color : bars.keySet()) {
-			int value = bars.get(color);
-			int height = (int) ((getHeight() - 5) * ((double) value / max));
-			g.setColor(color);
-			g.fillRect(x, getHeight() - height, width, height);
-			g.setColor(Color.black);
-			g.drawRect(x, getHeight() - height, width, height);
-			x += (width + 2);
-		}
-	}
+        JFreeChart barChart = ChartFactory.createBarChart(
+                chartTitle,
+                "Type",
+                "Omzet in euro's",
+                createDataset(),
+                PlotOrientation.VERTICAL,
+                true, true, false);
 
+        ChartPanel chartPanel = new ChartPanel(barChart);
+        chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
 
-	/**
-	 * Geeft de grootte van het diagram
-	 */
-	@Override
-	public Dimension getPreferredSize() {
-		return new Dimension(bars.size() * 10 + 2, 50);
-	}
+        this.add(chartPanel);
+    }
 
+    /**
+     * Creeer een nieuwe dataset voor de barchart
+     *
+     * @return de dataset
+     */
+    public CategoryDataset createDataset() {
+        return dataset;
+    }
+
+    /**
+     * Update de barchart met nieuwe gegevens
+     *
+     * @param d de verwachte omzet in euro's
+     * @param e de totale behaalde omzet
+     */
+    public void updateBarChart(double d, double e) {
+        dataset.setValue(d, "Verwachte omzet", "Omzet");
+        dataset.setValue(e, "Totale omzet", "Omzet");
+    }
 }
