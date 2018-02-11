@@ -61,6 +61,15 @@ public class MainView{
         hundredItem.addActionListener(e -> simulator.ffHundred());
         settingsItem.addActionListener(e -> new SettingsView(simulator));
 
+		graphItem.addActionListener(e -> {
+			lineChart.setVisible(!lineChart.isVisible());
+			if (lineChart.isVisible()) {
+				window.setSize(1650, 850);
+			} else {
+				window.setSize(1200, 420);
+			}
+		});
+
         exitItem.addActionListener(e -> window.dispose());
 
         // Zet de groote van het hoofdscherm
