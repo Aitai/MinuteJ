@@ -16,7 +16,12 @@ import model.Simulator;
 
 
 import javax.swing.*;
-
+/**
+ * De klasse waar het lijndiagram wordt aangemaakt
+ *
+ * @author MinuteJ
+ * @version 1.0.0
+ */
 public class LineChart extends JPanel{
 
 	public DefaultCategoryDataset dataset;
@@ -25,6 +30,9 @@ public class LineChart extends JPanel{
 	public Simulator simulator;
 	public GarageModel garageModel;
 
+    /**
+    * Maakt een lijndiagram aan met van tevoren bepaalde instellingen
+    */
     public LineChart() {
 
         JFreeChart lineChart = ChartFactory.createLineChart(
@@ -40,21 +48,24 @@ public class LineChart extends JPanel{
     }
 
 
+    /**
+    * Maakt een nieuwe dataset aan
+    */
     private DefaultCategoryDataset createDataset() {
       dataset = new DefaultCategoryDataset();
-//      dataset.addValue(15, "Ad hoc", "1");
-//      dataset.addValue(30, "Ad hoc", "2");
-//      dataset.addValue(60, "Ad hoc",  "3");
-//      dataset.addValue(120, "Ad hoc", "14:00");
-//      dataset.addValue(240, "Ad hoc", "15:00");
-//      dataset.addValue(300, "Ad hoc", "16:00");
       return dataset;
    }
 
+   /**
+   * Updatet het lijndiagram
+   */
     public void updateChart(int val, String row, String col) {
     	dataset.addValue(val, row, col);
     }
-    
+
+    /**
+    * Maakt de lijndiagram leeg
+    */
     public void clearChart() {
     	dataset.clear();
     }

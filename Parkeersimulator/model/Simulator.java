@@ -50,7 +50,7 @@ public class Simulator extends ViewModel implements Runnable {
 	private int numberOfResCars = 0;
 
 	/**
-	 * Maak een nieuwe simulator instantie
+	 * Maakt een nieuwe simulator instantie
 	 */
 	public Simulator() {
 		entranceCarQueue = new CarQueue();
@@ -63,12 +63,12 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	/**
-	 * Rond een double af
+	 * Rondt een double af
 	 *
 	 * @param value
-	 *            de waarde van het getal
+	 *            De waarde van het getal
 	 * @param places
-	 *            het decimaal waarop afgerond moet worden
+	 *            Het decimaal waarop afgerond moet worden
 	 * @return
 	 */
 	private static double round(double value, int places) {
@@ -81,7 +81,7 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	/**
-	 * Pas de tickpause aan
+	 * Past De tickpause aan
 	 *
 	 * @param a
 	 *            de duur van de pauze
@@ -91,28 +91,28 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	/**
-	 * Krijg de tickpause
+	 * Krijgt de tickpause
 	 *
-	 * @return de waarde van de tickpause
+	 * @return De waarde van de tickpause
 	 */
 	public int getTickPause() {
 		return tickPause;
 	}
 
 	/**
-	 * Pas de hoeveelheid pashouders aan
+	 * Past de hoeveelheid pashouders aan
 	 *
 	 * @param a
-	 *            de hoeveelheid
+	 *            De hoeveelheid
 	 */
 	public void setNumberOfPasses(int a) {
 		passHolders = a;
 	}
 
 	/**
-	 * Krijg de hoeveelheid pashouders
+	 * Krijgt de hoeveelheid pashouders
 	 *
-	 * @return de hoeveeleheid pashouders
+	 * @return De hoeveeleheid pashouders
 	 */
 	public int getNumberOfPasses() {
 		return passHolders;
@@ -120,17 +120,17 @@ public class Simulator extends ViewModel implements Runnable {
 
 	/**
 	 * Zet het aantal auto's dat kan binnen komen per minuut
-	 * 
+	 *
 	 * @param a
 	 */
 	public void setEnterSpeed(int a) {
 		enterSpeed = a;
 	}
-	
+
 	/**
-	 * Krijg het aantal auto's dat binnen komt per minuut
-	 * 
-	 * @return aantal auto's dat kan binnen komen per minuut
+	 * Krijgt het aantal auto's dat binnen komt per minuut
+	 *
+	 * @return Aantal auto's dat kan binnen komen per minuut
 	 */
 	public int getEnterSpeed() {
 		return enterSpeed;
@@ -138,7 +138,7 @@ public class Simulator extends ViewModel implements Runnable {
 
 	/**
 	 * Zet het aantal auto's dat kan uitrijden per minuut
-	 * 
+	 *
 	 * @param a
 	 */
 	public void setExitSpeed(int a) {
@@ -146,9 +146,9 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	/**
-	 * Krijg het aantal auto's dat kan wegrijden per minuut
-	 * 
-	 * @return het aantal auto's dat kan wegrijden per minuut
+	 * Krijgt het aantal auto's dat kan wegrijden per minuut
+	 *
+	 * @return Het aantal auto's dat kan wegrijden per minuut
 	 */
 	public int getExitSpeed() {
 		return exitSpeed;
@@ -156,7 +156,7 @@ public class Simulator extends ViewModel implements Runnable {
 
 	/**
 	 * Zet de snelheid van het betalen per minuut
-	 * 
+	 *
 	 * @param a
 	 */
 	public void setPaymentSpeed(int a) {
@@ -164,9 +164,9 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	/**
-	 * Krijg de snelheid van het betalen per minuut
-	 * 
-	 * @return de snelheid van het betalen per minuut
+	 * Krijgt de snelheid van het betalen per minuut
+	 *
+	 * @return De snelheid van het betalen per minuut
 	 */
 	public int getPaymentSpeed() {
 		return paymentSpeed;
@@ -174,7 +174,7 @@ public class Simulator extends ViewModel implements Runnable {
 
 	/**
 	 * Zet het aantal ad hoc auto's die komen in het weekend
-	 * 
+	 *
 	 * @param a
 	 */
 	public void setWeekendArrivals(int a) {
@@ -182,9 +182,9 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	/**
-	 * Krijg het aantal ad hoc auto's die komen in het weekend
-	 * 
-	 * @return het aantal ad hoc auto's die komen in het weekend
+	 * Krijgt het aantal ad hoc auto's die komen in het weekend
+	 *
+	 * @return Het aantal ad hoc auto's die komen in het weekend
 	 */
 	public int getWeekendArrivals() {
 		return weekendArrivals;
@@ -192,7 +192,7 @@ public class Simulator extends ViewModel implements Runnable {
 
 	/**
 	 * Zet aantal abonnement houders die komen in het weekend
-	 * 
+	 *
 	 * @param a
 	 */
 	public void setWeekendPassArrivals(int a) {
@@ -200,9 +200,9 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	/**
-	 * Krijg aantal abonnement houders die komen in het weekend
-	 * 
-	 * @return aantal abonnement houders die komen in het weekend
+	 * Krijgt aantal abonnement houders die komen in het weekend
+	 *
+	 * @return Aantal abonnement houders die komen in het weekend
 	 */
 	public int getWeekendPassArrivals() {
 		return weekendPassArrivals;
@@ -210,7 +210,7 @@ public class Simulator extends ViewModel implements Runnable {
 
 	/**
 	 * Zet de aantal gereserveerde auto's die komen in het weekend
-	 * 
+	 *
 	 * @param a
 	 */
 	public void setWeekendResArrivals(int a) {
@@ -218,9 +218,9 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	/**
-	 * Krijg de aantal gereserveerde auto's in het weekend
-	 * 
-	 * @return het aantal gereserveerde auto's in het weekend
+	 * Krijgt de aantal gereserveerde auto's in het weekend
+	 *
+	 * @return Het aantal gereserveerde auto's in het weekend
 	 */
 	public int getWeekendResArrivals() {
 		return weekendResArrivals;
@@ -228,7 +228,7 @@ public class Simulator extends ViewModel implements Runnable {
 
 	/**
 	 * Zet de kosten per minuut voor ad hoc auto's
-	 * 
+	 *
 	 * @param a
 	 */
 	public void setCostPerMinute(double a) {
@@ -236,16 +236,16 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	/**
-	 * Krijg de kosten van ad hoc auto's per minuut
-	 * 
-	 * @return kosten per minuut voor ad hoc auto's
+	 * Krijgt de kosten van ad hoc auto's per minuut
+	 *
+	 * @return Kosten per minuut voor ad hoc auto's
 	 */
 	public double getCostPerMinute() {
 		return garageModel.getCostPerMinute();
 	}
 
 	/**
-	 * Speel een geluidje af bij het afsluiten
+	 * Speelt een geluidje af wanneer er een of meer auto's in de wachtrij bij de uitgang staan
 	 */
 	private void playExitSound() {
 		try {
@@ -257,7 +257,7 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	/**
-	 * Open het programma
+	 * Zorgt ervoor dat er een tick wordt uitgevoerd zolang de boolean running waar is
 	 */
 	public void run() {
 		running = true;
@@ -267,14 +267,14 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	/**
-	 * zet de afspeelsnelheid naar realiteit
+	 * Zet de afspeelsnelheid naar echte tijd
 	 */
 	public void realTime() {
 		tickPause = 60000;
 	}
 
 	/**
-	 * Update de de simulatie met 1 stap
+	 * Updatet de simulatie met 1 stap
 	 */
 	private void tick() {
 		daysOfTheWeek();
@@ -299,7 +299,7 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	/**
-	 * Update de views
+	 * Updatet de views
 	 */
 	public void setLabels() {
 		InfoView.setDayLabel(daysOfTheWeek());
@@ -324,7 +324,7 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	/**
-	 * Zet een snelle stap in de simulatie
+	 * Zet een stap in de simulatie zonder de tickpauze
 	 */
 	private void tickFast() {
 		eveningArrivals();
@@ -338,7 +338,7 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	/**
-	 * Pas de simulatie aan zodat er minder auto's in de nacht komen
+	 * Past de simulatie aan zodat er minder auto's in de nacht komen
 	 */
 	private void eveningArrivals() {
 		if (calendar.get(Calendar.HOUR_OF_DAY) >= 22 || calendar.get(Calendar.HOUR_OF_DAY) <= 7) {
@@ -371,7 +371,6 @@ public class Simulator extends ViewModel implements Runnable {
 		}
 		else {
 			mainView.lineChart.clearChart();
-			// mainView.lineChart.updateChart(numberOfAdHocCars, "Ad hoc", ""+calendar.get(Calendar.HOUR_OF_DAY));
 		}
 	}
 
@@ -384,9 +383,9 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	/**
-	 * Krijg de dag van de week
+	 * Zet een nummer 1-7 om in de naam van de dag
 	 *
-	 * @return de dag
+	 * @return De dag
 	 */
 	private String daysOfTheWeek() {
 		String dayString;
@@ -420,9 +419,9 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	/**
-	 * Krijg de maand
+	 * Zet een nummer 0-11 om in de naam van die maand
 	 *
-	 * @return de maand
+	 * @return De maand
 	 */
 	private String monthName() {
 		String monthString;
@@ -490,7 +489,7 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	/**
-	 * Update alle views
+	 * Updatet alle views
 	 */
 	public void updateViews() {
 		garageModel.tick();
@@ -500,7 +499,7 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	/**
-	 * Methode dat ervoor zorgt dat de auto's aankomen
+	 * Methode die ervoor zorgt dat de auto's aankomen
 	 */
 	private void carsArriving() {
 		int numberOfCars = getTotalCars(weekDayArrivals, weekendArrivals, AD_HOC);
@@ -512,14 +511,14 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	/**
-	 * Haal de eerste auto uit de rij en plaats deze op een parkeerplaats
+	 * Haalt de eerste auto uit de rij en plaatst deze op een parkeerplaats
 	 *
 	 * @param queue
-	 *            de rij waarvan de auto gehaald moet worden
+	 *            De rij waarvan de auto gehaald moet worden
 	 */
 	private void carsEntering(CarQueue queue) {
 		int i = 0;
-		// Remove car from the front of the queue and assign to a parking space.
+		// Verwijdert een auto van het begin van de rij en wijst deze een plek toe.
 		while (queue.carsInQueue() > 0 && i < enterSpeed) {
 			Location freeLocation = garageModel.getFirstFreeLocation();
 			Location freeReservedLocation = garageModel.getFirstReservedLocation();
@@ -612,7 +611,7 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	/**
-	 * Methode die auto's toevoegd aan de rij om te betalen
+	 * Methode die auto's toevoegt aan de rij om te betalen
 	 */
 	private void carsReadyToLeave() {
 		Car car = garageModel.getFirstLeavingCar();
@@ -684,34 +683,34 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	/**
-	 * Krijg het aantal ad hoc auto's die zich op dat moment in de garage bevinden
-	 * 
-	 * @return ad hoc auto's in de garage
+	 * Krijgt het aantal ad hoc auto's die zich op dat moment in de garage bevinden
+	 *
+	 * @return Het aantal ad hoc auto's in de garage
 	 */
 	public int getNumberOfAdHocCars() {
 		return numberOfAdHocCars;
 	}
 
 	/**
-	 * Krijg het aantal abonnement auto's die zich op dat moment in de garage bevinden
-	 * 
-	 * @return abonnement auto's in de garage
+	 * Krijgt het aantal abonnement auto's die zich op dat moment in de garage bevinden
+	 *
+	 * @return Het aantal abonnement auto's in de garage
 	 */
 	public int getNumberOfParkingPassCars() {
 		return numberOfParkingPassCars;
 	}
 
 	/**
-	 * Krijg het aantal gereserveerde auto's die zich op dat moment in de garage bevinden
-	 * 
-	 * @return gereserveerde auto's in de garage
+	 * Krijgt het aantal gereserveerde auto's die zich op dat moment in de garage bevinden
+	 *
+	 * @return Het aantal gereserveerde auto's in de garage
 	 */
 	public int getNumberOfResCars() {
 		return numberOfResCars;
 	}
 
 	/**
-	 * Voeg aankomende auto's toe aan het eind van de rij
+	 * Voegt aankomende auto's toe aan het eind van de rij
 	 *
 	 * @param totalCars
 	 * @param type
@@ -737,7 +736,7 @@ public class Simulator extends ViewModel implements Runnable {
 	}
 
 	/**
-	 * Methode dat een auto van zijn parkeerplek afhaalt
+	 * Methode die een auto van zijn parkeerplek afhaalt
 	 *
 	 * @param car
 	 */

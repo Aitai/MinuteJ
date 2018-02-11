@@ -23,7 +23,7 @@ public class SettingsView extends AbstractView {
 	private final Simulator simulator;
 
 	/**
-	 * Maak een nieuwe instellingen menu aan
+	 * Maakt een nieuwe instellingen menu aan
 	 * @param simulator
 	 */
 	public SettingsView(Simulator simulator) {
@@ -41,6 +41,9 @@ public class SettingsView extends AbstractView {
 
 	}
 
+	/**
+	* Maakt een JPanel aan en vult deze met verschillende velden
+	*/
 	private JPanel settingsPanel() {
 		JPanel content = new JPanel(new GridLayout(10, 2));
 
@@ -96,6 +99,9 @@ public class SettingsView extends AbstractView {
 		return content;
 	}
 
+	/**
+    * Maakt een nieuwe knop "Canel" aan en voegt hier een action listener aan toe
+    */
 	private JButton cancelButton() {
 		JButton cancel = new JButton("Cancel");
 		cancel.addActionListener(e -> settingsWindow.dispose());
@@ -103,6 +109,9 @@ public class SettingsView extends AbstractView {
 		return cancel;
 	}
 
+	/**
+    * Maakt een nieuwe knop "Update" aan en voegt hier per tekstveld een action listener aan toe
+    */
 	private JButton updateButton() {
 
 		JButton update = new JButton("Update");

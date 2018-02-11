@@ -43,7 +43,7 @@ public class GarageModel {
 
 	/**
 	 * Zet de waarde van de kosten per minuut voor ad hoc auto's
-	 * 
+	 *
 	 * @param a
 	 */
 	public void setCostPerMinute(double a) {
@@ -52,7 +52,7 @@ public class GarageModel {
 
 	/**
 	 * Krijg de kosten per minuut voor ad hoc auto's
-	 * 
+	 *
 	 * @return kosten ad hoc auto's
 	 */
 	public double getCostPerMinute() {
@@ -104,7 +104,6 @@ public class GarageModel {
 		return expectedAdHocRev;
 	}
 
-	
 	/**
 	 * Krijg de hoeveelheid etages
 	 *
@@ -186,7 +185,7 @@ public class GarageModel {
 
 	/**
 	 * Zet een abonnement auto op één van de gereserveerde plekken
-	 * 
+	 *
 	 * @param location
 	 * 				de locatie waar de auto kan staan
 	 * @param car

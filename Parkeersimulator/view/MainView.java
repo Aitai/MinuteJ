@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * De klasse waar alle views worden getekend en toegevoegd in één hoofd scherm
+ * De klasse waar alle views worden getekend en toegevoegd in ï¿½ï¿½n hoofd scherm
  * 
  * @author MinuteJ
  * @version 1.0.0
@@ -64,7 +64,7 @@ public class MainView{
         graphItem.addActionListener(e -> {
             graph.setVisible(!graph.isVisible());
             if (graph.isVisible()) {
-                window.setSize(1200, 900);
+                window.setSize(1650, 850);
             } else {
                 window.setSize(1200, 420);
             }

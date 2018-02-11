@@ -11,7 +11,7 @@ import javax.swing.*;
 
 /**
  * De klasse waar het taart diagram wordt aangemaakt
- * 
+ *
  * @author MinuteJ
  * @version 1.0.0
  */
@@ -22,7 +22,7 @@ public class PieChart extends JPanel{
 	public PiePlot plot;
 	
 	/**
-	 * Maakt een nieuwe gegevens zet en diagram aan
+	 * Maakt een nieuwe gegevensset en diagram aan en voegt deze vervolgens toe aan de JPanel
 	 */
     public PieChart() {
 		dataset = new DefaultPieDataset();
@@ -31,27 +31,27 @@ public class PieChart extends JPanel{
         chart = ChartFactory.createPieChart("Aantal auto's in de parkeergarage", dataset, false, false, false);
         plot = (PiePlot) chart.getPlot();
         
-        // Zet de instellingen van het diagram
+        // Stelt de instellingen van het diagram in
         plot.setOutlineVisible(false);
         plot.setCircular(true);
         plot.setShadowYOffset(4);
         plot.setShadowXOffset(4);
         
-        // Bepaal de kleur van de verschillende categorieën
+        // Bepaalt de kleur van de verschillende categorieÃ«n
         plot.setSectionPaint("Ad hoc auto's", Color.red);
         plot.setSectionPaint("Abonnement auto's", Color.blue);
         plot.setSectionPaint("Gereserveerde auto's", Color.green);
         plot.setSectionPaint("Vrije ad hoc plaatsen", Color.white);
         plot.setSectionPaint("Vrije abonnee plaatsen", Color.gray);
         
-        // Maakt een nieuw diagram paneel aan en bepaald de afmetingen van het paneel
+        // Maakt een nieuw diagrampaneel aan en bepaalt de afmetingen van het paneel
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(400, 400));
         this.add(chartPanel);        
     }
     
     /**
-     * Bepaal de waarde van de gegevens zet met twee parameters
+     * Bepaalt de waarde van de gegevensset met twee parameters
      * 
      * @param name
      * @param value
